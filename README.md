@@ -1,3 +1,3 @@
 # AI-Handbook
 
-AI Handbook
+AI Handbook Notes
