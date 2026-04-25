@@ -1,2 +1,3 @@
 # AI-Handbook
-ai handbook
+
+AI Handbook

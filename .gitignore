@@ -1,0 +1,16 @@
+# ignore for python
+__pycache__/
+*.pyc
+# ignore for vscode
+.vscode/
+# ignore for node
+node_modules/
+# ignore for mac.DS_Store
+.DS_Store
+# ignore for log
+*.log
+# ignore for env
+.env
+# ignore for build
+build/
+dist/
