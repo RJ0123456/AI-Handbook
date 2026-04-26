@@ -22,6 +22,7 @@ Some noisy data points that comes from unkown Target function $f$. Our aim is to
 Define the Loss Function:
 $$L(\hat f(\vec{w}), D)$$
 Target finding the set of wight w that minimizes the loss function.
+
 $$
 \min_{\vec{w}}{L(\hat{f}{\vec{w}}, D)}  \\
 \mathbf{x} := \vec{w}
