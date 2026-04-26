@@ -2,10 +2,18 @@
 
 Gradient Descent is an iterative optimization algorithm used to minimize a cost function by adjusting model parameters in the direction of the steepest descent of the function’s gradient. In simple terms, it finds the optimal values of weights and biases by gradually reducing the error between predicted and actual outputs.
 
-<div style="text-align: center">
-<video src="./static/Gradient_Descent_in_2D.webm" controls="controls" width="400" height="400"></video>
-<figcaption>Gradient descent in 2D</figcaption>
-</div>
+<figure>
+    <video controls width="400" height="400">
+        <source src="./static/Gradient_Descent_in_2D.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+    <figcaption>Gradient descent in 2D</figcaption>
+</figure>
+
+For GitHub preview (where embedded local video may not render), open:
+[Gradient descent in 2D video](./static/Gradient_Descent_in_2D.webm)
+
+![Gradient descent in 2D preview](./static/gradient-descent-1.png)
 
 ## Mathematics Behind Gradient Descent
 
