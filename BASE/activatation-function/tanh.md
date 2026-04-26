@@ -7,7 +7,8 @@ It is mathematically defined as:
 <font size= "8"> $$f(x)=  tanh(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}} = \frac{sinh(x)}{cosh(x)}$$ </font>
 
 Where:
-- $e$ is Euler's number (approximately 2.718). 
+
+- $e$ is Euler's number (approximately 2.718).
 - $x$ is the input to the function.
 
 ## Tanh activation function graph
