@@ -17,10 +17,10 @@ For GitHub preview (where embedded local video may not render), open:
 
 ## Mathematics Behind Gradient Descent
 
-Some noisy data points that comes from unkown Target function $f$. Our aim is to find an approximation $\hat f$ base on the data to recover the structure of the unkown function. To do so we often parameterize our function by some weights $\vec {w}$. We can define a loss function $L$ that measures how good our approximation performs on the given data set $D$
+Some noisy data points that comes from unkown Target function $f$. Our aim is to find an approximation $\hat{f}$ base on the data to recover the structure of the unkown function. To do so we often parameterize our function by some weights $\vec{w}$. We can define a loss function $L$ that measures how good our approximation performs on the given data set $D$
 
 Define the Loss Function:
-$$ L(\hat f(\vec{w}), D) $$
+$$L(\hat f(\vec{w}), D)$$
 Target finding the set of wight w that minimizes the loss function.
 $$
 \min_{\vec{w}}{L(\hat{f}{\vec{w}}, D)}  \\
