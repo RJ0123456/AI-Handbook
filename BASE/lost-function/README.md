@@ -10,12 +10,7 @@ There are many types of loss functions each suited for different tasks. Here are
 
 ## 1. Regression Loss Functions
 
-Regression tasks involve predicting continuous values, such as house prices or temperatures. Here are some commonly used loss functions for regression:
-
 ### 1. Mean Squared Error (MSE) Loss
-
-It is the Mean of Square of Residuals for all the datapoints in the dataset. Residuals is the difference between the actual and the predicted prediction by the model.
-
 
 ### 2. Mean Absolute Error (MAE) Loss
 
