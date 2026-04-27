@@ -6,7 +6,7 @@ It helps train models to make more confident and accurate predictions by rewardi
 
 ## Types of Cross-Entropy Loss Function
 
-## 1. Binary Cross Entropy Loss
+### 1. Binary Cross Entropy Loss
 
 Binary Cross-Entropy Loss is a widely used loss function in binary classification problems. For a dataset with N instances, the Binary Cross-Entropy Loss is calculated as:
 
@@ -18,7 +18,7 @@ where:
 - $y_{i}$ true label for sample $i$(0 or 1)
 - $p_{i}$ model-predicted probability for class 1 for sample $i$.
 
-## 2. Multiclass Cross Entropy Loss
+### 2. Multiclass Cross Entropy Loss
 
 Multiclass Cross-Entropy Loss, also known as categorical cross-entropy or softmax loss is a widely used loss function for training models in multiclass classification problems. For a dataset with N instances, Multiclass Cross-Entropy Loss is calculated as
 
