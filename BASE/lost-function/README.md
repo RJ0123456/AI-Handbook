@@ -26,6 +26,12 @@ It is the Mean of Square of Residuals for all the datapoints in the dataset. Res
 
 ### 2. Categorical Cross-Entropy Loss
 
+Cross-Entropy Loss, also known as Negative Log Likelihood, is a commonly used loss function in machine learning for classification tasks. This loss function measures how well the predicted probabilities match the actual labels.
+
+The cross-entropy loss increases as the predicted probability diverges from the true label. In simpler terms, the farther the model's prediction is from the actual class, the higher the loss. This makes cross-entropy loss an essential tool for improving the accuracy of classification models by minimizing the difference between the predicted and actual labels.
+
+A loss function example using cross-entropy would involve comparing the predicted probabilities for each class against the actual class label, adjusting the model to reduce this error during training.
+
 ### 3. Sparse Categorical Cross-Entropy Loss
 
 ### 4. Kullback-Leibler Divergence Loss (KL Divergence)
