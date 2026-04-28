@@ -19,16 +19,18 @@ $$
 \mathbf{x} := \vec{w}
 $$
 
-1. Taylor Expansion: Local Linear Approximation
+### 1. Taylor Expansion: Local Linear Approximation
+We want to find a new point \(\mathbf{x}_{k+1}\) such that the function value decreases. Let \(\Delta \mathbf{x}\) be the change we apply, so \(\mathbf{x}_{k+1} = \mathbf{x}_k + \Delta \mathbf{x}\).
+
 Suppose our objective function $f(\mathbf{x})$ is first-order differentiable at the point $\mathbf{x}_k$. To study the change in the function value after moving a small vector $\Delta \mathbf{x}$ around $\mathbf{x}_k$, we perform a first-order Taylor expansion:
 
 $$f(\mathbf{x}_k + \Delta \mathbf{x}) \approx f(\mathbf{x}_k) + \nabla f(\mathbf{x}_k)^T \Delta \mathbf{x}$$
 
-To make the function value decrease (i.e., $f(\mathbf{x}_k + \Delta \mathbf{x}) < f(\mathbf{x}_k)$), we need to ensure:
+To make the function value decrease (i.e.,  $f(\mathbf{x}_{k+1}) = f(\mathbf{x}_k + \Delta \mathbf{x}) < f(\mathbf{x}_k)$), we need to ensure:
 
 $$\nabla f(\mathbf{x}_k)^T \Delta \mathbf{x} < 0$$
 
-2. Core Proof: Cauchy-Schwarz Inequality
+### 2. Core Proof: Cauchy-Schwarz Inequality
 
 The mathematical problem now becomes: given a fixed step size (vector length) $\|\Delta \mathbf{x}\|$, in which direction $\Delta \mathbf{x}$ will the term $\nabla f(\mathbf{x}_k)^T \Delta \mathbf{x}$ decrease the fastest (i.e., have the largest negative value)?
 
@@ -53,7 +55,7 @@ Substituting into the update formula:
 $$\mathbf{x}_{k+1} = \mathbf{x}_k - \eta \nabla f(\mathbf{x}_k)$$
 Here, $\eta$ (learning rate) includes the step size and the reciprocal magnitude of the gradient, simplifying the calculation.
 
-4. Limitations: Sufficient Condition for Convergence
+### 4. Limitations: Sufficient Condition for Convergence
 Mathematically, for gradient descent to converge to a local minimum, the L-Lipschitz continuous gradient condition must be satisfied. That is, there exists a constant $L$ such that:
 
 $$\|\nabla f(\mathbf{x}) - \nabla f(\mathbf{y})\| \le L \|\mathbf{x} - \mathbf{y}\|$$ Under this condition, as long as the learning rate $\eta < \frac{2}{L}$, gradient descent guarantees that the function value is monotonically decreasing.
