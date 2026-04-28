@@ -59,4 +59,4 @@ This result is extremely concise: Gradient = Predicted value - True value.
 
 * Larger error, faster update: As long as the difference between $\hat{y}$ and $y$ is large, the gradient is large, and the model updates rapidly. This ensures that the model can quickly escape even with poor initialization (falling into the saturation region).
 
-In multi-class classification tasks, Softmax combined with cross-entropy has the same "cancellation" property.
+In multi-class classification tasks, [Softmax combined with cross-entropy has the same "cancellation" property](./cross-entropy-cancel-out-softmax.md).
