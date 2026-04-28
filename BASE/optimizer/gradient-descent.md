@@ -46,10 +46,17 @@ When $\cos(\theta) = -1$ ($\theta = 180^\circ$), the dot product is minimized (m
 
 Therefore, to achieve the maximum magnitude of descent, the direction of $\Delta \mathbf{x}$ must be exactly opposite to the gradient direction $\nabla f(\mathbf{x}_k)$.
 
-3. Derivation of Conclusion
+### 3. Derivation of Conclusion
 Let $\Delta \mathbf{x} = -\alpha \mathbf{u}$, where $\mathbf{u}$ is the unit direction vector. As proven above, the descent is fastest when $\mathbf{u}$ is the unit vector of the gradient:
 
 $$\mathbf{u} = \frac{\nabla f(\mathbf{x}_k)}{\|\nabla f(\mathbf{x}_k)\|}$$
+
+Note: The use of $\alpha$ and $\mathbf{u}$ (unit vectors) in mathematical derivations is actually for "decoupling":
+1. $\alpha$ represents physical distance: it is a scalar, purely indicating how far you want to travel (step size). 
+2. $\mathbf{u}$ represents precise direction: it is a unit vector, purely indicating which way to go. 
+
+The purpose of this is to rigorously answer in mathematical proofs: "Given a fixed length, which direction is most effective?"
+
 Substituting into the update formula:
 
 $$\mathbf{x}_{k+1} = \mathbf{x}_k - \eta \nabla f(\mathbf{x}_k)$$
