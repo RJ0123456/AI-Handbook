@@ -24,6 +24,33 @@ Each output $\sigma(z_i)$ represents the probability of class $j$
     <figcaption>Graph of Softmax Activation Function</figcaption>
 </div>
 
+### Why Not Use Simple Division?
+
+A simpler alternative to Softmax is dividing each score by the sum of all scores:
+
+$$Simple Division(Z_{i})= \frac{z_{i}}{\sum_{j=1}^n z_{j}}$$
+
+While this approach may seem intuitive, it fails in several scenarios:
+
+**No Amplification of Differences**: Simple division treats all differences equally, making it harder to identify the most likely option.
+- Example: Scores [100,101,102] result in near-equal probabilities.
+
+**Negative Scores or Zero Scores**: Simple division fails if any score is negative or zero, leading to undefined or meaningless probabilities.
+
+**Gradient Optimization Issues**: In machine learning, optimization algorithms rely on gradients. The gradient of a simple division approach is not as smooth or reliable as Softmax.
+
+### Why Use Exponential in SoftMax
+
+The exponential function adds three critical advantages:
+
+**Amplifies Differences**: Exponentiation increases the gap between higher and lower scores. This makes the most likely class stand out, which is essential in classification tasks.
+
+- Example: For scores [2,1,0.1][2, 1, 0.1][2,1,0.1]: Without exponential -Probabilities are [0.5,0.3,0.2][0.5, 0.3, 0.2][0.5,0.3,0.2] (small differences). With exponential — Probabilities are [0.66,0.24,0.1][0.66, 0.24, 0.1][0.66,0.24,0.1] (clear distinction).
+
+- **Handles Negative and Zero Scores**: The exponential function ensures all transformed scores are positive, avoiding issues with negative or zero inputs.
+
+- **Smooth Gradients for Learning**: The derivative of exponential is exponential, which is always positive. This property ensures smooth learning in gradient-based optimization, avoiding flat or undefined regions.
+
 ## Key Characteristics
 
 - **Normalization**: Converts logits into a probability distribution where the sum equals 1.
@@ -48,6 +75,16 @@ The Softmax Activation function is typically used in the final layer of a classi
 - It transforms the model raw output into interpretable probabilities.
 - It ensures the outputs are mutually exclusive suitable for problems where each sample belongs to exactly one class.
 - It works seamlessly with the Cross Entropy Loss Function which measures the difference between predicted and actual probabilities.
+
+## Why is it called softmax?
+
+The softmax activation function should actually be called softargmax. Softmax can indeed be considered a “soft” version of the argmax function: Instead of returning a 1 at the position of the maximum element in the $z$ vector, and 0 for the rest, it returns the highest value at the position of the maximum element, and small values for the rest of the vector.
+
+The use of the exponential function ensures that:
+
+- Every output value is positive.
+- The largest components in the input vector remains the largest in the output vector.
+- The normalization function is differentiable, enabling the seamless application of the chain rule for the computation of the error derivative during backpropagation.
 
 ## Applications
 
