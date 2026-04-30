@@ -175,3 +175,4 @@ A quick tip: In modern frameworks like PyTorch, you don't write these four equat
 
 ## Other Resource
 [Reference 1](https://visionbook.mit.edu/backpropagation.html) 
+[Reference 2](https://en.wikipedia.org/wiki/Backpropagation)
