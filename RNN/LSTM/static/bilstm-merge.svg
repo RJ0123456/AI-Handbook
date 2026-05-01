@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="280" viewBox="0 0 900 280">
+  <rect width="900" height="280" fill="#f4f7fb"/>
+  <text x="450" y="34" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="27" font-weight="700" fill="#183153">How One Token Representation Is Built</text>
+  <text x="450" y="60" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#52657a">BiLSTM combines what came before and what comes after</text>
+
+  <rect x="110" y="115" width="220" height="58" rx="12" fill="#dcecff" stroke="#3b82c4" stroke-width="2"/>
+  <text x="220" y="139" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#183153">Forward hidden state</text>
+  <text x="220" y="160" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#183153">h→t = summary of past</text>
+
+  <rect x="570" y="115" width="220" height="58" rx="12" fill="#ffe5d6" stroke="#d96c30" stroke-width="2"/>
+  <text x="680" y="139" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#183153">Backward hidden state</text>
+  <text x="680" y="160" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#183153">h←t = summary of future</text>
+
+  <circle cx="450" cy="144" r="40" fill="#fff9d7" stroke="#b39500" stroke-width="3"/>
+  <text x="450" y="139" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#183153">concat</text>
+  <text x="450" y="159" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#183153">or sum</text>
+
+  <path d="M330 144 H408" stroke="#3b82c4" stroke-width="4" fill="none"/>
+  <polygon points="408,144 398,138 398,150" fill="#3b82c4"/>
+  <path d="M570 144 H492" stroke="#d96c30" stroke-width="4" fill="none"/>
+  <polygon points="492,144 502,138 502,150" fill="#d96c30"/>
+
+  <rect x="325" y="205" width="250" height="48" rx="12" fill="#e3f7e8" stroke="#35925b" stroke-width="2"/>
+  <text x="450" y="225" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#183153">Final token representation</text>
+  <text x="450" y="245" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#183153">h<tspan baseline-shift="sub" font-size="12">t</tspan> = [h→t ; h←t]</text>
+
+  <path d="M450 184 V205" stroke="#35925b" stroke-width="4" fill="none"/>
+  <polygon points="450,205 444,194 456,194" fill="#35925b"/>
+</svg>

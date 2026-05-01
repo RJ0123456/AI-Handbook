@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="320" viewBox="0 0 1080 320">
+  <rect width="1080" height="320" fill="#f7f3eb"/>
+  <text x="540" y="38" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#183153">Bidirectional LSTM Overview</text>
+  <text x="540" y="66" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#44556b">One sequence, two reading directions, richer context at every position</text>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#183153">
+    <text x="200" y="132" text-anchor="end">Input tokens</text>
+    <text x="200" y="190" text-anchor="end">Forward LSTM</text>
+    <text x="200" y="248" text-anchor="end">Backward LSTM</text>
+    <text x="955" y="190">Merged states</text>
+  </g>
+
+  <g>
+    <rect x="265" y="100" width="90" height="44" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <rect x="395" y="100" width="90" height="44" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <rect x="525" y="100" width="90" height="44" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <rect x="655" y="100" width="90" height="44" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <text x="310" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">x1</text>
+    <text x="440" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">x2</text>
+    <text x="570" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">x3</text>
+    <text x="700" y="128" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">x4</text>
+  </g>
+
+  <g>
+    <rect x="270" y="165" width="80" height="38" rx="10" fill="#d8ebff" stroke="#3b82c4" stroke-width="2"/>
+    <rect x="400" y="165" width="80" height="38" rx="10" fill="#d8ebff" stroke="#3b82c4" stroke-width="2"/>
+    <rect x="530" y="165" width="80" height="38" rx="10" fill="#d8ebff" stroke="#3b82c4" stroke-width="2"/>
+    <rect x="660" y="165" width="80" height="38" rx="10" fill="#d8ebff" stroke="#3b82c4" stroke-width="2"/>
+    <text x="310" y="189" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">f1</text>
+    <text x="440" y="189" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">f2</text>
+    <text x="570" y="189" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">f3</text>
+    <text x="700" y="189" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">f4</text>
+    <path d="M350 184 H395" stroke="#3b82c4" stroke-width="3" fill="none"/>
+    <polygon points="395,184 386,179 386,189" fill="#3b82c4"/>
+    <path d="M480 184 H525" stroke="#3b82c4" stroke-width="3" fill="none"/>
+    <polygon points="525,184 516,179 516,189" fill="#3b82c4"/>
+    <path d="M610 184 H655" stroke="#3b82c4" stroke-width="3" fill="none"/>
+    <polygon points="655,184 646,179 646,189" fill="#3b82c4"/>
+  </g>
+
+  <g>
+    <rect x="270" y="223" width="80" height="38" rx="10" fill="#fde4d3" stroke="#d96c30" stroke-width="2"/>
+    <rect x="400" y="223" width="80" height="38" rx="10" fill="#fde4d3" stroke="#d96c30" stroke-width="2"/>
+    <rect x="530" y="223" width="80" height="38" rx="10" fill="#fde4d3" stroke="#d96c30" stroke-width="2"/>
+    <rect x="660" y="223" width="80" height="38" rx="10" fill="#fde4d3" stroke="#d96c30" stroke-width="2"/>
+    <text x="310" y="247" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">b1</text>
+    <text x="440" y="247" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">b2</text>
+    <text x="570" y="247" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">b3</text>
+    <text x="700" y="247" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">b4</text>
+    <path d="M655 242 H610" stroke="#d96c30" stroke-width="3" fill="none"/>
+    <polygon points="610,242 619,237 619,247" fill="#d96c30"/>
+    <path d="M525 242 H480" stroke="#d96c30" stroke-width="3" fill="none"/>
+    <polygon points="480,242 489,237 489,247" fill="#d96c30"/>
+    <path d="M395 242 H350" stroke="#d96c30" stroke-width="3" fill="none"/>
+    <polygon points="350,242 359,237 359,247" fill="#d96c30"/>
+  </g>
+
+  <g>
+    <rect x="820" y="165" width="150" height="38" rx="10" fill="#e2f6e6" stroke="#35925b" stroke-width="2"/>
+    <rect x="820" y="223" width="150" height="38" rx="10" fill="#e2f6e6" stroke="#35925b" stroke-width="2"/>
+    <text x="895" y="188" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#183153">[forward; backward]</text>
+    <text x="895" y="246" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#183153">context at t</text>
+  </g>
+
+  <path d="M740 184 C775 184, 790 184, 820 184" stroke="#3b82c4" stroke-width="3" fill="none"/>
+  <path d="M740 242 C775 242, 790 242, 820 242" stroke="#d96c30" stroke-width="3" fill="none"/>
+</svg>

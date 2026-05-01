@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="320" viewBox="0 0 1000 320">
+  <rect width="1000" height="320" fill="#faf6ef"/>
+  <text x="500" y="35" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#183153">BiLSTM for Sequence Labeling</text>
+  <text x="500" y="62" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#52657a">Each token gets a context-rich representation, then predicts its own label</text>
+
+  <g>
+    <rect x="110" y="100" width="120" height="46" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <rect x="270" y="100" width="120" height="46" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <rect x="430" y="100" width="120" height="46" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <rect x="590" y="100" width="120" height="46" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <rect x="750" y="100" width="120" height="46" rx="10" fill="#fff" stroke="#cc8b3c" stroke-width="2"/>
+    <text x="170" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">John</text>
+    <text x="330" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">works</text>
+    <text x="490" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">at</text>
+    <text x="650" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">Google</text>
+    <text x="810" y="129" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#183153">.</text>
+  </g>
+
+  <g>
+    <rect x="110" y="182" width="120" height="50" rx="12" fill="#dff0ff" stroke="#3b82c4" stroke-width="2"/>
+    <rect x="270" y="182" width="120" height="50" rx="12" fill="#dff0ff" stroke="#3b82c4" stroke-width="2"/>
+    <rect x="430" y="182" width="120" height="50" rx="12" fill="#dff0ff" stroke="#3b82c4" stroke-width="2"/>
+    <rect x="590" y="182" width="120" height="50" rx="12" fill="#dff0ff" stroke="#3b82c4" stroke-width="2"/>
+    <rect x="750" y="182" width="120" height="50" rx="12" fill="#dff0ff" stroke="#3b82c4" stroke-width="2"/>
+    <text x="170" y="204" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#183153">BiLSTM</text>
+    <text x="170" y="222" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#183153">context h1</text>
+    <text x="330" y="204" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#183153">BiLSTM</text>
+    <text x="330" y="222" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#183153">context h2</text>
+    <text x="490" y="204" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#183153">BiLSTM</text>
+    <text x="490" y="222" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#183153">context h3</text>
+    <text x="650" y="204" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#183153">BiLSTM</text>
+    <text x="650" y="222" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#183153">context h4</text>
+    <text x="810" y="204" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#183153">BiLSTM</text>
+    <text x="810" y="222" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#183153">context h5</text>
+  </g>
+
+  <g>
+    <rect x="110" y="262" width="120" height="38" rx="10" fill="#e3f7e8" stroke="#35925b" stroke-width="2"/>
+    <rect x="270" y="262" width="120" height="38" rx="10" fill="#e3f7e8" stroke="#35925b" stroke-width="2"/>
+    <rect x="430" y="262" width="120" height="38" rx="10" fill="#e3f7e8" stroke="#35925b" stroke-width="2"/>
+    <rect x="590" y="262" width="120" height="38" rx="10" fill="#e3f7e8" stroke="#35925b" stroke-width="2"/>
+    <rect x="750" y="262" width="120" height="38" rx="10" fill="#e3f7e8" stroke="#35925b" stroke-width="2"/>
+    <text x="170" y="286" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">B-PER</text>
+    <text x="330" y="286" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">O</text>
+    <text x="490" y="286" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">O</text>
+    <text x="650" y="286" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">B-ORG</text>
+    <text x="810" y="286" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#183153">O</text>
+  </g>
+
+  <g stroke="#7b8ea3" stroke-width="2">
+    <line x1="170" y1="146" x2="170" y2="182"/>
+    <line x1="330" y1="146" x2="330" y2="182"/>
+    <line x1="490" y1="146" x2="490" y2="182"/>
+    <line x1="650" y1="146" x2="650" y2="182"/>
+    <line x1="810" y1="146" x2="810" y2="182"/>
+    <line x1="170" y1="232" x2="170" y2="262"/>
+    <line x1="330" y1="232" x2="330" y2="262"/>
+    <line x1="490" y1="232" x2="490" y2="262"/>
+    <line x1="650" y1="232" x2="650" y2="262"/>
+    <line x1="810" y1="232" x2="810" y2="262"/>
+  </g>
+</svg>
