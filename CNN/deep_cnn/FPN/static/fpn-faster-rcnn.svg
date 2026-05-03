@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="400" viewBox="0 0 860 400" font-family="Consolas, monospace" font-size="13">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#cdd6f4"/>
+    </marker>
+    <marker id="arr-p" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#cba6f7"/>
+    </marker>
+  </defs>
+  <rect width="860" height="400" fill="#1e1e2e" rx="12"/>
+  <text x="430" y="30" text-anchor="middle" fill="#cdd6f4" font-size="16" font-weight="bold">FPN in Faster R-CNN — Detection Pipeline</text>
+
+  <!-- ══ Step 1: Input ══ -->
+  <rect x="20" y="60" width="90" height="40" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="65" y="78" text-anchor="middle" fill="#89b4fa" font-size="12">Image</text>
+  <text x="65" y="93" text-anchor="middle" fill="#a6adc8" font-size="10">H×W×3</text>
+
+  <line x1="110" y1="80" x2="138" y2="80" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ══ Step 1: Backbone ══ -->
+  <rect x="138" y="50" width="110" height="60" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="193" y="72" text-anchor="middle" fill="#89b4fa" font-weight="bold">① Backbone</text>
+  <text x="193" y="87" text-anchor="middle" fill="#a6adc8" font-size="11">ResNet-50/101</text>
+  <text x="193" y="102" text-anchor="middle" fill="#a6adc8" font-size="11">C2–C5</text>
+
+  <line x1="248" y1="80" x2="276" y2="80" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ══ Step 2: FPN neck ══ -->
+  <rect x="276" y="50" width="110" height="60" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="331" y="72" text-anchor="middle" fill="#a6e3a1" font-weight="bold">② FPN Neck</text>
+  <text x="331" y="87" text-anchor="middle" fill="#a6adc8" font-size="11">Top-down +</text>
+  <text x="331" y="102" text-anchor="middle" fill="#a6adc8" font-size="11">P2–P6</text>
+
+  <line x1="386" y1="80" x2="414" y2="80" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ══ Step 3: RPN ══ -->
+  <rect x="414" y="50" width="130" height="60" rx="6" fill="#313244" stroke="#fab387" stroke-width="1.5"/>
+  <text x="479" y="72" text-anchor="middle" fill="#fab387" font-weight="bold">③ RPN (shared)</text>
+  <text x="479" y="87" text-anchor="middle" fill="#a6adc8" font-size="11">1 anchor scale / level</text>
+  <text x="479" y="102" text-anchor="middle" fill="#a6adc8" font-size="11">objectness + Δbox</text>
+
+  <line x1="544" y1="80" x2="572" y2="80" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ══ Proposals box ══ -->
+  <rect x="572" y="60" width="100" height="40" rx="6" fill="#313244" stroke="#f38ba8" stroke-width="1.5"/>
+  <text x="622" y="78" text-anchor="middle" fill="#f38ba8" font-size="12">Proposals</text>
+  <text x="622" y="93" text-anchor="middle" fill="#a6adc8" font-size="10">~1000 RoIs</text>
+
+  <!-- ══ Step 4: Level assignment ══ -->
+  <!-- arrow down from proposals -->
+  <line x1="622" y1="100" x2="622" y2="145" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="548" y="145" width="150" height="50" rx="6" fill="#313244" stroke="#f38ba8" stroke-width="1.5"/>
+  <text x="623" y="165" text-anchor="middle" fill="#f38ba8" font-weight="bold">④ Level Assignment</text>
+  <text x="623" y="182" text-anchor="middle" fill="#a6adc8" font-size="11">k = ⌊k₀ + log₂(√wh / 224)⌋</text>
+
+  <!-- arrows from level assignment to P levels -->
+  <line x1="548" y1="170" x2="414" y2="170" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ══ Step 4b: RoI Align ══ -->
+  <rect x="276" y="145" width="138" height="50" rx="6" fill="#313244" stroke="#fab387" stroke-width="1.5"/>
+  <text x="345" y="165" text-anchor="middle" fill="#fab387" font-weight="bold">⑤ RoI Align</text>
+  <text x="345" y="182" text-anchor="middle" fill="#a6adc8" font-size="11">on selected P_k</text>
+
+  <line x1="276" y1="170" x2="248" y2="170" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ══ Step 5: Detection Head ══ -->
+  <rect x="110" y="145" width="138" height="50" rx="6" fill="#313244" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="179" y="165" text-anchor="middle" fill="#cba6f7" font-weight="bold">⑥ Detection Head</text>
+  <text x="179" y="182" text-anchor="middle" fill="#a6adc8" font-size="11">FC → class + box (shared)</text>
+
+  <line x1="110" y1="170" x2="80" y2="170" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ══ Output ══ -->
+  <rect x="20" y="150" width="60" height="40" rx="6" fill="#45475a" stroke="#a6e3a1" stroke-width="2"/>
+  <text x="50" y="168" text-anchor="middle" fill="#a6e3a1" font-weight="bold">Output</text>
+  <text x="50" y="183" text-anchor="middle" fill="#a6adc8" font-size="10">boxes+labels</text>
+
+  <!-- ══ Pyramid level visual ══ -->
+  <text x="430" y="240" text-anchor="middle" fill="#6c7086" font-size="12">Pyramid Level Assignment — each proposal is routed to its matching P_k</text>
+
+  <!-- P2 large box -->
+  <rect x="30"  y="258" width="145" height="50" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="102" y="278" text-anchor="middle" fill="#cba6f7" font-weight="bold">P2  (160×160)</text>
+  <text x="102" y="298" text-anchor="middle" fill="#a6adc8" font-size="11">tiny objects  ≤32² px</text>
+
+  <rect x="195" y="262" width="145" height="46" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="267" y="280" text-anchor="middle" fill="#cba6f7" font-weight="bold">P3  (80×80)</text>
+  <text x="267" y="296" text-anchor="middle" fill="#a6adc8" font-size="11">small  32²–64² px</text>
+
+  <rect x="360" y="266" width="145" height="42" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="432" y="284" text-anchor="middle" fill="#cba6f7" font-weight="bold">P4  (40×40)</text>
+  <text x="432" y="298" text-anchor="middle" fill="#a6adc8" font-size="11">medium 64²–128² px</text>
+
+  <rect x="525" y="270" width="145" height="38" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="597" y="287" text-anchor="middle" fill="#cba6f7" font-weight="bold">P5  (20×20)</text>
+  <text x="597" y="300" text-anchor="middle" fill="#a6adc8" font-size="11">large 128²–256² px</text>
+
+  <rect x="690" y="274" width="145" height="34" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="762" y="291" text-anchor="middle" fill="#cba6f7" font-weight="bold">P6  (10×10)</text>
+  <text x="762" y="303" text-anchor="middle" fill="#a6adc8" font-size="11">huge  ≥256² px</text>
+
+  <!-- ══ Key insight box ══ -->
+  <rect x="20" y="330" width="820" height="52" rx="8" fill="#181825" stroke="#a6e3a1" stroke-width="1"/>
+  <text x="430" y="350" text-anchor="middle" fill="#a6e3a1" font-size="13" font-weight="bold">Key Insight</text>
+  <text x="430" y="370" text-anchor="middle" fill="#cdd6f4" font-size="12">The detection head is SHARED across all levels — FPN gives every P_k identical 256-ch. representations,</text>
+  <text x="430" y="386" text-anchor="middle" fill="#cdd6f4" font-size="12">so one head works for all scales. This is unlike SSD which needs independent heads per scale.</text>
+</svg>

@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="520" viewBox="0 0 860 520" font-family="Consolas, monospace" font-size="13">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#cdd6f4"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#a6e3a1"/>
+    </marker>
+    <marker id="arr-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f38ba8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="860" height="520" fill="#1e1e2e" rx="12"/>
+
+  <!-- Title -->
+  <text x="430" y="32" text-anchor="middle" fill="#cdd6f4" font-size="17" font-weight="bold">Feature Pyramid Network — Full Architecture</text>
+
+  <!-- ════════ COLUMN LABELS ════════ -->
+  <text x="90"  y="60" text-anchor="middle" fill="#6c7086" font-size="12">Input</text>
+  <text x="210" y="60" text-anchor="middle" fill="#89b4fa" font-size="12">Bottom-Up (ResNet)</text>
+  <text x="430" y="60" text-anchor="middle" fill="#f38ba8" font-size="12">Top-Down + Lateral</text>
+  <text x="690" y="60" text-anchor="middle" fill="#cba6f7" font-size="12">Pyramid Output</text>
+
+  <!-- ════════ ROW Y CENTRES ════════ -->
+  <!-- C2/P2  y=100  C3/P3  y=200  C4/P4  y=300  C5/P5  y=400 -->
+
+  <!-- ── INPUT IMAGE ── -->
+  <rect x="30" y="380" width="120" height="40" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="90" y="405" text-anchor="middle" fill="#89b4fa">Input Image</text>
+
+  <!-- arrow input → C5 -->
+  <line x1="150" y1="400" x2="155" y2="400" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ════════ BACKBONE FEATURE MAPS (left column) ════════ -->
+
+  <!-- C5 -->
+  <rect x="155" y="378" width="120" height="44" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="215" y="398" text-anchor="middle" fill="#89b4fa" font-weight="bold">C5  stride 32</text>
+  <text x="215" y="413" text-anchor="middle" fill="#a6adc8" font-size="11">20×20 × 2048</text>
+
+  <!-- C4 -->
+  <rect x="155" y="278" width="120" height="44" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="215" y="298" text-anchor="middle" fill="#89b4fa" font-weight="bold">C4  stride 16</text>
+  <text x="215" y="313" text-anchor="middle" fill="#a6adc8" font-size="11">40×40 × 1024</text>
+
+  <!-- C3 -->
+  <rect x="155" y="178" width="120" height="44" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="215" y="198" text-anchor="middle" fill="#89b4fa" font-weight="bold">C3  stride 8</text>
+  <text x="215" y="213" text-anchor="middle" fill="#a6adc8" font-size="11">80×80 × 512</text>
+
+  <!-- C2 -->
+  <rect x="155" y="78" width="120" height="44" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="215" y="98" text-anchor="middle" fill="#89b4fa" font-weight="bold">C2  stride 4</text>
+  <text x="215" y="113" text-anchor="middle" fill="#a6adc8" font-size="11">160×160 × 256</text>
+
+  <!-- vertical backbone arrows (bottom-up) -->
+  <line x1="215" y1="378" x2="215" y2="322" stroke="#89b4fa" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="215" y1="278" x2="215" y2="222" stroke="#89b4fa" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <line x1="215" y1="178" x2="215" y2="122" stroke="#89b4fa" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+  <!-- ════════ 1×1 CONV (lateral projections) ════════ -->
+  <!-- shared horizontal: Ck → lateral 1x1 -->
+
+  <!-- C5 → 1x1 -->
+  <line x1="275" y1="400" x2="320" y2="400" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="320" y="378" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="360" y="398" text-anchor="middle" fill="#a6e3a1" font-weight="bold">1×1</text>
+  <text x="360" y="413" text-anchor="middle" fill="#a6adc8" font-size="11">→ 256</text>
+
+  <!-- C4 → 1x1 -->
+  <line x1="275" y1="300" x2="320" y2="300" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="320" y="278" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="360" y="298" text-anchor="middle" fill="#a6e3a1" font-weight="bold">1×1</text>
+  <text x="360" y="313" text-anchor="middle" fill="#a6adc8" font-size="11">→ 256</text>
+
+  <!-- C3 → 1x1 -->
+  <line x1="275" y1="200" x2="320" y2="200" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="320" y="178" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="360" y="198" text-anchor="middle" fill="#a6e3a1" font-weight="bold">1×1</text>
+  <text x="360" y="213" text-anchor="middle" fill="#a6adc8" font-size="11">→ 256</text>
+
+  <!-- C2 → 1x1 -->
+  <line x1="275" y1="100" x2="320" y2="100" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="320" y="78" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="360" y="98" text-anchor="middle" fill="#a6e3a1" font-weight="bold">1×1</text>
+  <text x="360" y="113" text-anchor="middle" fill="#a6adc8" font-size="11">→ 256</text>
+
+  <!-- ════════ ADD CIRCLES ════════ -->
+  <!-- P5 has no add, just the 1x1 output -->
+  <!-- P4 add at (460, 300) -->
+  <circle cx="460" cy="300" r="18" fill="#313244" stroke="#fab387" stroke-width="2"/>
+  <text x="460" y="306" text-anchor="middle" fill="#fab387" font-size="18" font-weight="bold">+</text>
+  <!-- P3 add at (460, 200) -->
+  <circle cx="460" cy="200" r="18" fill="#313244" stroke="#fab387" stroke-width="2"/>
+  <text x="460" y="206" text-anchor="middle" fill="#fab387" font-size="18" font-weight="bold">+</text>
+  <!-- P2 add at (460, 100) -->
+  <circle cx="460" cy="100" r="18" fill="#313244" stroke="#fab387" stroke-width="2"/>
+  <text x="460" y="106" text-anchor="middle" fill="#fab387" font-size="18" font-weight="bold">+</text>
+
+  <!-- 1x1 C5 → add P4 path: right → up through (420,400)→(420,300) → add -->
+  <line x1="400" y1="400" x2="420" y2="400" stroke="#f38ba8" stroke-width="1.5"/>
+  <line x1="420" y1="400" x2="420" y2="300" stroke="#f38ba8" stroke-width="1.5"/>
+  <line x1="420" y1="300" x2="442" y2="300" stroke="#f38ba8" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <text x="430" y="355" fill="#f38ba8" font-size="11">2× up</text>
+
+  <!-- 1x1 C4 → add P3 path -->
+  <line x1="400" y1="300" x2="420" y2="300" stroke="#f38ba8" stroke-width="1.5"/>
+  <line x1="420" y1="300" x2="420" y2="200" stroke="#f38ba8" stroke-width="1.5"/>
+  <line x1="420" y1="200" x2="442" y2="200" stroke="#f38ba8" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <text x="430" y="255" fill="#f38ba8" font-size="11">2× up</text>
+
+  <!-- 1x1 C3 → add P2 path -->
+  <line x1="400" y1="200" x2="420" y2="200" stroke="#f38ba8" stroke-width="1.5"/>
+  <line x1="420" y1="200" x2="420" y2="100" stroke="#f38ba8" stroke-width="1.5"/>
+  <line x1="420" y1="100" x2="442" y2="100" stroke="#f38ba8" stroke-width="1.5" marker-end="url(#arr-red)"/>
+  <text x="430" y="155" fill="#f38ba8" font-size="11">2× up</text>
+
+  <!-- lateral 1x1 → add (horizontal arrows from 1x1 to add circles) -->
+  <line x1="400" y1="300" x2="442" y2="300" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="400" y1="200" x2="442" y2="200" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="400" y1="100" x2="442" y2="100" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ════════ 3×3 CONV ════════ -->
+  <!-- P5: 1x1 C5 → 3x3 directly -->
+  <line x1="400" y1="400" x2="500" y2="400" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="500" y="378" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="540" y="398" text-anchor="middle" fill="#a6e3a1" font-weight="bold">3×3</text>
+  <text x="540" y="413" text-anchor="middle" fill="#a6adc8" font-size="11">smooth</text>
+
+  <!-- P4 add → 3x3 -->
+  <line x1="478" y1="300" x2="500" y2="300" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="500" y="278" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="540" y="298" text-anchor="middle" fill="#a6e3a1" font-weight="bold">3×3</text>
+  <text x="540" y="313" text-anchor="middle" fill="#a6adc8" font-size="11">smooth</text>
+
+  <!-- P3 add → 3x3 -->
+  <line x1="478" y1="200" x2="500" y2="200" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="500" y="178" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="540" y="198" text-anchor="middle" fill="#a6e3a1" font-weight="bold">3×3</text>
+  <text x="540" y="213" text-anchor="middle" fill="#a6adc8" font-size="11">smooth</text>
+
+  <!-- P2 add → 3x3 -->
+  <line x1="478" y1="100" x2="500" y2="100" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="500" y="78" width="80" height="44" rx="6" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="540" y="98" text-anchor="middle" fill="#a6e3a1" font-weight="bold">3×3</text>
+  <text x="540" y="113" text-anchor="middle" fill="#a6adc8" font-size="11">smooth</text>
+
+  <!-- ════════ OUTPUT P MAPS ════════ -->
+  <!-- P5 -->
+  <line x1="580" y1="400" x2="630" y2="400" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="630" y="378" width="110" height="44" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="2"/>
+  <text x="685" y="398" text-anchor="middle" fill="#cba6f7" font-weight="bold">P5</text>
+  <text x="685" y="413" text-anchor="middle" fill="#a6adc8" font-size="11">20×20 × 256</text>
+
+  <!-- P4 -->
+  <line x1="580" y1="300" x2="630" y2="300" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="630" y="278" width="110" height="44" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="2"/>
+  <text x="685" y="298" text-anchor="middle" fill="#cba6f7" font-weight="bold">P4</text>
+  <text x="685" y="313" text-anchor="middle" fill="#a6adc8" font-size="11">40×40 × 256</text>
+
+  <!-- P3 -->
+  <line x1="580" y1="200" x2="630" y2="200" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="630" y="178" width="110" height="44" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="2"/>
+  <text x="685" y="198" text-anchor="middle" fill="#cba6f7" font-weight="bold">P3</text>
+  <text x="685" y="213" text-anchor="middle" fill="#a6adc8" font-size="11">80×80 × 256</text>
+
+  <!-- P2 -->
+  <line x1="580" y1="100" x2="630" y2="100" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="630" y="78" width="110" height="44" rx="6" fill="#45475a" stroke="#cba6f7" stroke-width="2"/>
+  <text x="685" y="98" text-anchor="middle" fill="#cba6f7" font-weight="bold">P2</text>
+  <text x="685" y="113" text-anchor="middle" fill="#a6adc8" font-size="11">160×160 × 256</text>
+
+  <!-- ════════ LEGEND ════════ -->
+  <rect x="30" y="458" width="800" height="50" rx="6" fill="#181825"/>
+  <rect x="45" y="472" width="14" height="14" rx="2" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="65" y="484" fill="#89b4fa" font-size="11">Backbone feature map</text>
+  <rect x="195" y="472" width="14" height="14" rx="2" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="215" y="484" fill="#a6e3a1" font-size="11">Conv layer</text>
+  <circle cx="325" cy="479" r="8" fill="#313244" stroke="#fab387" stroke-width="1.5"/>
+  <text x="338" y="484" fill="#fab387" font-size="11">Element-wise add</text>
+  <line x1="455" y1="479" x2="475" y2="479" stroke="#f38ba8" stroke-width="2"/>
+  <text x="480" y="484" fill="#f38ba8" font-size="11">Top-down (upsample)</text>
+  <rect x="615" y="472" width="14" height="14" rx="2" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="635" y="484" fill="#cba6f7" font-size="11">Pyramid output (P_k)</text>
+</svg>

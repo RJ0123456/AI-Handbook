@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360" font-family="Consolas, monospace" font-size="13">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#cdd6f4"/>
+    </marker>
+  </defs>
+  <rect width="860" height="360" fill="#1e1e2e" rx="12"/>
+  <text x="430" y="30" text-anchor="middle" fill="#cdd6f4" font-size="16" font-weight="bold">Multi-Scale Detection Approaches</text>
+
+  <!-- ══ (a) Image Pyramid ══ -->
+  <text x="95" y="58" text-anchor="middle" fill="#fab387" font-size="13" font-weight="bold">(a) Image Pyramid</text>
+  <!-- 3 image scales stacked -->
+  <rect x="20" y="68" width="150" height="30" rx="4" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="95" y="88" text-anchor="middle" fill="#89b4fa" font-size="11">Large image</text>
+  <rect x="30" y="104" width="130" height="26" rx="4" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="95" y="121" text-anchor="middle" fill="#89b4fa" font-size="11">Medium image</text>
+  <rect x="40" y="136" width="110" height="22" rx="4" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="95" y="152" text-anchor="middle" fill="#89b4fa" font-size="11">Small image</text>
+  <!-- arrows to detectors -->
+  <line x1="170" y1="83"  x2="195" y2="83"  stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="160" y1="117" x2="195" y2="117" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="150" y1="147" x2="195" y2="147" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="195" y="70" width="60" height="90" rx="4" fill="#313244" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="225" y="115" text-anchor="middle" fill="#a6e3a1" font-size="11">CNN ×3</text>
+  <!-- label -->
+  <text x="95" y="182" text-anchor="middle" fill="#f38ba8" font-size="11">Slow at test time</text>
+
+  <!-- ══ (b) Single Feature Map ══ -->
+  <text x="310" y="58" text-anchor="middle" fill="#fab387" font-size="13" font-weight="bold">(b) Single Map</text>
+  <rect x="250" y="68" width="70" height="100" rx="4" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="285" y="122" text-anchor="middle" fill="#89b4fa" font-size="11">CNN</text>
+  <line x1="320" y1="118" x2="345" y2="118" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="345" y="98" width="75" height="40" rx="4" fill="#45475a" stroke="#cba6f7" stroke-width="2"/>
+  <text x="382" y="122" text-anchor="middle" fill="#cba6f7" font-size="11">Detect</text>
+  <text x="310" y="182" text-anchor="middle" fill="#f38ba8" font-size="11">Misses small objects</text>
+
+  <!-- ══ (c) SSD / Hierarchical ══ -->
+  <text x="543" y="58" text-anchor="middle" fill="#fab387" font-size="13" font-weight="bold">(c) Hierarchical (SSD)</text>
+  <rect x="445" y="68" width="70" height="100" rx="4" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="480" y="122" text-anchor="middle" fill="#89b4fa" font-size="11">CNN</text>
+  <!-- feature maps at 3 depths -->
+  <line x1="515" y1="85"  x2="540" y2="85"  stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="515" y1="118" x2="540" y2="118" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="515" y1="150" x2="540" y2="150" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="540" y="70"  width="75" height="28" rx="4" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="577" y="88" text-anchor="middle" fill="#cba6f7" font-size="10">Pred (shallow)</text>
+  <rect x="540" y="104" width="75" height="28" rx="4" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="577" y="122" text-anchor="middle" fill="#cba6f7" font-size="10">Pred (mid)</text>
+  <rect x="540" y="136" width="75" height="28" rx="4" fill="#45475a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="577" y="154" text-anchor="middle" fill="#cba6f7" font-size="10">Pred (deep)</text>
+  <text x="543" y="182" text-anchor="middle" fill="#f38ba8" font-size="11">Weak semantics at shallow</text>
+
+  <!-- ══ (d) FPN ══ -->
+  <text x="745" y="58" text-anchor="middle" fill="#a6e3a1" font-size="13" font-weight="bold">(d) FPN ✓</text>
+  <!-- backbone -->
+  <rect x="655" y="68" width="60" height="100" rx="4" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="685" y="88" text-anchor="middle" fill="#89b4fa" font-size="10">C2</text>
+  <text x="685" y="108" text-anchor="middle" fill="#89b4fa" font-size="10">C3</text>
+  <text x="685" y="128" text-anchor="middle" fill="#89b4fa" font-size="10">C4</text>
+  <text x="685" y="148" text-anchor="middle" fill="#89b4fa" font-size="10">C5</text>
+  <!-- top-down arrows -->
+  <line x1="715" y1="148" x2="730" y2="148" stroke="#f38ba8" stroke-width="1.5"/>
+  <line x1="730" y1="148" x2="730" y2="88" stroke="#f38ba8" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="736" y="122" fill="#f38ba8" font-size="10">↑</text>
+  <!-- lateral + predict -->
+  <line x1="715" y1="88"  x2="760" y2="88"  stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="715" y1="108" x2="760" y2="108" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="715" y1="128" x2="760" y2="128" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="715" y1="148" x2="760" y2="148" stroke="#cdd6f4" stroke-width="1.5" marker-end="url(#arr)"/>
+  <rect x="760" y="70"  width="60" height="24" rx="4" fill="#45475a" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="790" y="86" text-anchor="middle" fill="#a6e3a1" font-size="10">P2 ✓</text>
+  <rect x="760" y="98"  width="60" height="24" rx="4" fill="#45475a" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="790" y="114" text-anchor="middle" fill="#a6e3a1" font-size="10">P3 ✓</text>
+  <rect x="760" y="126" width="60" height="24" rx="4" fill="#45475a" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="790" y="142" text-anchor="middle" fill="#a6e3a1" font-size="10">P4 ✓</text>
+  <rect x="760" y="154" width="60" height="24" rx="4" fill="#45475a" stroke="#a6e3a1" stroke-width="1.5"/>
+  <text x="790" y="170" text-anchor="middle" fill="#a6e3a1" font-size="10">P5 ✓</text>
+  <text x="745" y="202" text-anchor="middle" fill="#a6e3a1" font-size="11">Rich semantics at all scales</text>
+
+  <!-- ══ Bottom comparison table ══ -->
+  <rect x="20" y="220" width="820" height="120" rx="8" fill="#181825"/>
+  <!-- header -->
+  <text x="30"  y="244" fill="#a6adc8" font-size="12" font-weight="bold">Approach</text>
+  <text x="200" y="244" fill="#a6adc8" font-size="12" font-weight="bold">Speed</text>
+  <text x="340" y="244" fill="#a6adc8" font-size="12" font-weight="bold">Small obj. accuracy</text>
+  <text x="560" y="244" fill="#a6adc8" font-size="12" font-weight="bold">Semantic quality at all levels</text>
+  <line x1="30" y1="250" x2="830" y2="250" stroke="#45475a" stroke-width="1"/>
+  <!-- rows -->
+  <text x="30"  y="270" fill="#cdd6f4" font-size="12">(a) Image Pyramid</text>
+  <text x="200" y="270" fill="#f38ba8" font-size="12">Slow</text>
+  <text x="340" y="270" fill="#a6e3a1" font-size="12">Good</text>
+  <text x="560" y="270" fill="#a6e3a1" font-size="12">Good (separate models)</text>
+
+  <text x="30"  y="292" fill="#cdd6f4" font-size="12">(b) Single Map</text>
+  <text x="200" y="292" fill="#a6e3a1" font-size="12">Fast</text>
+  <text x="340" y="292" fill="#f38ba8" font-size="12">Poor</text>
+  <text x="560" y="292" fill="#f38ba8" font-size="12">Only at last layer</text>
+
+  <text x="30"  y="314" fill="#cdd6f4" font-size="12">(c) SSD</text>
+  <text x="200" y="314" fill="#a6e3a1" font-size="12">Fast</text>
+  <text x="340" y="314" fill="#fab387" font-size="12">Mediocre</text>
+  <text x="560" y="314" fill="#f38ba8" font-size="12">Weak at shallow levels</text>
+
+  <text x="30"  y="336" fill="#a6e3a1" font-size="12" font-weight="bold">(d) FPN ✓</text>
+  <text x="200" y="336" fill="#a6e3a1" font-size="12" font-weight="bold">Fast</text>
+  <text x="340" y="336" fill="#a6e3a1" font-size="12" font-weight="bold">Excellent</text>
+  <text x="560" y="336" fill="#a6e3a1" font-size="12" font-weight="bold">Strong at every level</text>
+</svg>
