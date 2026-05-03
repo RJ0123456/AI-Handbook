@@ -30,6 +30,53 @@ $$
 
 The additive identity term helps gradients propagate through deep stacks.
 
+### Projection connection
+
+If the function $𝐹$ is of type $𝐹: \mathbb{R}^𝑛 → \mathbb{R}^𝑚$ where $𝑛 ≠ 𝑚$, then $𝐹(𝑥) + 𝑥$ is undefined. To handle this special case, a projection connection is used:
+
+$$ 𝑦=𝐹(𝑥)+𝑃(𝑥)$$
+
+where $𝑃$ is typically a linear projection, defined by $𝑃(𝑥)=𝑀𝑥$ where $𝑀$ is a $𝑚×𝑛$ matrix. The matrix is trained via [backpropagation](https://en.wikipedia.org/wiki/Backpropagation), as is any other parameter of the model.
+
+#### Signal propagation
+
+The introduction of identity mappings facilitates signal propagation in both forward and backward paths.[5](#8-recommended-resources)
+
+#### Forward propagation
+
+If the output of the ${\displaystyle \ell }$-th residual block is the input to the ${\displaystyle (\ell +1)}$-th residual block (assuming no activation function between blocks), then the ${\displaystyle (\ell +1)}$-th input is:
+
+$$x_{\ell+1} = F{x_\ell} +x_\ell$$
+
+Applying this formulation recursively, e.g.:
+
+$$
+\begin{align*}
+x_{\ell + 2} &= F(x_\ell + 1) + x_{\ell + 1} \\
+             &= F(x_\ell + 1) + F(x_{\ell}) + x_{\ell}
+\end{align*}
+$$
+
+yields the general relationship:
+
+$$x_L = x_{\ell} + \sum_{i=\ell}^{L-1}F(x_i)$$
+
+where $𝐿$ is the index of a residual block and $\ell$ is the index of some earlier block. This formulation suggests that there is always a signal that is directly sent from a shallower block $\ell$ to a deeper block $𝐿$.
+
+#### Backward propagation
+
+The residual learning formulation provides the added benefit of mitigating the vanishing gradient problem to some extent. However, it is crucial to acknowledge that the vanishing gradient issue is not the root cause of the degradation problem, which is tackled through the use of normalization. To observe the effect of residual blocks on backpropagation, consider the partial derivative of a loss function $𝐸$ with respect to some residual block input $𝑥_{\ell}$. Using the equation above from forward propagation for a later residual block $𝐿 > \ell$: [5](#8-recommended-resources)
+
+$$
+\begin{align*}
+\frac{\partial{\mathcal{E}}}{\partial{x_{\ell}}} &= \frac{\partial{\mathcal{E}}}{\partial{x_L}} \frac{\partial{X_L}}{\partial{x_\ell}} \\
+&= \frac{\partial{\mathcal{E}}}{\partial{x_{L}}}(1 + \frac{\partial{}}{\partial{x_{\ell}}} \sum_{i=l}^{L-1}F(x_i)) \\
+&= \frac{\partial{\mathcal{E}}}{\partial{x_{L}}} + \frac{\partial{\mathcal{E}}}{\partial{x_{L}}} \frac{\partial{}}{\partial{x_{\ell}}} \sum_{i=l}^{L-1}F(x_i)
+\end{align*}
+$$
+
+This formulation suggests that the gradient computation of a shallower layer, $\frac{\partial{\mathcal{E}}}{\partial{x_{\ell}}}$, always has a later term $\frac{\partial{\mathcal{E}}}{\partial{x_{L}}}$ that is directly added. Even if the gradients of the $𝐹(𝑥_𝑖)$ terms are small, the total gradient $\frac{\partial{\mathcal{E}}}{\partial{x_{\ell}}}$ resists vanishing due to the added term $\frac{\partial{\mathcal{E}}}{\partial{x_{L}}}$.
+
 ## 2. Core Block Types
 
 1. Basic block (ResNet-18/34): two $3\times3$ convolutions.
@@ -311,3 +358,5 @@ https://d2l.ai/chapter_convolutional-modern/resnet.html
 
 4. PyTorch ResNet docs:
 https://pytorch.org/vision/main/models/resnet.html
+
+6.  He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian (2016). [Identity Mappings in Deep Residual Networks](https://link.springer.com/content/pdf/10.1007/978-3-319-46493-0_38.pdf). European Conference on Computer Vision. arXiv:1603.05027. [doi:10.1007/978-3-319-46493-0_38](https://doi.org/10.1007%2F978-3-319-46493-0_38).
