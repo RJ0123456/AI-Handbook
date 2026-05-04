@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 300" width="780" height="300" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="780" height="300" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="390" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#212529">GRU Unrolled Over Time</text>
+
+  <!-- ── Define arrow markers ─────────────────────── -->
+  <defs>
+    <marker id="arrowB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4361ee"/>
+    </marker>
+    <marker id="arrowG" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#06d6a0"/>
+    </marker>
+    <marker id="arrowR" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f72585"/>
+    </marker>
+    <marker id="arrowGr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#888"/>
+    </marker>
+  </defs>
+
+  <!-- ── GRU cells (5 cells at x = 90, 210, 330, 450, 600) ── -->
+  <!-- Cell positions: cx=90,210,330,450,600  cy=150 box 80×60 -->
+
+  <!-- Cell 1 -->
+  <rect x="50" y="120" width="80" height="60" rx="10" fill="#4361ee" stroke="none"/>
+  <text x="90" y="147" text-anchor="middle" font-size="13" font-weight="bold" fill="white">GRU</text>
+  <text x="90" y="163" text-anchor="middle" font-size="11" fill="#c8d8ff">Cell 1</text>
+
+  <!-- Cell 2 -->
+  <rect x="170" y="120" width="80" height="60" rx="10" fill="#4361ee" stroke="none"/>
+  <text x="210" y="147" text-anchor="middle" font-size="13" font-weight="bold" fill="white">GRU</text>
+  <text x="210" y="163" text-anchor="middle" font-size="11" fill="#c8d8ff">Cell 2</text>
+
+  <!-- Cell 3 -->
+  <rect x="290" y="120" width="80" height="60" rx="10" fill="#4361ee" stroke="none"/>
+  <text x="330" y="147" text-anchor="middle" font-size="13" font-weight="bold" fill="white">GRU</text>
+  <text x="330" y="163" text-anchor="middle" font-size="11" fill="#c8d8ff">Cell 3</text>
+
+  <!-- Cell 4 -->
+  <rect x="410" y="120" width="80" height="60" rx="10" fill="#4361ee" stroke="none"/>
+  <text x="450" y="147" text-anchor="middle" font-size="13" font-weight="bold" fill="white">GRU</text>
+  <text x="450" y="163" text-anchor="middle" font-size="11" fill="#c8d8ff">Cell 4</text>
+
+  <!-- dots -->
+  <text x="535" y="155" text-anchor="middle" font-size="22" fill="#888">···</text>
+
+  <!-- Cell T -->
+  <rect x="560" y="120" width="80" height="60" rx="10" fill="#4361ee" stroke="none"/>
+  <text x="600" y="147" text-anchor="middle" font-size="13" font-weight="bold" fill="white">GRU</text>
+  <text x="600" y="163" text-anchor="middle" font-size="11" fill="#c8d8ff">Cell T</text>
+
+  <!-- ── Input arrows (top → cell) ─────────────────── -->
+  <!-- x₁ -->
+  <text x="90" y="70" text-anchor="middle" font-size="13" fill="#212529">x₁</text>
+  <line x1="90" y1="75" x2="90" y2="118" stroke="#888" stroke-width="1.8" marker-end="url(#arrowGr)"/>
+  <!-- x₂ -->
+  <text x="210" y="70" text-anchor="middle" font-size="13" fill="#212529">x₂</text>
+  <line x1="210" y1="75" x2="210" y2="118" stroke="#888" stroke-width="1.8" marker-end="url(#arrowGr)"/>
+  <!-- x₃ -->
+  <text x="330" y="70" text-anchor="middle" font-size="13" fill="#212529">x₃</text>
+  <line x1="330" y1="75" x2="330" y2="118" stroke="#888" stroke-width="1.8" marker-end="url(#arrowGr)"/>
+  <!-- x₄ -->
+  <text x="450" y="70" text-anchor="middle" font-size="13" fill="#212529">x₄</text>
+  <line x1="450" y1="75" x2="450" y2="118" stroke="#888" stroke-width="1.8" marker-end="url(#arrowGr)"/>
+  <!-- xT -->
+  <text x="600" y="70" text-anchor="middle" font-size="13" fill="#212529">xT</text>
+  <line x1="600" y1="75" x2="600" y2="118" stroke="#888" stroke-width="1.8" marker-end="url(#arrowGr)"/>
+
+  <!-- ── Hidden state arrows (cell → cell) ─────────── -->
+  <line x1="130" y1="150" x2="168" y2="150" stroke="#4361ee" stroke-width="2.2" marker-end="url(#arrowB)"/>
+  <line x1="250" y1="150" x2="288" y2="150" stroke="#4361ee" stroke-width="2.2" marker-end="url(#arrowB)"/>
+  <line x1="370" y1="150" x2="408" y2="150" stroke="#4361ee" stroke-width="2.2" marker-end="url(#arrowB)"/>
+  <line x1="490" y1="150" x2="525" y2="150" stroke="#4361ee" stroke-width="2.2" stroke-dasharray="5,3"/>
+  <line x1="548" y1="150" x2="558" y2="150" stroke="#4361ee" stroke-width="2.2" marker-end="url(#arrowB)"/>
+
+  <!-- ── Output arrows (cell → bottom) ─────────────── -->
+  <line x1="90" y1="182" x2="90" y2="220" stroke="#06d6a0" stroke-width="1.8" marker-end="url(#arrowG)"/>
+  <line x1="210" y1="182" x2="210" y2="220" stroke="#06d6a0" stroke-width="1.8" marker-end="url(#arrowG)"/>
+  <line x1="330" y1="182" x2="330" y2="220" stroke="#06d6a0" stroke-width="1.8" marker-end="url(#arrowG)"/>
+  <line x1="450" y1="182" x2="450" y2="220" stroke="#06d6a0" stroke-width="1.8" marker-end="url(#arrowG)"/>
+  <line x1="600" y1="182" x2="600" y2="220" stroke="#06d6a0" stroke-width="1.8" marker-end="url(#arrowG)"/>
+
+  <!-- Output labels -->
+  <text x="90" y="238" text-anchor="middle" font-size="13" fill="#06d6a0" font-weight="bold">h₁</text>
+  <text x="210" y="238" text-anchor="middle" font-size="13" fill="#06d6a0" font-weight="bold">h₂</text>
+  <text x="330" y="238" text-anchor="middle" font-size="13" fill="#06d6a0" font-weight="bold">h₃</text>
+  <text x="450" y="238" text-anchor="middle" font-size="13" fill="#06d6a0" font-weight="bold">h₄</text>
+  <text x="600" y="238" text-anchor="middle" font-size="13" fill="#06d6a0" font-weight="bold">hT</text>
+
+  <!-- ── Gradient backprop arrow ───────────────────── -->
+  <path d="M 640,262 Q 390,285 50,262" stroke="#f72585" stroke-width="2" fill="none" stroke-dasharray="7,4" marker-end="url(#arrowR)"/>
+  <text x="360" y="278" text-anchor="middle" font-size="11" fill="#f72585">Gradient flows backward (gates prevent vanishing)</text>
+
+  <!-- ── Hidden state label ─────────────────────────── -->
+  <text x="145" y="142" text-anchor="middle" font-size="10" fill="#4361ee" font-style="italic">h_t</text>
+  <text x="265" y="142" text-anchor="middle" font-size="10" fill="#4361ee" font-style="italic">h_t</text>
+  <text x="385" y="142" text-anchor="middle" font-size="10" fill="#4361ee" font-style="italic">h_t</text>
+</svg>

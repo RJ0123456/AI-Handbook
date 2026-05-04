@@ -14,3 +14,5 @@ node_modules/
 # ignore for build
 build/
 dist/
+# ignore for virtual environment
+.venv/

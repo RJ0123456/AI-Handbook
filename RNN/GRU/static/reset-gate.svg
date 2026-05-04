@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" width="700" height="320" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="700" height="320" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="350" y="32" text-anchor="middle" font-size="16" font-weight="bold" fill="#212529">Reset Gate (r_t) — Behavior</text>
+  <text x="350" y="52" text-anchor="middle" font-size="12" fill="#666">Controls: "How much of h_{t-1} is used when computing new candidate h̃_t?"</text>
+
+  <!-- ── Columns: r≈0, r≈0.5, r≈1 ─────────────────── -->
+
+  <!-- Column headers -->
+  <rect x="40" y="70" width="180" height="38" rx="8" fill="#f72585"/>
+  <text x="130" y="93" text-anchor="middle" font-size="13" font-weight="bold" fill="white">r_t ≈ 0  (Full Reset)</text>
+
+  <rect x="260" y="70" width="180" height="38" rx="8" fill="#ff6b6b"/>
+  <text x="350" y="93" text-anchor="middle" font-size="13" font-weight="bold" fill="white">r_t ≈ 0.5  (Partial)</text>
+
+  <rect x="480" y="70" width="180" height="38" rx="8" fill="#c9184a"/>
+  <text x="570" y="93" text-anchor="middle" font-size="13" font-weight="bold" fill="white">r_t ≈ 1  (Full Keep)</text>
+
+  <!-- Column 1: r≈0 -->
+  <rect x="40" y="125" width="180" height="80" rx="8" fill="white" stroke="#f72585" stroke-width="1.5"/>
+  <text x="130" y="148" text-anchor="middle" font-size="12" fill="#333">r_t ⊙ h_{t-1} ≈ 0</text>
+  <text x="130" y="166" text-anchor="middle" font-size="12" fill="#555">h̃_t = tanh(Wx_t + b)</text>
+  <text x="130" y="184" text-anchor="middle" font-size="11" fill="#888">Past is ignored</text>
+
+  <rect x="60" y="220" width="140" height="50" rx="8" fill="#fce4ec"/>
+  <text x="130" y="242" text-anchor="middle" font-size="11" fill="#c62828" font-weight="bold">When useful:</text>
+  <text x="130" y="258" text-anchor="middle" font-size="11" fill="#555">Sentence boundary</text>
+  <text x="130" y="272" text-anchor="middle" font-size="11" fill="#555">New topic begins</text>
+
+  <!-- Column 2: r≈0.5 -->
+  <rect x="260" y="125" width="180" height="80" rx="8" fill="white" stroke="#ff6b6b" stroke-width="1.5"/>
+  <text x="350" y="148" text-anchor="middle" font-size="12" fill="#333">r_t ⊙ h_{t-1} ≈ 0.5 h_{t-1}</text>
+  <text x="350" y="166" text-anchor="middle" font-size="12" fill="#555">h̃_t = tanh(Wx + 0.5Uh)</text>
+  <text x="350" y="184" text-anchor="middle" font-size="11" fill="#888">Partial past used</text>
+
+  <rect x="280" y="220" width="140" height="50" rx="8" fill="#fff3e0"/>
+  <text x="350" y="242" text-anchor="middle" font-size="11" fill="#e65100" font-weight="bold">When useful:</text>
+  <text x="350" y="258" text-anchor="middle" font-size="11" fill="#555">General case</text>
+  <text x="350" y="272" text-anchor="middle" font-size="11" fill="#555">Moderate context shift</text>
+
+  <!-- Column 3: r≈1 -->
+  <rect x="480" y="125" width="180" height="80" rx="8" fill="white" stroke="#c9184a" stroke-width="1.5"/>
+  <text x="570" y="148" text-anchor="middle" font-size="12" fill="#333">r_t ⊙ h_{t-1} ≈ h_{t-1}</text>
+  <text x="570" y="166" text-anchor="middle" font-size="12" fill="#555">h̃_t = tanh(Wx + Uh)</text>
+  <text x="570" y="184" text-anchor="middle" font-size="11" fill="#888">Full past used</text>
+
+  <rect x="500" y="220" width="140" height="50" rx="8" fill="#e8f5e9"/>
+  <text x="570" y="242" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="bold">When useful:</text>
+  <text x="570" y="258" text-anchor="middle" font-size="11" fill="#555">Continuing context</text>
+  <text x="570" y="272" text-anchor="middle" font-size="11" fill="#555">Long dependency</text>
+
+  <!-- Formula label at bottom -->
+  <rect x="40" y="290" width="620" height="22" rx="6" fill="#e9ecef"/>
+  <text x="350" y="305" text-anchor="middle" font-size="11" fill="#333">Formula:  r_t = σ(W_r x_t + U_r h_{t-1} + b_r)</text>
+</svg>

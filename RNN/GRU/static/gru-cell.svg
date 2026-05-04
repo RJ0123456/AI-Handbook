@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 520" width="700" height="520" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="700" height="520" fill="#f8f9fa" rx="12"/>
+
+  <!-- Title -->
+  <text x="350" y="36" text-anchor="middle" font-size="17" font-weight="bold" fill="#212529">GRU Cell — Forward Pass</text>
+
+  <!-- ── Inputs ─────────────────────────────────────── -->
+  <!-- x_t box -->
+  <rect x="40" y="200" width="80" height="40" rx="8" fill="#4361ee" stroke="none"/>
+  <text x="80" y="225" text-anchor="middle" font-size="14" font-weight="bold" fill="white">x_t</text>
+
+  <!-- h_{t-1} box -->
+  <rect x="40" y="280" width="80" height="40" rx="8" fill="#4361ee" stroke="none"/>
+  <text x="80" y="305" text-anchor="middle" font-size="14" font-weight="bold" fill="white">h_{t-1}</text>
+
+  <!-- ── Reset Gate ─────────────────────────────────── -->
+  <rect x="185" y="130" width="130" height="52" rx="10" fill="#f72585" stroke="none"/>
+  <text x="250" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Reset Gate</text>
+  <text x="250" y="170" text-anchor="middle" font-size="12" fill="white">r_t = σ(Wx + Uh)</text>
+
+  <!-- ── Update Gate ────────────────────────────────── -->
+  <rect x="185" y="290" width="130" height="52" rx="10" fill="#3a86ff" stroke="none"/>
+  <text x="250" y="312" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Update Gate</text>
+  <text x="250" y="330" text-anchor="middle" font-size="12" fill="white">z_t = σ(Wx + Uh)</text>
+
+  <!-- ── Hadamard product circle (r ⊙ h) ───────────── -->
+  <circle cx="250" cy="220" r="22" fill="#fff" stroke="#f72585" stroke-width="2.5"/>
+  <text x="250" y="226" text-anchor="middle" font-size="16" font-weight="bold" fill="#f72585">⊙</text>
+  <text x="250" y="245" text-anchor="middle" font-size="11" fill="#555">r_t ⊙ h_{t-1}</text>
+
+  <!-- ── Candidate hidden state ─────────────────────── -->
+  <rect x="380" y="185" width="130" height="52" rx="10" fill="#7209b7" stroke="none"/>
+  <text x="445" y="207" text-anchor="middle" font-size="13" font-weight="bold" fill="white">Candidate</text>
+  <text x="445" y="225" text-anchor="middle" font-size="12" fill="white">h̃_t = tanh(·)</text>
+
+  <!-- ── Interpolation (1-z)⊙h + z⊙h̃ ──────────────── -->
+  <rect x="380" y="340" width="145" height="52" rx="10" fill="#06d6a0" stroke="none"/>
+  <text x="452" y="360" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Linear Interpolation</text>
+  <text x="452" y="378" text-anchor="middle" font-size="11" fill="white">(1−z_t)⊙h_{t-1} + z_t⊙h̃_t</text>
+
+  <!-- ── h_t output ──────────────────────────────────── -->
+  <rect x="570" y="340" width="80" height="52" rx="8" fill="#4361ee" stroke="none"/>
+  <text x="610" y="362" text-anchor="middle" font-size="14" font-weight="bold" fill="white">h_t</text>
+  <text x="610" y="380" text-anchor="middle" font-size="11" fill="#c8d8ff">(output)</text>
+
+  <!-- ── Arrows ──────────────────────────────────────── -->
+  <!-- x_t → Reset Gate -->
+  <line x1="120" y1="210" x2="185" y2="155" stroke="#aaa" stroke-width="1.8" marker-end="url(#arr)"/>
+  <!-- x_t → Update Gate -->
+  <line x1="120" y1="230" x2="185" y2="310" stroke="#aaa" stroke-width="1.8" marker-end="url(#arr)"/>
+  <!-- h_{t-1} → Reset Gate -->
+  <line x1="120" y1="290" x2="185" y2="175" stroke="#aaa" stroke-width="1.8" marker-end="url(#arr)"/>
+  <!-- h_{t-1} → Update Gate -->
+  <line x1="120" y1="300" x2="185" y2="316" stroke="#aaa" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- Reset Gate → Hadamard circle -->
+  <line x1="250" y1="182" x2="250" y2="198" stroke="#f72585" stroke-width="1.8" marker-end="url(#arr-pink)"/>
+  <!-- h_{t-1} → Hadamard circle (from left) -->
+  <line x1="120" y1="300" x2="220" y2="222" stroke="#aaa" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+
+  <!-- Hadamard circle → Candidate -->
+  <line x1="272" y1="211" x2="380" y2="211" stroke="#7209b7" stroke-width="1.8" marker-end="url(#arr-purple)"/>
+  <!-- x_t → Candidate (direct) -->
+  <line x1="120" y1="215" x2="380" y2="208" stroke="#aaa" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+
+  <!-- Candidate → Interpolation -->
+  <line x1="445" y1="237" x2="445" y2="340" stroke="#06d6a0" stroke-width="1.8" marker-end="url(#arr-green)"/>
+  <!-- Update Gate → Interpolation -->
+  <line x1="315" y1="316" x2="380" y2="366" stroke="#3a86ff" stroke-width="1.8" marker-end="url(#arr-blue)"/>
+  <!-- h_{t-1} (pass-through) → Interpolation -->
+  <line x1="120" y1="310" x2="380" y2="380" stroke="#aaa" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+
+  <!-- Interpolation → h_t -->
+  <line x1="525" y1="366" x2="570" y2="366" stroke="#4361ee" stroke-width="2" marker-end="url(#arr-indigo)"/>
+
+  <!-- ── Legend ──────────────────────────────────────── -->
+  <rect x="40" y="450" width="620" height="50" rx="8" fill="#e9ecef" stroke="none"/>
+  <circle cx="65" cy="475" r="7" fill="#f72585"/>
+  <text x="78" y="479" font-size="12" fill="#333">Reset gate r_t</text>
+  <circle cx="185" cy="475" r="7" fill="#3a86ff"/>
+  <text x="198" y="479" font-size="12" fill="#333">Update gate z_t</text>
+  <circle cx="315" cy="475" r="7" fill="#7209b7"/>
+  <text x="328" y="479" font-size="12" fill="#333">Candidate h̃_t</text>
+  <circle cx="435" cy="475" r="7" fill="#06d6a0"/>
+  <text x="448" y="479" font-size="12" fill="#333">Interpolation</text>
+  <circle cx="560" cy="475" r="7" fill="#4361ee"/>
+  <text x="573" y="479" font-size="12" fill="#333">States</text>
+
+  <!-- ── Arrow markers ──────────────────────────────── -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#aaa"/>
+    </marker>
+    <marker id="arr-pink" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f72585"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3a86ff"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#7209b7"/>
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#06d6a0"/>
+    </marker>
+    <marker id="arr-indigo" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4361ee"/>
+    </marker>
+  </defs>
+</svg>
