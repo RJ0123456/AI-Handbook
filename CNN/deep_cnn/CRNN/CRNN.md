@@ -192,6 +192,325 @@ Two stacked **Bidirectional LSTM** layers with hidden size 256 (→ 512 per dire
 
 The bidirectional design means each output $o_i$ sees context from **both left and right** — essential because characters often depend on their neighbors (e.g., distinguishing "rn" from "m").
 
+#### Why BiLSTM for Text Recognition?
+
+**The Core Problem with Unidirectional Sequence Modeling:**
+
+In scene text recognition, predicting a character depends heavily on **context from both directions**:
+
+```
+Image:  ...  r n  ...   vs   ...  m  ...
+
+Forward LSTM alone (left → right):
+  Time step t (at "n"):
+    - Has seen: ... r
+    - Hasn't seen: n ...  (what comes after)
+    - Must decide: "Is this 'n' or part of 'm'?"
+    - Disadvantage: Limited information!
+
+Bidirectional LSTM (both directions):
+  Time step t (at "n"):
+    - Has seen: ... r  (from forward LSTM)
+    - Has seen: n ...  (from backward LSTM)
+    - Can decide: "r" + "n" pattern = "rn" (not "m")
+    - Advantage: Full context!
+```
+
+**Real-world examples:**
+
+| Image Pattern | Ambiguity | Resolution |
+|---|---|---|
+| "rn" | Looks like "m" when blurred | BiLSTM sees "r" before and "n" context after → disambiguate |
+| "cl" | Can look like "d" | BiLSTM sees "c" pattern from left and "l" from right |
+| "1l" | Digit 1 vs letter l | BiLSTM sees both directions to distinguish based on neighbor patterns |
+| "0O" | Zero vs letter O | Context from adjacent characters helps distinguish |
+| "S5" | Letter S vs digit 5 | Spatial context + directional info clarifies |
+
+#### 3.4.1 Advantages of BiLSTM
+
+**1. Full Context for Character Disambiguation**
+
+```
+Character "n" is ambiguous standalone:
+
+  ?
+  │
+  ▼
+ ╱╲    ← Could be "n", "h", "u", "v", or part of "m"
+  │
+  
+With bidirectional context:
+
+  [Previous context: "r"]  +  [Character region]  +  [Next context: "d"]
+         ↓                         ↓                       ↓
+      Forward                   RNN                    Backward
+      LSTM                     Hidden                   LSTM
+      sees "r"                 State                   sees "d"
+      
+      Combined: "rnd" sequence → Character is "n" (not "h", "u", or "v")
+```
+
+**2. Eliminates Left-to-Right Bias**
+
+A unidirectional LSTM must output predictions using only information from the left. This creates a **recency bias**: later characters get better predictions than earlier ones.
+
+```
+Unidirectional (forward only):
+  [h][e][l][l][o]
+   ↓  ↓  ↓  ↓  ↓
+   (weak context) →→→ (increasingly better context as we move right)
+   
+   Early characters "h", "e" may be mispredicted due to lack of context
+   Late characters "l", "o" get more support
+```
+
+BiLSTM balances this by providing equal information to all positions:
+
+```
+Bidirectional:
+  [h][e][l][l][o]
+   ↓  ↓  ↓  ↓  ↓
+   (rich context) (rich context) (rich context) (rich context) (rich context)
+   
+   All positions equally supported by left and right context
+```
+
+**3. Improves Handling of Ambiguous/Degraded Characters**
+
+In natural scene text, characters may be:
+- Partially occluded
+- Blurry or low-resolution
+- Distorted or rotated
+- Overlapping with other characters
+
+BiLSTM can "infer" the identity using context:
+
+```
+Example: Degraded character in "happy"
+
+Original:   h a p p y
+Degraded:   h a [?] p y    ← heavily corrupted middle 'p'
+
+Unidirectional LSTM:
+  h → a → [?] → tries to decide just based on "ha" context
+  
+Bidirectional LSTM:
+  h → a → [?] → p → y    (forward)
+  ← a ← [?] ← p ← y ← h  (backward)
+  
+  Both directions see the valid "ppy" pattern on the right
+  → Network can infer the [?] must be "p"
+```
+
+**4. Enables Multi-Level Understanding**
+
+With **stacked BiLSTM** layers (2 layers in CRNN):
+
+```
+Layer 1 (BiLSTM):  Learns local patterns
+  Input:  [pixel column features]
+  Output: [low-level character fragments]
+  
+  Example output: detects "straight vertical line", "curved top", etc.
+
+Layer 2 (BiLSTM):  Learns global language patterns
+  Input:  [layer 1 outputs]
+  Output: [high-level character identity]
+  
+  Example: layer 1 detected "vertical line + top curve + loop"
+           layer 2 recognizes this as character "p"
+```
+
+**5. Handles Variable-Length Input Naturally**
+
+BiLSTM processes sequences by stepping through each position. Unlike CNNs with fixed receptive fields, it scales naturally to any sequence length:
+
+```
+Short word:  "hi"
+            [h][i]
+            forward + backward LSTM
+            handles fine, output = 2 time steps
+
+Long word:   "extraordinary"
+            [e][x][t][r][a][o][r][d][i][n][a][r][y]
+            forward + backward LSTM
+            handles fine, output = 13 time steps
+
+No modification needed!
+```
+
+**6. Learns Long-Range Dependencies**
+
+LSTM gates (input, forget, output) allow information to flow across many time steps. This helps capture dependencies like:
+
+```
+Long-range pattern: Words ending in "-ing"
+
+[...][s][o][m][e][t][h][i][n][g]
+                          ↑       ↑
+                     Must remember early position "s"
+                     to predict final "g" as part of "-ing"
+                     
+BiLSTM can learn: "if 'n' seen at current time and 'i' was recent, 
+                   likely in '-ing' sequence"
+```
+
+#### 3.4.2 Comparison: BiLSTM vs Alternatives
+
+**BiLSTM vs Unidirectional LSTM:**
+
+| Aspect | Unidirectional LSTM | BiLSTM |
+|---|---|---|
+| **Context** | Left-only | Both left and right |
+| **Character disambiguation** | Weak (only prior context) | Strong (full context) |
+| **Early vs late bias** | Early chars worse | Uniform quality |
+| **Parameters** | $P$ | $2P$ (approx) |
+| **Inference latency** | Same as processing | Slightly higher (need full pass) |
+| **Suitability for text** | Moderate | Excellent |
+
+**BiLSTM vs Attention-based Models:**
+
+| Aspect | BiLSTM | Attention |
+|---|---|---|
+| **Complexity** | Simple, stable | Complex, requires careful tuning |
+| **Interpretability** | Hidden states less interpretable | Attention weights show what model sees |
+| **Sequence length handling** | Works well even for long sequences | Quadratic complexity $O(T^2)$ |
+| **Context radius** | Fixed by hidden state size | Dynamic, learns to attend anywhere |
+| **Training stability** | Very stable | Can have convergence issues |
+| **Inference speed** | Fast | Slower due to attention computation |
+| **Typical use** | CRNN, STN | Transformer-based models, Seq2Seq |
+
+**BiLSTM vs Pure CNN:**
+
+| Aspect | Pure CNN | BiLSTM |
+|---|---|---|
+| **Receptive field** | Fixed, defined by kernel size | Dynamic, grows with layers |
+| **Global context** | Need many layers to achieve | Easier to capture globally |
+| **Repeated patterns** | Must learn separately at each position | Learns once, applies anywhere |
+| **Efficiency** | Very fast (parallel ops) | Sequential (harder to parallelize) |
+| **Text sequences** | Moderate | Excellent |
+
+#### 3.4.3 Why Not Pure CNN for Sequence Modeling?
+
+A natural question: why not just stack more CNN layers instead of using LSTM?
+
+**Problem 1: Receptive Field Growth**
+
+```
+CNN with 3×3 kernels:
+  Layer 1: receptive field = 3
+  Layer 2: receptive field = 5
+  Layer 3: receptive field = 7
+  ...
+  Need ~10 layers for receptive field = 21 (to see entire word)
+
+BiLSTM:
+  Layer 1: receptive field = T (entire sequence) in next pass
+  Layer 2: refined global context
+```
+
+**Problem 2: Parameter Efficiency**
+
+```
+Deep CNN: O(K² · C² · D) parameters (kernel size, channels, depth)
+          Explodes quickly with depth
+
+BiLSTM: O(4 · H² + H · C) parameters per direction
+        Much more modest scaling
+        
+For text: BiLSTM ~8M params vs CNN ~50M params for similar performance
+```
+
+**Problem 3: Natural Alignment with Sequence Structure**
+
+Text is fundamentally **sequential** — each character follows another. BiLSTM respects this structure:
+
+```
+CNN view (treats text as 2D spatial):
+  [image grid]
+  ↓
+  [spatial features]
+  ← Wasteful: text isn't inherently 2D spatial
+  
+BiLSTM view (treats text as 1D sequence):
+  [sequence of column vectors]
+  ↓
+  [sequential features]
+  ← Natural fit: directly models character dependencies
+```
+
+#### 3.4.4 The Complete BiLSTM Stack in CRNN
+
+**Layer 1 (BiLSTM):**
+
+```
+Input:  [f₁, f₂, ..., fT] each fᵢ ∈ ℝ⁵¹²
+
+Forward LSTM:  f₁ → f₂ → f₃ → ... → fT  (accumulates left context)
+Backward LSTM: f₁ ← f₂ ← f₃ ← ... ← fT  (accumulates right context)
+
+Output: [o₁, o₂, ..., oT] each oᵢ ∈ ℝ⁵¹² (concatenated states)
+```
+
+**Layer 2 (stacked on Layer 1):**
+
+```
+Input:  [o₁, o₂, ..., oT] each oᵢ ∈ ℝ⁵¹²
+
+Forward LSTM:  o₁ → o₂ → o₃ → ... → oT  (higher-level left context)
+Backward LSTM: o₁ ← o₂ ← o₃ ← ... ← oT  (higher-level right context)
+
+Output: [p₁, p₂, ..., pT] each pᵢ ∈ ℝ⁵¹² (final sequence representation)
+```
+
+**Why 2 layers (not 1, not 3)?**
+
+- **1 layer:** Sufficient for simple sequences, but lacks ability to learn hierarchical patterns
+- **2 layers:** Empirically found optimal in the CRNN paper — good balance of expressiveness and training stability
+- **3+ layers:** Diminishing returns; harder to train; risk of vanishing gradients in BiLSTM stacks
+
+#### 3.4.5 Practical Impact: Examples
+
+**Example 1: Distinguishing "rn" from "m"**
+
+```
+Input image:    "rn" with certain font/blur
+CNN output:     [column_r_features] [column_n_features]
+                (locally ambiguous to distinguish "rn" vs "m")
+
+BiLSTM Layer 1:
+  Forward:  processes column_r → recognizes "starts like 'r'"
+            processes column_n → sees "r before me" + current features
+            → leans toward "n" (not "m")
+  Backward: processes column_n → recognizes "ends like 'n'"
+            processes column_r → sees "n after me" + current features
+            → leans toward "r" (confirmed)
+
+BiLSTM Layer 2:
+  Confirms: sequence pattern "r" → "n" detected
+  Output:   high confidence for "r", high confidence for "n"
+  Final:    text = "rn" (not "m")
+```
+
+**Example 2: Handling blur in the middle character**
+
+```
+Input: "abc" but 'b' is very blurry
+
+CNN output:       [a_features] [blurry_features] [c_features]
+                                      ↑ ambiguous!
+
+BiLSTM forward:   a → blurry(?) → ...
+BiLSTM backward:  ... → blurry(?) → c
+                  
+Combined:         "a" pattern before + "c" pattern after
+                  Predicts: middle char must be "b"
+                  
+Result:           Even with severe blur, CRNN recovers "abc"
+```
+
+
+
 ### Sequence Labeling [Re f: 1507.05717](https://arxiv.org/abs/1507.05717)
 
 ![Sequence Labeling](./static/crnn-sequence-labeling.png)
