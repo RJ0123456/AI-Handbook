@@ -125,9 +125,42 @@ This recursive dependency is why gradients flow backward through time.
 
 Approximate sensitivity across $k$ steps:
 
+Start from the pre-activation form at step $j$:
+
+$$
+a_j = W_{xh}x_j + W_{hh}h_{j-1} + b_h,
+\qquad h_j = \phi(a_j)
+$$
+
+For one step, apply chain rule:
+
+$$
+\frac{\partial h_j}{\partial h_{j-1}}
+= \frac{\partial h_j}{\partial a_j}\frac{\partial a_j}{\partial h_{j-1}}
+= \operatorname{diag}(\phi'(a_j))\,W_{hh}
+$$
+
+Backprop often uses row-vector convention for gradients, which introduces a transpose in the equivalent Jacobian factor:
+
+$$
+\left(\frac{\partial h_j}{\partial h_{j-1}}\right)^\top
+= W_{hh}^\top\operatorname{diag}(\phi'(a_j))
+$$
+
+Across $k$ steps, repeatedly applying chain rule gives:
+
+$$
+\frac{\partial h_t}{\partial h_{t-k}}
+= \prod_{j=t-k+1}^{t} \frac{\partial h_j}{\partial h_{j-1}}
+$$
+
+Using the transposed-factor form above:
+
 $$
 \frac{\partial h_t}{\partial h_{t-k}} \approx \prod_{i=t-k+1}^{t} W_{hh}^\top \operatorname{diag}(\phi'(a_i))
 $$
+
+The approximation sign emphasizes that this expression is used to reason about scaling behavior (vanishing/exploding), often ignoring bias terms and fine-grained nonlinear interactions.
 
 If the effective norm of this product is:
 
@@ -146,7 +179,7 @@ This reduces memory/compute cost, but very long dependencies may be learned less
 
 ---
 
-## 4. Images for Illustration (Downloaded from Internet)
+## 4. Images for Illustration
 
 ### 4.1 Standard RNN: Compressed vs Unfolded
 
