@@ -27,9 +27,47 @@ Typical applications:
 
 ---
 
-## 2. Architecture
+## 2. Types Of Recurrent Neural Networks
 
-### 2.1 Vanilla RNN Cell
+There are **four types of RNNs** based on the number of inputs and outputs in the network.
+
+> **Color key for diagrams below:** <span style="color:#4CAF50">■</span> input &nbsp; <span style="color:#1E88E5">■</span> hidden state &nbsp; <span style="color:#FB8C00">■</span> output &nbsp; ░ inactive slot
+
+### 2.1 One-to-One
+
+![One-to-One RNN](./static/rnn-type-one-to-one.svg)
+
+- One input and one output
+- Same as standard feedforward mapping (not sequence modeling)
+- Example: single image classification
+
+### 2.2 One-to-Many
+
+![One-to-Many RNN](./static/rnn-type-one-to-many.svg)
+
+- One input and a sequence of outputs
+- Example: image captioning (one image -> many words)
+
+### 2.3 Many-to-One
+
+![Many-to-One RNN](./static/rnn-type-many-to-one.svg)
+
+- A sequence of inputs and one output
+- Example: sentiment analysis (many words -> one sentiment label)
+
+### 2.4 Many-to-Many
+
+![Many-to-Many RNN](./static/rnn-type-many-to-many.svg)
+
+- A sequence of inputs and a sequence of outputs
+- Can be aligned (same length) or encoder-decoder style (different lengths)
+- Examples: POS tagging, machine translation, speech recognition
+
+---
+
+## 3. Architecture
+
+### 3.1 Vanilla RNN Cell
 
 At each time step:
 
@@ -48,7 +86,7 @@ Where:
 - $y_t \in \mathbb{R}^{o}$: output (logits or regression value)
 - $\phi$: nonlinearity, usually $\tanh$ or ReLU
 
-### 2.2 Unrolling Through Time
+### 3.2 Unrolling Through Time
 
 An RNN can be viewed as the **same cell reused** at every time step with shared weights.
 
@@ -56,7 +94,14 @@ An RNN can be viewed as the **same cell reused** at every time step with shared 
 - Different inputs: $x_1, x_2, \dots, x_T$
 - Hidden state links steps over time: $h_0 \to h_1 \to ... \to h_T$
 
-### 2.3 Training with BPTT
+### 3.3 Training with BPTT
+
+**Backpropagation Through Time (BPTT)** means:
+
+1. Run the RNN forward over the full sequence (or a fixed window).
+2. Compute the total sequence loss.
+3. Unroll the recurrence over time and backpropagate gradients from later steps to earlier steps.
+4. Accumulate gradients for shared parameters $W_{xh}, W_{hh}, W_{hy}$ across all time steps.
 
 Given sequence loss:
 
@@ -64,7 +109,19 @@ $$
 \mathcal{L} = \sum_{t=1}^{T} \ell(y_t, \hat{y}_t)
 $$
 
-Gradients are propagated from later steps back to earlier steps through recurrent transitions.
+Because parameters are shared, each parameter receives contributions from every step:
+
+$$
+\frac{\partial \mathcal{L}}{\partial W_{hh}} = \sum_{t=1}^{T} \frac{\partial \mathcal{L}}{\partial h_t}\frac{\partial h_t}{\partial W_{hh}}
+$$
+
+The hidden-state gradient at time $t$ depends on future steps:
+
+$$
+\frac{\partial \mathcal{L}}{\partial h_t} = \frac{\partial \ell_t}{\partial h_t} + \frac{\partial \mathcal{L}}{\partial h_{t+1}}\frac{\partial h_{t+1}}{\partial h_t}
+$$
+
+This recursive dependency is why gradients flow backward through time.
 
 Approximate sensitivity across $k$ steps:
 
@@ -72,20 +129,33 @@ $$
 \frac{\partial h_t}{\partial h_{t-k}} \approx \prod_{i=t-k+1}^{t} W_{hh}^\top \operatorname{diag}(\phi'(a_i))
 $$
 
-If the effective spectral norm of factors is $< 1$, gradients vanish; if $> 1$, they explode.
+If the effective norm of this product is:
+
+- $< 1$: gradients shrink exponentially (vanishing gradient)
+- $> 1$: gradients grow exponentially (exploding gradient)
+
+### Practical Note: Truncated BPTT
+
+In many real systems, training uses **truncated BPTT**:
+
+- Split long sequences into shorter windows of length $K$
+- Backpropagate only within each window
+- Carry hidden state forward between windows (often detached from graph)
+
+This reduces memory/compute cost, but very long dependencies may be learned less effectively.
 
 ---
 
-## 3. Images for Illustration (Downloaded from Internet)
+## 4. Images for Illustration (Downloaded from Internet)
 
-### 3.1 Standard RNN: Compressed vs Unfolded
+### 4.1 Standard RNN: Compressed vs Unfolded
 
 ![Recurrent Neural Network Unfolded](./static/rnn-unfold-wiki.svg)
 
 Source: fdeloche, Wikimedia Commons, CC BY-SA 4.0  
 Original: https://commons.wikimedia.org/wiki/File:Recurrent_neural_network_unfold.svg
 
-### 3.2 Elman Simple Recurrent Neural Network
+### 4.2 Elman Simple Recurrent Neural Network
 
 ![Elman Simple Recurrent Neural Network](./static/elman-srnn-wiki.png)
 
@@ -94,9 +164,9 @@ Original: https://commons.wikimedia.org/wiki/File:Elman_srnn.png
 
 ---
 
-## 4. Math Formula Summary
+## 5. Math Formula Summary
 
-### 4.1 Forward pass (sequence)
+### 5.1 Forward pass (sequence)
 
 $$
 h_0 = 0
@@ -111,7 +181,7 @@ o_t = W_{hy}h_t + b_y, \quad
 \hat{y}_t = \operatorname{softmax}(o_t)
 $$
 
-### 4.2 Sequence objective (classification example)
+### 5.2 Sequence objective (classification example)
 
 If only final output is used:
 
@@ -125,7 +195,7 @@ $$
 \mathcal{L} = \sum_{t=1}^{T} -\sum_{c=1}^{C} y_{t,c}\log\hat{y}_{t,c}
 $$
 
-### 4.3 Why gradients can vanish
+### 5.3 Why gradients can vanish
 
 Ignoring bias terms and nonlinear details, recurrent influence scales roughly as:
 
@@ -140,9 +210,9 @@ This is the core reason gated models like GRU/LSTM became dominant.
 
 ---
 
-## 5. Sample Code
+## 6. Sample Code
 
-### 5.1 Minimal Vanilla RNN Cell (NumPy)
+### 6.1 Minimal Vanilla RNN Cell (NumPy)
 
 ```python
 import numpy as np
@@ -185,7 +255,7 @@ if __name__ == "__main__":
 		print(f"t={t}, predicted probs={y.ravel()}")
 ```
 
-### 2.2 Sequence Classifier with PyTorch `nn.RNN`
+### 6.2 Sequence Classifier with PyTorch `nn.RNN`
 
 ```python
 import torch
@@ -222,7 +292,7 @@ if __name__ == "__main__":
 
 ---
 
-## 6. Quick Comparison: RNN vs GRU vs LSTM
+## 7. Quick Comparison: RNN vs GRU vs LSTM
 
 | Model | Main Idea | Strength | Limitation |
 |---|---|---|---|
