@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="360" viewBox="0 0 1100 360" role="img" aria-label="BLEU score pipeline">
+  <defs>
+    <style>
+      .title { font: 700 30px Segoe UI, Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 17px Segoe UI, Arial, sans-serif; fill: #1e293b; }
+      .small { font: 500 14px Segoe UI, Arial, sans-serif; fill: #334155; }
+      .formula { font: 600 18px Segoe UI, Arial, sans-serif; fill: #0b3a8f; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="360" fill="#f8fafc"/>
+  <text x="28" y="42" class="title">BLEU Pipeline (Corpus Level)</text>
+
+  <rect x="36" y="92" width="220" height="150" rx="12" fill="#e0f2fe" stroke="#7dd3fc"/>
+  <text x="62" y="130" class="label">Candidate Output</text>
+  <text x="62" y="158" class="small">Generated sentence(s)</text>
+  <text x="62" y="182" class="small">to evaluate</text>
+
+  <rect x="302" y="92" width="220" height="150" rx="12" fill="#dcfce7" stroke="#86efac"/>
+  <text x="340" y="130" class="label">Reference Set</text>
+  <text x="340" y="158" class="small">One or more human</text>
+  <text x="340" y="182" class="small">translations</text>
+
+  <rect x="568" y="92" width="230" height="150" rx="12" fill="#ede9fe" stroke="#c4b5fd"/>
+  <text x="592" y="130" class="label">N-gram Matching</text>
+  <text x="592" y="158" class="small">Compute clipped</text>
+  <text x="592" y="182" class="small">precision p1 ... pN</text>
+
+  <rect x="844" y="92" width="220" height="150" rx="12" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="890" y="130" class="label">Final BLEU</text>
+  <text x="868" y="158" class="small">Apply brevity penalty</text>
+  <text x="886" y="182" class="small">and geometric mean</text>
+
+  <line x1="258" y1="166" x2="300" y2="166" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="524" y1="166" x2="566" y2="166" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="800" y1="166" x2="842" y2="166" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="178" y="295" class="formula">BLEU = BP * exp(sum w_n log p_n)</text>
+</svg>

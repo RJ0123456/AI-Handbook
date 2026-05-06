@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="460" viewBox="0 0 1100 460" role="img" aria-label="Brevity penalty curve for BLEU">
+  <defs>
+    <style>
+      .title { font: 700 30px Segoe UI, Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 16px Segoe UI, Arial, sans-serif; fill: #1e293b; }
+      .tick { font: 500 13px Segoe UI, Arial, sans-serif; fill: #475569; }
+      .note { font: 600 14px Segoe UI, Arial, sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="460" fill="#f8fafc"/>
+  <text x="28" y="44" class="title">Brevity Penalty Curve</text>
+
+  <rect x="46" y="78" width="1010" height="340" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <g transform="translate(120,110)">
+    <line x1="0" y1="250" x2="860" y2="250" stroke="#64748b" stroke-width="2"/>
+    <line x1="0" y1="250" x2="0" y2="20" stroke="#64748b" stroke-width="2"/>
+
+    <text x="330" y="292" class="label">length ratio c / r</text>
+    <text x="-185" y="-14" class="label" transform="rotate(-90)">BP</text>
+
+    <path d="M 20 240 C 120 225, 210 190, 290 135 C 345 96, 390 62, 430 40"
+          fill="none" stroke="#2563eb" stroke-width="5"/>
+    <line x1="430" y1="40" x2="820" y2="40" stroke="#2563eb" stroke-width="5"/>
+
+    <line x1="430" y1="250" x2="430" y2="20" stroke="#94a3b8" stroke-dasharray="6 6"/>
+    <text x="414" y="270" class="tick">1.0</text>
+
+    <g class="tick">
+      <text x="10" y="270">0.2</text>
+      <text x="88" y="270">0.4</text>
+      <text x="166" y="270">0.6</text>
+      <text x="244" y="270">0.8</text>
+      <text x="500" y="270">1.2</text>
+      <text x="578" y="270">1.4</text>
+      <text x="656" y="270">1.6</text>
+      <text x="734" y="270">1.8</text>
+
+      <text x="-30" y="252">0.0</text>
+      <text x="-30" y="202">0.2</text>
+      <text x="-30" y="152">0.4</text>
+      <text x="-30" y="102">0.6</text>
+      <text x="-30" y="52">0.8</text>
+      <text x="-22" y="44">1.0</text>
+    </g>
+
+    <text x="42" y="98" class="note">When c &lt; r, BP = exp(1 - r/c) &lt; 1</text>
+    <text x="500" y="72" class="note">When c &gt;= r, BP = 1</text>
+  </g>
+</svg>
