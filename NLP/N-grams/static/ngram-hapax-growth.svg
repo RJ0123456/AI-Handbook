@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-label="Hapax ratio increases with n-gram order">
+  <defs>
+    <style>
+      .title { font: 700 28px 'Segoe UI', Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 16px 'Segoe UI', Arial, sans-serif; fill: #334155; }
+      .tick { font: 500 13px 'Segoe UI', Arial, sans-serif; fill: #475569; }
+      .txt { font: 600 15px 'Segoe UI', Arial, sans-serif; fill: #1e293b; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="520" fill="#f8fafc"/>
+  <text x="34" y="44" class="title">Hapax Ratio Rises with N-gram Order</text>
+
+  <g transform="translate(84,84)">
+    <rect x="0" y="0" width="820" height="370" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+
+    <line x1="70" y1="300" x2="760" y2="300" stroke="#64748b" stroke-width="2"/>
+    <line x1="70" y1="300" x2="70" y2="50" stroke="#64748b" stroke-width="2"/>
+
+    <text x="330" y="336" class="label">n-gram order</text>
+    <text x="-190" y="22" class="label" transform="rotate(-90)">hapax ratio (%)</text>
+
+    <rect x="140" y="170" width="100" height="130" fill="#10b981"/>
+    <rect x="300" y="110" width="100" height="190" fill="#059669"/>
+    <rect x="460" y="70" width="100" height="230" fill="#047857"/>
+
+    <g class="tick">
+      <text x="164" y="320">Unigram</text>
+      <text x="330" y="320">Bigram</text>
+      <text x="490" y="320">Trigram</text>
+
+      <text x="34" y="304">0</text>
+      <text x="28" y="254">20</text>
+      <text x="28" y="204">40</text>
+      <text x="28" y="154">60</text>
+      <text x="28" y="104">80</text>
+      <text x="28" y="54">100</text>
+    </g>
+
+    <text x="158" y="162" class="txt">~55%</text>
+    <text x="324" y="102" class="txt">~80%</text>
+    <text x="484" y="62" class="txt">~93%</text>
+
+    <text x="430" y="246" class="txt">Higher n  →  more one-off types</text>
+  </g>
+</svg>

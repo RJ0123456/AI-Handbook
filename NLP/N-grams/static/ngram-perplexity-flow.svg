@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="250" viewBox="0 0 980 250">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#64748b"/>
+    </marker>
+    <style>
+      .title { font: 700 20px Arial, sans-serif; fill: #1f2937; }
+      .label { font: 600 14px Arial, sans-serif; fill: #334155; }
+      .small { font: 12px Arial, sans-serif; fill: #475569; }
+      .tok { font: 600 13px Arial, sans-serif; fill: #0f172a; }
+    </style>
+  </defs>
+
+  <text x="20" y="30" class="title">Evaluation Pipeline: Probabilities -> Cross-Entropy -> Perplexity</text>
+
+  <rect x="40" y="80" width="260" height="90" rx="10" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="170" y="108" text-anchor="middle" class="label">Step 1</text>
+  <text x="170" y="130" text-anchor="middle" class="tok">Compute log probabilities</text>
+  <text x="170" y="150" text-anchor="middle" class="small">log P(w_t | h_t)</text>
+
+  <line x1="300" y1="125" x2="360" y2="125" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="360" y="80" width="260" height="90" rx="10" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="490" y="108" text-anchor="middle" class="label">Step 2</text>
+  <text x="490" y="130" text-anchor="middle" class="tok">Average negative log prob</text>
+  <text x="490" y="150" text-anchor="middle" class="small">H = -(1/T) sum log P(w_t | h_t)</text>
+
+  <line x1="620" y1="125" x2="680" y2="125" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="680" y="80" width="260" height="90" rx="10" fill="#fef3c7" stroke="#d97706"/>
+  <text x="810" y="108" text-anchor="middle" class="label">Step 3</text>
+  <text x="810" y="130" text-anchor="middle" class="tok">Perplexity</text>
+  <text x="810" y="150" text-anchor="middle" class="small">PPL = exp(H)</text>
+
+  <text x="40" y="210" class="small">Interpretation: lower perplexity means the model assigns higher probability to true next tokens.</text>
+</svg>

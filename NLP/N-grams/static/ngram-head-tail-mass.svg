@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-label="Head tail probability mass in n-gram distributions">
+  <defs>
+    <style>
+      .title { font: 700 28px 'Segoe UI', Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 16px 'Segoe UI', Arial, sans-serif; fill: #334155; }
+      .tick { font: 500 13px 'Segoe UI', Arial, sans-serif; fill: #475569; }
+      .txt { font: 600 15px 'Segoe UI', Arial, sans-serif; fill: #1e293b; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="520" fill="#f8fafc"/>
+  <text x="34" y="44" class="title">Frequency Mass Concentrates in the Head</text>
+
+  <g transform="translate(70,86)">
+    <rect x="0" y="0" width="840" height="370" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+
+    <line x1="70" y1="300" x2="790" y2="300" stroke="#64748b" stroke-width="2"/>
+    <line x1="70" y1="300" x2="70" y2="46" stroke="#64748b" stroke-width="2"/>
+
+    <text x="326" y="336" class="label">rank bins (most frequent → rare)</text>
+    <text x="-200" y="22" class="label" transform="rotate(-90)">share of total count</text>
+
+    <rect x="120" y="84" width="70" height="216" fill="#0ea5e9"/>
+    <rect x="230" y="146" width="70" height="154" fill="#38bdf8"/>
+    <rect x="340" y="208" width="70" height="92" fill="#7dd3fc"/>
+    <rect x="450" y="248" width="70" height="52" fill="#bae6fd"/>
+    <rect x="560" y="270" width="70" height="30" fill="#dbeafe"/>
+    <rect x="670" y="284" width="70" height="16" fill="#e0f2fe"/>
+
+    <g class="tick">
+      <text x="134" y="320">1</text>
+      <text x="244" y="320">2</text>
+      <text x="354" y="320">3</text>
+      <text x="464" y="320">4</text>
+      <text x="574" y="320">5</text>
+      <text x="684" y="320">6</text>
+
+      <text x="32" y="304">0%</text>
+      <text x="28" y="252">20%</text>
+      <text x="28" y="200">40%</text>
+      <text x="28" y="148">60%</text>
+      <text x="28" y="96">80%</text>
+    </g>
+
+    <text x="110" y="72" class="txt">Top-ranked n-grams dominate observed counts</text>
+    <text x="462" y="232" class="txt">Long tail: many types, tiny individual counts</text>
+  </g>
+</svg>

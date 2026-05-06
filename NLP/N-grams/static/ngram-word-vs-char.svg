@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="330" viewBox="0 0 980 330">
+  <defs>
+    <style>
+      .title { font: 700 20px Arial, sans-serif; fill: #1f2937; }
+      .sub { font: 700 15px Arial, sans-serif; fill: #334155; }
+      .tok { font: 600 13px Arial, sans-serif; fill: #0f172a; }
+      .small { font: 12px Arial, sans-serif; fill: #475569; }
+    </style>
+  </defs>
+
+  <text x="20" y="30" class="title">Word N-grams vs Character N-grams</text>
+
+  <rect x="30" y="55" width="440" height="245" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="50" y="82" class="sub">Word n-grams (token-level)</text>
+  <text x="50" y="104" class="small">Sentence: "nlp models learn fast"</text>
+
+  <text x="50" y="132" class="tok">Bigrams:</text>
+  <rect x="50" y="142" width="180" height="28" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="140" y="161" text-anchor="middle" class="tok">nlp models</text>
+  <rect x="245" y="142" width="170" height="28" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="330" y="161" text-anchor="middle" class="tok">models learn</text>
+  <rect x="50" y="178" width="160" height="28" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+  <text x="130" y="197" text-anchor="middle" class="tok">learn fast</text>
+
+  <text x="50" y="232" class="small">Pros: semantic chunks, interpretable features</text>
+  <text x="50" y="252" class="small">Cons: OOV words, vocabulary grows quickly</text>
+
+  <rect x="510" y="55" width="440" height="245" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="530" y="82" class="sub">Character n-grams (subword-level)</text>
+  <text x="530" y="104" class="small">Word: "learning"</text>
+
+  <text x="530" y="132" class="tok">Character trigrams:</text>
+  <rect x="530" y="142" width="74" height="28" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="567" y="161" text-anchor="middle" class="tok">lea</text>
+  <rect x="612" y="142" width="74" height="28" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="649" y="161" text-anchor="middle" class="tok">ear</text>
+  <rect x="694" y="142" width="74" height="28" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="731" y="161" text-anchor="middle" class="tok">arn</text>
+  <rect x="776" y="142" width="74" height="28" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="813" y="161" text-anchor="middle" class="tok">rni</text>
+  <rect x="530" y="178" width="74" height="28" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="567" y="197" text-anchor="middle" class="tok">nin</text>
+  <rect x="612" y="178" width="74" height="28" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="649" y="197" text-anchor="middle" class="tok">ing</text>
+
+  <text x="530" y="232" class="small">Pros: robust to typos/rare words, language-agnostic</text>
+  <text x="530" y="252" class="small">Cons: weaker direct semantic granularity</text>
+
+  <line x1="470" y1="70" x2="510" y2="70" stroke="#9ca3af" stroke-width="2"/>
+  <line x1="470" y1="285" x2="510" y2="285" stroke="#9ca3af" stroke-width="2"/>
+</svg>
