@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320">
+  <defs>
+    <marker id="arr" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,9 3,0 6" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="24" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#222">Full Softmax vs. Negative Sampling — Gradient Update Scope</text>
+
+  <!-- ========== LEFT: Full Softmax ========== -->
+  <rect x="20" y="38" width="340" height="240" rx="8" fill="#fff3f3" stroke="#e53935" stroke-width="1.8"/>
+  <text x="190" y="60" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#c62828">Full Softmax</text>
+
+  <!-- center word box -->
+  <rect x="80" y="76" width="90" height="32" rx="5" fill="#ff8c00" stroke="#b35900" stroke-width="1.5"/>
+  <text x="125" y="97" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="white">sat (w_c)</text>
+
+  <!-- vocab words — all red = all updated -->
+  <!-- column of V words -->
+  <rect x="230" y="72"  width="84" height="22" rx="4" fill="#ef9a9a" stroke="#e53935" stroke-width="1"/>
+  <text x="272" y="87"  text-anchor="middle" font-family="Arial" font-size="11" fill="#333">cat  ✓</text>
+
+  <rect x="230" y="100" width="84" height="22" rx="4" fill="#ef9a9a" stroke="#e53935" stroke-width="1"/>
+  <text x="272" y="115" text-anchor="middle" font-family="Arial" font-size="11" fill="#333">on   ✓</text>
+
+  <rect x="230" y="128" width="84" height="22" rx="4" fill="#ef9a9a" stroke="#e53935" stroke-width="1"/>
+  <text x="272" y="143" text-anchor="middle" font-family="Arial" font-size="11" fill="#333">the  ✓</text>
+
+  <rect x="230" y="156" width="84" height="22" rx="4" fill="#ef9a9a" stroke="#e53935" stroke-width="1"/>
+  <text x="272" y="171" text-anchor="middle" font-family="Arial" font-size="11" fill="#333">king ✓</text>
+
+  <rect x="230" y="184" width="84" height="22" rx="4" fill="#ef9a9a" stroke="#e53935" stroke-width="1"/>
+  <text x="272" y="199" text-anchor="middle" font-family="Arial" font-size="11" fill="#333">fox  ✓</text>
+
+  <!-- ellipsis -->
+  <text x="272" y="222" text-anchor="middle" font-family="Arial" font-size="16" fill="#e53935">&#8942;</text>
+  <text x="272" y="248" text-anchor="middle" font-family="Arial" font-size="11" fill="#e53935">|V| words updated</text>
+
+  <!-- arrows from center to all vocab -->
+  <line x1="170" y1="83"  x2="228" y2="83"  stroke="#e53935" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="170" y1="92"  x2="228" y2="111" stroke="#e53935" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="170" y1="92"  x2="228" y2="139" stroke="#e53935" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="170" y1="92"  x2="228" y2="167" stroke="#e53935" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="170" y1="92"  x2="228" y2="195" stroke="#e53935" stroke-width="1.2" marker-end="url(#arr)"/>
+
+  <!-- Cost label -->
+  <rect x="30" y="258" width="320" height="14" rx="3" fill="#ffcdd2"/>
+  <text x="190" y="270" text-anchor="middle" font-family="Arial" font-size="11" fill="#b71c1c">Gradient touches |V| ≈ 10⁵ context vectors per step</text>
+
+  <!-- ========== RIGHT: Negative Sampling ========== -->
+  <rect x="400" y="38" width="340" height="240" rx="8" fill="#f1f8e9" stroke="#43a047" stroke-width="1.8"/>
+  <text x="570" y="60" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#2e7d32">Negative Sampling (K = 4)</text>
+
+  <!-- center word box -->
+  <rect x="460" y="76" width="90" height="32" rx="5" fill="#ff8c00" stroke="#b35900" stroke-width="1.5"/>
+  <text x="505" y="97" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="white">sat (w_c)</text>
+
+  <!-- positive: cat -->
+  <rect x="610" y="72"  width="110" height="22" rx="4" fill="#a5d6a7" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="665" y="87"  text-anchor="middle" font-family="Arial" font-size="11" fill="#1b5e20">cat  ✓  (positive)</text>
+
+  <!-- negatives -->
+  <rect x="610" y="102" width="110" height="22" rx="4" fill="#e8f5e9" stroke="#81c784" stroke-width="1"/>
+  <text x="665" y="117" text-anchor="middle" font-family="Arial" font-size="11" fill="#388e3c">king ✗  (neg 1)</text>
+
+  <rect x="610" y="130" width="110" height="22" rx="4" fill="#e8f5e9" stroke="#81c784" stroke-width="1"/>
+  <text x="665" y="145" text-anchor="middle" font-family="Arial" font-size="11" fill="#388e3c">fox  ✗  (neg 2)</text>
+
+  <rect x="610" y="158" width="110" height="22" rx="4" fill="#e8f5e9" stroke="#81c784" stroke-width="1"/>
+  <text x="665" y="173" text-anchor="middle" font-family="Arial" font-size="11" fill="#388e3c">run  ✗  (neg 3)</text>
+
+  <rect x="610" y="186" width="110" height="22" rx="4" fill="#e8f5e9" stroke="#81c784" stroke-width="1"/>
+  <text x="665" y="201" text-anchor="middle" font-family="Arial" font-size="11" fill="#388e3c">blue ✗  (neg 4)</text>
+
+  <!-- arrows from center to K+1 only -->
+  <line x1="550" y1="83"  x2="608" y2="83"  stroke="#388e3c" stroke-width="1.8" marker-end="url(#arr)"/>
+  <line x1="550" y1="92"  x2="608" y2="113" stroke="#388e3c" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="550" y1="92"  x2="608" y2="141" stroke="#388e3c" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="550" y1="92"  x2="608" y2="169" stroke="#388e3c" stroke-width="1.2" marker-end="url(#arr)"/>
+  <line x1="550" y1="92"  x2="608" y2="197" stroke="#388e3c" stroke-width="1.2" marker-end="url(#arr)"/>
+
+  <!-- greyed-out skipped vocab hint -->
+  <text x="570" y="235" text-anchor="middle" font-family="Arial" font-size="10" fill="#aaa">remaining |V|−K−1 words: not touched</text>
+
+  <!-- Cost label -->
+  <rect x="410" y="258" width="320" height="14" rx="3" fill="#dcedc8"/>
+  <text x="570" y="270" text-anchor="middle" font-family="Arial" font-size="11" fill="#33691e">Gradient touches only K+1 context vectors per step</text>
+
+  <!-- Speedup arrow in centre -->
+  <text x="380" y="300" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#555">&#x2190; Full Softmax   |   Negative Sampling &#x2192;</text>
+</svg>

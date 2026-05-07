@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="280" viewBox="0 0 700 280">
+
+  <!-- Title -->
+  <text x="350" y="22" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#222">Unigram vs. Smoothed (3/4-power) Noise Distribution</text>
+
+  <!-- Axes -->
+  <!-- X axis -->
+  <line x1="60" y1="220" x2="660" y2="220" stroke="#555" stroke-width="1.5"/>
+  <!-- Y axis -->
+  <line x1="60" y1="40"  x2="60"  y2="220" stroke="#555" stroke-width="1.5"/>
+
+  <!-- Y axis label -->
+  <text x="16" y="135" text-anchor="middle" font-family="Arial" font-size="12" fill="#555" transform="rotate(-90,16,135)">Sampling Probability</text>
+  <!-- X axis label -->
+  <text x="360" y="250" text-anchor="middle" font-family="Arial" font-size="12" fill="#555">Word (sorted by frequency, left = most frequent)</text>
+
+  <!-- Y gridlines and ticks -->
+  <line x1="57" y1="220" x2="660" y2="220" stroke="#eee" stroke-width="1"/>
+  <line x1="57" y1="175" x2="660" y2="175" stroke="#eee" stroke-width="1"/>
+  <line x1="57" y1="130" x2="660" y2="130" stroke="#eee" stroke-width="1"/>
+  <line x1="57" y1="85"  x2="660" y2="85"  stroke="#eee" stroke-width="1"/>
+  <line x1="57" y1="40"  x2="660" y2="40"  stroke="#eee" stroke-width="1"/>
+  <text x="52" y="224" text-anchor="end" font-family="Arial" font-size="10" fill="#777">0</text>
+  <text x="52" y="179" text-anchor="end" font-family="Arial" font-size="10" fill="#777">0.25</text>
+  <text x="52" y="134" text-anchor="end" font-family="Arial" font-size="10" fill="#777">0.50</text>
+  <text x="52" y="89"  text-anchor="end" font-family="Arial" font-size="10" fill="#777">0.75</text>
+  <text x="52" y="44"  text-anchor="end" font-family="Arial" font-size="10" fill="#777">1.00</text>
+
+  <!-- 8 word bars, each pair: raw unigram (left, red) vs 3/4-power (right, blue) -->
+  <!-- Word frequencies (normalized): the=0.30, of=0.18, a=0.14, in=0.10, is=0.08, cat=0.05, king=0.03, zebra=0.01 -->
+  <!-- 3/4 power then renorm: the^0.75=0.218, of^0.75=0.149, a^0.75=0.122, in^0.75=0.094, is^0.75=0.079, cat^0.75=0.054, king^0.75=0.036, zebra^0.75=0.015 -->
+  <!-- sum≈0.767; normalized: 0.284,0.194,0.159,0.123,0.103,0.070,0.047,0.020 -->
+  <!-- Bar scale: 180px = 1.0 -->
+
+  <!-- word 1: the -->
+  <rect x="72"  y="166" width="18" height="54" fill="#ef5350" opacity="0.85"/>  <!-- raw 0.30 -->
+  <rect x="92"  y="169" width="18" height="51" fill="#1976d2" opacity="0.85"/>  <!-- smooth 0.284 -->
+  <text x="91" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">the</text>
+
+  <!-- word 2: of -->
+  <rect x="148" y="188" width="18" height="32" fill="#ef5350" opacity="0.85"/>  <!-- 0.18 -->
+  <rect x="168" y="185" width="18" height="35" fill="#1976d2" opacity="0.85"/>  <!-- 0.194 -->
+  <text x="167" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">of</text>
+
+  <!-- word 3: a -->
+  <rect x="224" y="195" width="18" height="25" fill="#ef5350" opacity="0.85"/>  <!-- 0.14 -->
+  <rect x="244" y="191" width="18" height="29" fill="#1976d2" opacity="0.85"/>  <!-- 0.159 -->
+  <text x="243" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">a</text>
+
+  <!-- word 4: in -->
+  <rect x="300" y="202" width="18" height="18" fill="#ef5350" opacity="0.85"/>  <!-- 0.10 -->
+  <rect x="320" y="198" width="18" height="22" fill="#1976d2" opacity="0.85"/>  <!-- 0.123 -->
+  <text x="319" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">in</text>
+
+  <!-- word 5: is -->
+  <rect x="376" y="206" width="18" height="14" fill="#ef5350" opacity="0.85"/>  <!-- 0.08 -->
+  <rect x="396" y="201" width="18" height="19" fill="#1976d2" opacity="0.85"/>  <!-- 0.103 -->
+  <text x="395" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">is</text>
+
+  <!-- word 6: cat -->
+  <rect x="452" y="211" width="18" height="9"  fill="#ef5350" opacity="0.85"/>  <!-- 0.05 -->
+  <rect x="472" y="207" width="18" height="13" fill="#1976d2" opacity="0.85"/>  <!-- 0.070 -->
+  <text x="471" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">cat</text>
+
+  <!-- word 7: king -->
+  <rect x="528" y="215" width="18" height="5"  fill="#ef5350" opacity="0.85"/>  <!-- 0.03 -->
+  <rect x="548" y="212" width="18" height="8"  fill="#1976d2" opacity="0.85"/>  <!-- 0.047 -->
+  <text x="547" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">king</text>
+
+  <!-- word 8: zebra -->
+  <rect x="604" y="218" width="18" height="2"  fill="#ef5350" opacity="0.85"/>  <!-- 0.01 -->
+  <rect x="624" y="216" width="18" height="4"  fill="#1976d2" opacity="0.85"/>  <!-- 0.020 -->
+  <text x="623" y="238" text-anchor="middle" font-family="Arial" font-size="10" fill="#555">zebra</text>
+
+  <!-- Legend -->
+  <rect x="200" y="254" width="14" height="12" rx="2" fill="#ef5350" opacity="0.85"/>
+  <text x="219" y="265" font-family="Arial" font-size="11" fill="#444">Raw unigram  P(w) ∝ f(w)</text>
+  <rect x="430" y="254" width="14" height="12" rx="2" fill="#1976d2" opacity="0.85"/>
+  <text x="449" y="265" font-family="Arial" font-size="11" fill="#444">Smoothed  P_n(w) ∝ f(w)^(3/4)</text>
+
+  <!-- annotation: arrow pointing to zebra showing uplift -->
+  <line x1="633" y1="210" x2="633" y2="185" stroke="#1976d2" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="655" y="200" font-family="Arial" font-size="9" fill="#1976d2">rare word</text>
+  <text x="655" y="210" font-family="Arial" font-size="9" fill="#1976d2">boosted ↑</text>
+</svg>
