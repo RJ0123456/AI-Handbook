@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="278" viewBox="0 0 700 278">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#c06000"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="350" y="24" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#222">Skip-Gram: Sliding Window Example (m = 2)</text>
+
+  <!-- === Word boxes === -->
+
+  <!-- "the" pos 1, context -->
+  <rect x="18" y="52" width="98" height="40" rx="5" fill="#ddeeff" stroke="#4a7fb5" stroke-width="1.5"/>
+  <text x="67" y="77" text-anchor="middle" font-family="Arial" font-size="14" fill="#1a3a5c">the</text>
+
+  <!-- "cat" pos 2, context -->
+  <rect x="126" y="52" width="98" height="40" rx="5" fill="#ddeeff" stroke="#4a7fb5" stroke-width="1.5"/>
+  <text x="175" y="77" text-anchor="middle" font-family="Arial" font-size="14" fill="#1a3a5c">cat</text>
+
+  <!-- "sat" center word -->
+  <rect x="234" y="46" width="98" height="52" rx="5" fill="#ff8c00" stroke="#b35900" stroke-width="2.5"/>
+  <text x="283" y="73" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="white">sat</text>
+  <text x="283" y="89" text-anchor="middle" font-family="Arial" font-size="9" fill="#ffe0b0">center word</text>
+
+  <!-- "on" pos 4, context -->
+  <rect x="342" y="52" width="98" height="40" rx="5" fill="#ddeeff" stroke="#4a7fb5" stroke-width="1.5"/>
+  <text x="391" y="77" text-anchor="middle" font-family="Arial" font-size="14" fill="#1a3a5c">on</text>
+
+  <!-- "the" pos 5, context -->
+  <rect x="450" y="52" width="98" height="40" rx="5" fill="#ddeeff" stroke="#4a7fb5" stroke-width="1.5"/>
+  <text x="499" y="77" text-anchor="middle" font-family="Arial" font-size="14" fill="#1a3a5c">the</text>
+
+  <!-- "mat" outside window -->
+  <rect x="558" y="52" width="98" height="40" rx="5" fill="#eeeeee" stroke="#bbbbbb" stroke-width="1"/>
+  <text x="607" y="77" text-anchor="middle" font-family="Arial" font-size="14" fill="#aaaaaa">mat</text>
+
+  <!-- Window dashed bracket -->
+  <rect x="12" y="42" width="542" height="60" rx="7" fill="none" stroke="#4a7fb5" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="283" y="39" text-anchor="middle" font-family="Arial" font-size="10" fill="#4a7fb5">&#x2190; context window (m = 2) &#x2192;</text>
+
+  <!-- Arrows: from bottom of "sat" (283, 98) curving under to bottom of each context word -->
+  <!-- to "the" left (67, 92) -->
+  <path d="M278,98 C278,148 67,148 67,92" fill="none" stroke="#c06000" stroke-width="1.8" marker-end="url(#arr)"/>
+  <!-- to "cat" (175, 92) -->
+  <path d="M281,98 C281,126 175,126 175,92" fill="none" stroke="#c06000" stroke-width="1.8" marker-end="url(#arr)"/>
+  <!-- to "on" (391, 92) -->
+  <path d="M285,98 C285,126 391,126 391,92" fill="none" stroke="#c06000" stroke-width="1.8" marker-end="url(#arr)"/>
+  <!-- to "the" right (499, 92) -->
+  <path d="M288,98 C288,148 499,148 499,92" fill="none" stroke="#c06000" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- Training Pairs heading -->
+  <text x="350" y="178" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#333">Training Pairs Generated</text>
+
+  <!-- Pair boxes -->
+  <rect x="18"  y="187" width="145" height="28" rx="5" fill="#fff4e0" stroke="#c06000" stroke-width="1.2"/>
+  <text x="91"  y="206" text-anchor="middle" font-family="monospace" font-size="12" fill="#333">(sat, the)</text>
+
+  <rect x="173" y="187" width="145" height="28" rx="5" fill="#fff4e0" stroke="#c06000" stroke-width="1.2"/>
+  <text x="246" y="206" text-anchor="middle" font-family="monospace" font-size="12" fill="#333">(sat, cat)</text>
+
+  <rect x="328" y="187" width="145" height="28" rx="5" fill="#fff4e0" stroke="#c06000" stroke-width="1.2"/>
+  <text x="401" y="206" text-anchor="middle" font-family="monospace" font-size="12" fill="#333">(sat, on)</text>
+
+  <rect x="483" y="187" width="175" height="28" rx="5" fill="#fff4e0" stroke="#c06000" stroke-width="1.2"/>
+  <text x="571" y="206" text-anchor="middle" font-family="monospace" font-size="12" fill="#333">(sat, the)</text>
+
+  <!-- Legend -->
+  <rect x="140" y="232" width="14" height="14" rx="3" fill="#ff8c00" stroke="#b35900" stroke-width="1"/>
+  <text x="160" y="244" font-family="Arial" font-size="11" fill="#444">Center word</text>
+
+  <rect x="290" y="232" width="14" height="14" rx="3" fill="#ddeeff" stroke="#4a7fb5" stroke-width="1"/>
+  <text x="310" y="244" font-family="Arial" font-size="11" fill="#444">Context word (in window)</text>
+
+  <rect x="520" y="232" width="14" height="14" rx="3" fill="#eeeeee" stroke="#bbbbbb" stroke-width="1"/>
+  <text x="540" y="244" font-family="Arial" font-size="11" fill="#444">Outside window</text>
+</svg>

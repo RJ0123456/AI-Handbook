@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="370" viewBox="0 0 760 370">
+  <defs>
+    <marker id="arrArch" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#444"/>
+    </marker>
+    <clipPath id="hClip">
+      <rect x="210" y="120" width="34" height="90" rx="4"/>
+    </clipPath>
+  </defs>
+
+  <!-- Title -->
+  <text x="380" y="28" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#222">Skip-Gram Network Architecture</text>
+
+  <!-- ===== x: one-hot input vector ===== -->
+  <!-- |V| x 1, centered at y=165 -->
+  <rect x="40" y="55" width="34" height="220" rx="4" fill="#f5f5f5" stroke="#bbb" stroke-width="1.5"/>
+  <text x="57" y="105" text-anchor="middle" font-family="Arial" font-size="15" fill="#ccc">&#8942;</text>
+  <!-- center word cell = 1 -->
+  <rect x="40" y="150" width="34" height="30" fill="#ff8c00"/>
+  <text x="57" y="170" text-anchor="middle" font-family="Arial" font-size="11" fill="white" font-weight="bold">1</text>
+  <text x="57" y="225" text-anchor="middle" font-family="Arial" font-size="15" fill="#ccc">&#8942;</text>
+  <!-- Labels -->
+  <text x="57" y="293" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#222">x</text>
+  <text x="57" y="309" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">|V| &#xD7; 1</text>
+  <text x="57" y="324" text-anchor="middle" font-family="Arial" font-size="10" fill="#999">one-hot</text>
+
+  <!-- Arrow x &#x2192; h at y=165 -->
+  <line x1="74" y1="165" x2="208" y2="165" stroke="#555" stroke-width="2" marker-end="url(#arrArch)"/>
+  <!-- W matrix label box, centered at x=141 -->
+  <rect x="103" y="96" width="76" height="42" rx="6" fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="141" y="115" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#1565c0">W</text>
+  <text x="141" y="130" text-anchor="middle" font-family="Arial" font-size="10" fill="#1565c0">|V| &#xD7; d</text>
+  <!-- connector dashed line from box to arrow -->
+  <line x1="141" y1="138" x2="141" y2="165" stroke="#1976d2" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="141" y="184" text-anchor="middle" font-family="Arial" font-size="9" fill="#999">row lookup</text>
+
+  <!-- ===== h: center word embedding (dense, d x 1) ===== -->
+  <rect x="210" y="120" width="34" height="90" rx="4" fill="#1976d2" stroke="#1565c0" stroke-width="1.5"/>
+  <!-- dense stripes clipped to rounded rect -->
+  <rect x="210" y="120" width="34" height="18" fill="#42a5f5" clip-path="url(#hClip)"/>
+  <rect x="210" y="138" width="34" height="18" fill="#1e88e5" clip-path="url(#hClip)"/>
+  <rect x="210" y="156" width="34" height="18" fill="#1565c0" clip-path="url(#hClip)"/>
+  <rect x="210" y="174" width="34" height="18" fill="#1e88e5" clip-path="url(#hClip)"/>
+  <rect x="210" y="192" width="34" height="18" fill="#42a5f5" clip-path="url(#hClip)"/>
+  <!-- Labels -->
+  <text x="227" y="293" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#222">h</text>
+  <text x="227" y="309" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">d &#xD7; 1</text>
+  <text x="227" y="324" text-anchor="middle" font-family="Arial" font-size="10" fill="#999">= v&#x2093;_c</text>
+
+  <!-- Arrow h &#x2192; z at y=165 -->
+  <line x1="244" y1="165" x2="358" y2="165" stroke="#555" stroke-width="2" marker-end="url(#arrArch)"/>
+  <!-- W' matrix label box, centered at x=301 -->
+  <rect x="263" y="96" width="76" height="42" rx="6" fill="#e8f5e9" stroke="#388e3c" stroke-width="1.5"/>
+  <text x="301" y="115" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#2e7d32">W&#x2019;</text>
+  <text x="301" y="130" text-anchor="middle" font-family="Arial" font-size="10" fill="#2e7d32">d &#xD7; |V|</text>
+  <line x1="301" y1="138" x2="301" y2="165" stroke="#388e3c" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="301" y="184" text-anchor="middle" font-family="Arial" font-size="9" fill="#999">dot products</text>
+
+  <!-- ===== z: score vector (|V| x 1) ===== -->
+  <rect x="360" y="55" width="34" height="220" rx="4" fill="#f5f5f5" stroke="#bbb" stroke-width="1.5"/>
+  <!-- score bars of varying heights -->
+  <rect x="360" y="80"  width="34" height="10" fill="#90caf9"/>
+  <rect x="360" y="114" width="34" height="18" fill="#64b5f6"/>
+  <rect x="360" y="148" width="34" height="40" fill="#1976d2"/>
+  <rect x="360" y="208" width="34" height="8"  fill="#bbdefb"/>
+  <text x="377" y="105" text-anchor="middle" font-family="Arial" font-size="14" fill="#ccc">&#8942;</text>
+  <text x="377" y="238" text-anchor="middle" font-family="Arial" font-size="14" fill="#ccc">&#8942;</text>
+  <!-- Labels -->
+  <text x="377" y="293" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#222">z</text>
+  <text x="377" y="309" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">|V| &#xD7; 1</text>
+  <text x="377" y="324" text-anchor="middle" font-family="Arial" font-size="10" fill="#999">scores</text>
+
+  <!-- Arrow z &#x2192; softmax -->
+  <line x1="394" y1="165" x2="448" y2="165" stroke="#555" stroke-width="2" marker-end="url(#arrArch)"/>
+
+  <!-- ===== Softmax box ===== -->
+  <rect x="450" y="142" width="102" height="46" rx="8" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
+  <text x="501" y="162" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#bf360c">softmax</text>
+  <text x="501" y="179" text-anchor="middle" font-family="Arial" font-size="10" fill="#e64a19">exp(z) / &#x3A3;exp(z)</text>
+
+  <!-- Arrow softmax &#x2192; P -->
+  <line x1="552" y1="165" x2="588" y2="165" stroke="#555" stroke-width="2" marker-end="url(#arrArch)"/>
+
+  <!-- ===== P: output probability vector (|V| x 1) ===== -->
+  <rect x="590" y="55" width="34" height="220" rx="4" fill="#f5f5f5" stroke="#bbb" stroke-width="1.5"/>
+  <!-- probability bars -->
+  <rect x="590" y="78"  width="34" height="6"  fill="#c8e6c9"/>
+  <rect x="590" y="110" width="34" height="11" fill="#81c784"/>
+  <rect x="590" y="145" width="34" height="42" fill="#2e7d32"/>
+  <rect x="590" y="208" width="34" height="5"  fill="#dcedc8"/>
+  <text x="607" y="103" text-anchor="middle" font-family="Arial" font-size="14" fill="#ccc">&#8942;</text>
+  <text x="607" y="238" text-anchor="middle" font-family="Arial" font-size="14" fill="#ccc">&#8942;</text>
+  <!-- annotation for context word peak -->
+  <text x="630" y="172" font-family="Arial" font-size="10" fill="#2e7d32">&#x2190; w_o (context)</text>
+  <!-- Labels -->
+  <text x="607" y="293" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#222">P(&#xB7;|w_c)</text>
+  <text x="607" y="309" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">|V| &#xD7; 1</text>
+  <text x="607" y="324" text-anchor="middle" font-family="Arial" font-size="10" fill="#999">probability</text>
+
+  <!-- Step labels -->
+  <line x1="20" y1="338" x2="740" y2="338" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="57"  y="354" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">&#x2460; Input</text>
+  <text x="227" y="354" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">&#x2461; Center Embed</text>
+  <text x="377" y="354" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">&#x2462; Scores</text>
+  <text x="501" y="354" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">&#x2463; Normalize</text>
+  <text x="607" y="354" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">&#x2464; Predict</text>
+</svg>
