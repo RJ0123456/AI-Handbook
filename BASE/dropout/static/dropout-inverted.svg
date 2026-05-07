@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="300" viewBox="0 0 700 300">
+
+  <!-- Title -->
+  <text x="350" y="22" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#222">Inverted Dropout: Train vs. Inference</text>
+
+  <!-- ===== LEFT: Training ===== -->
+  <rect x="20" y="36" width="310" height="230" rx="8" fill="#fff8e1" stroke="#f9a825" stroke-width="1.8"/>
+  <text x="175" y="58" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#e65100">Training Phase</text>
+
+  <!-- Step boxes -->
+  <!-- Step 1 -->
+  <rect x="36" y="68" width="278" height="32" rx="5" fill="#fff3e0" stroke="#ff8f00" stroke-width="1"/>
+  <text x="175" y="84" text-anchor="middle" font-family="monospace" font-size="11" fill="#333">mask ~ Bernoulli(1 − p)</text>
+  <text x="175" y="96" text-anchor="middle" font-family="Arial" font-size="9" fill="#888">sample 0/1 for each neuron</text>
+
+  <!-- Step 2 -->
+  <rect x="36" y="110" width="278" height="32" rx="5" fill="#fff3e0" stroke="#ff8f00" stroke-width="1"/>
+  <text x="175" y="126" text-anchor="middle" font-family="monospace" font-size="11" fill="#333">h̃ = h ⊙ mask</text>
+  <text x="175" y="138" text-anchor="middle" font-family="Arial" font-size="9" fill="#888">element-wise zero out dropped units</text>
+
+  <!-- Step 3 -->
+  <rect x="36" y="152" width="278" height="32" rx="5" fill="#fff3e0" stroke="#ff8f00" stroke-width="1"/>
+  <text x="175" y="168" text-anchor="middle" font-family="monospace" font-size="11" fill="#333">h̃ = h̃ / (1 − p)</text>
+  <text x="175" y="180" text-anchor="middle" font-family="Arial" font-size="9" fill="#888">scale up to preserve expected value</text>
+
+  <!-- Note -->
+  <text x="175" y="210" text-anchor="middle" font-family="Arial" font-size="11" fill="#555">Expected output = h × (1−p) × 1/(1−p) = h</text>
+  <text x="175" y="226" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">→ scale compensates for missing units</text>
+  <text x="175" y="244" text-anchor="middle" font-family="Arial" font-size="10" fill="#e65100">Gradient only flows through active neurons</text>
+
+  <!-- Connector arrows between steps -->
+  <line x1="175" y1="100" x2="175" y2="110" stroke="#f9a825" stroke-width="1.5"/>
+  <line x1="175" y1="142" x2="175" y2="152" stroke="#f9a825" stroke-width="1.5"/>
+
+  <!-- ===== RIGHT: Inference ===== -->
+  <rect x="370" y="36" width="310" height="230" rx="8" fill="#e8f5e9" stroke="#43a047" stroke-width="1.8"/>
+  <text x="525" y="58" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#1b5e20">Inference Phase</text>
+
+  <!-- Step 1 -->
+  <rect x="386" y="68" width="278" height="32" rx="5" fill="#f1f8e9" stroke="#66bb6a" stroke-width="1"/>
+  <text x="525" y="84" text-anchor="middle" font-family="monospace" font-size="11" fill="#333">No mask applied</text>
+  <text x="525" y="96" text-anchor="middle" font-family="Arial" font-size="9" fill="#888">all neurons are active</text>
+
+  <!-- Step 2 -->
+  <rect x="386" y="110" width="278" height="32" rx="5" fill="#f1f8e9" stroke="#66bb6a" stroke-width="1"/>
+  <text x="525" y="126" text-anchor="middle" font-family="monospace" font-size="11" fill="#333">output = h  (unchanged)</text>
+  <text x="525" y="138" text-anchor="middle" font-family="Arial" font-size="9" fill="#888">no scaling needed — inverted dropout handled it</text>
+
+  <!-- Note -->
+  <text x="525" y="180" text-anchor="middle" font-family="Arial" font-size="11" fill="#555">Expected activations already match training</text>
+  <text x="525" y="196" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">because training scaled by 1/(1−p)</text>
+
+  <rect x="406" y="210" width="238" height="36" rx="6" fill="#c8e6c9" stroke="#388e3c" stroke-width="1.2"/>
+  <text x="525" y="226" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#1b5e20">No modification needed at test time</text>
+  <text x="525" y="241" text-anchor="middle" font-family="Arial" font-size="10" fill="#2e7d32">= standard forward pass</text>
+</svg>
