@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 370" width="760" height="370">
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#89b4fa"/>
+    </marker>
+    <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#a6e3a1"/>
+    </marker>
+    <marker id="ao" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#fab387"/>
+    </marker>
+    <marker id="ay" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#f9e2af"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="760" height="370" fill="#1e1e2e" rx="10"/>
+
+  <!-- Title -->
+  <text x="380" y="26" text-anchor="middle" fill="#cdd6f4" font-family="monospace" font-size="14" font-weight="bold">
+    CBOW Architecture
+  </text>
+
+  <!-- ─── Layer labels ─── -->
+  <text x="62"  y="348" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">Input</text>
+  <text x="62"  y="358" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">one-hot</text>
+  <text x="240" y="348" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">Embedding</text>
+  <text x="240" y="358" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">W ∈ ℝ^|V|×d</text>
+  <text x="430" y="348" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">Average</text>
+  <text x="430" y="358" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">v̂ ∈ ℝ^d</text>
+  <text x="588" y="348" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">Output</text>
+  <text x="588" y="358" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">W' ∈ ℝ^d×|V|</text>
+  <text x="710" y="348" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">Softmax</text>
+  <text x="710" y="358" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">P(w | ctx)</text>
+
+  <!-- ─── Context word boxes (input) ─── -->
+  <!-- w_{t-2} -->
+  <rect x="22" y="52" width="78" height="34" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="61" y="73" text-anchor="middle" fill="#89b4fa" font-family="monospace" font-size="12">w_{t-2}</text>
+  <!-- w_{t-1} -->
+  <rect x="22" y="118" width="78" height="34" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="61" y="139" text-anchor="middle" fill="#89b4fa" font-family="monospace" font-size="12">w_{t-1}</text>
+  <!-- w_{t+1} -->
+  <rect x="22" y="216" width="78" height="34" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="61" y="237" text-anchor="middle" fill="#89b4fa" font-family="monospace" font-size="12">w_{t+1}</text>
+  <!-- w_{t+2} -->
+  <rect x="22" y="280" width="78" height="34" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="1.5"/>
+  <text x="61" y="301" text-anchor="middle" fill="#89b4fa" font-family="monospace" font-size="12">w_{t+2}</text>
+  <!-- dots -->
+  <text x="61" y="183" text-anchor="middle" fill="#45475a" font-family="monospace" font-size="18">⋮</text>
+
+  <!-- ─── Embedding vectors ─── -->
+  <!-- v_{t-2} -->
+  <rect x="188" y="52" width="100" height="34" rx="6" fill="#2a1e3a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="238" y="68" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">v_{t-2}</text>
+  <text x="238" y="80" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">∈ ℝ^d</text>
+  <!-- v_{t-1} -->
+  <rect x="188" y="118" width="100" height="34" rx="6" fill="#2a1e3a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="238" y="134" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">v_{t-1}</text>
+  <text x="238" y="146" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">∈ ℝ^d</text>
+  <!-- v_{t+1} -->
+  <rect x="188" y="216" width="100" height="34" rx="6" fill="#2a1e3a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="238" y="232" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">v_{t+1}</text>
+  <text x="238" y="244" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">∈ ℝ^d</text>
+  <!-- v_{t+2} -->
+  <rect x="188" y="280" width="100" height="34" rx="6" fill="#2a1e3a" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="238" y="296" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">v_{t+2}</text>
+  <text x="238" y="308" text-anchor="middle" fill="#cba6f7" font-family="monospace" font-size="10">∈ ℝ^d</text>
+  <!-- dots -->
+  <text x="238" y="183" text-anchor="middle" fill="#45475a" font-family="monospace" font-size="18">⋮</text>
+
+  <!-- ─── Arrows: input → embedding ─── -->
+  <line x1="100" y1="69"  x2="186" y2="69"  stroke="#89b4fa" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="100" y1="135" x2="186" y2="135" stroke="#89b4fa" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="100" y1="233" x2="186" y2="233" stroke="#89b4fa" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="100" y1="297" x2="186" y2="297" stroke="#89b4fa" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- W label -->
+  <text x="142" y="100" text-anchor="middle" fill="#7f849c" font-family="monospace" font-size="11">W</text>
+
+  <!-- ─── Arrows: embedding → average ─── -->
+  <line x1="288" y1="69"  x2="398" y2="172" stroke="#cba6f7" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="288" y1="135" x2="398" y2="176" stroke="#cba6f7" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="288" y1="233" x2="398" y2="182" stroke="#cba6f7" stroke-width="1.5" marker-end="url(#ah)"/>
+  <line x1="288" y1="297" x2="398" y2="186" stroke="#cba6f7" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- ─── Average node ─── -->
+  <rect x="400" y="152" width="60" height="54" rx="8" fill="#1a2a3a" stroke="#89b4fa" stroke-width="2"/>
+  <text x="430" y="172" text-anchor="middle" fill="#89b4fa" font-family="monospace" font-size="11" font-weight="bold">Avg</text>
+  <text x="430" y="187" text-anchor="middle" fill="#89b4fa" font-family="monospace" font-size="10">1/2m</text>
+  <text x="430" y="200" text-anchor="middle" fill="#89b4fa" font-family="monospace" font-size="10">∑ v</text>
+
+  <!-- ─── Arrow: average → output scores ─── -->
+  <line x1="460" y1="179" x2="524" y2="179" stroke="#a6e3a1" stroke-width="2" marker-end="url(#ag)"/>
+  <text x="491" y="170" text-anchor="middle" fill="#7f849c" font-family="monospace" font-size="11">W'</text>
+
+  <!-- ─── Output score box ─── -->
+  <rect x="526" y="148" width="120" height="62" rx="8" fill="#1e3a26" stroke="#a6e3a1" stroke-width="2"/>
+  <text x="586" y="172" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="10">scores z_w</text>
+  <text x="586" y="187" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="10">= u_w^T v̂</text>
+  <text x="586" y="202" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="10">for all w ∈ V</text>
+
+  <!-- ─── Arrow: output → softmax ─── -->
+  <line x1="646" y1="179" x2="672" y2="179" stroke="#fab387" stroke-width="2" marker-end="url(#ao)"/>
+
+  <!-- ─── Softmax box ─── -->
+  <rect x="674" y="148" width="70" height="62" rx="8" fill="#3a2e1a" stroke="#fab387" stroke-width="2"/>
+  <text x="709" y="172" text-anchor="middle" fill="#fab387" font-family="monospace" font-size="12" font-weight="bold">σ(·)</text>
+  <text x="709" y="190" text-anchor="middle" fill="#fab387" font-family="monospace" font-size="9">P(w_t|ctx)</text>
+
+  <!-- ─── Center word label (prediction target) ─── -->
+  <rect x="530" y="52" width="100" height="34" rx="6" fill="#2a1a2a" stroke="#f38ba8" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="580" y="68" text-anchor="middle" fill="#f38ba8" font-family="monospace" font-size="11">w_t</text>
+  <text x="580" y="80" text-anchor="middle" fill="#f38ba8" font-family="monospace" font-size="9">(predict)</text>
+
+  <!-- dashed arrow from softmax up to center word label -->
+  <line x1="709" y1="148" x2="640" y2="85" stroke="#f38ba8" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ah)"/>
+</svg>
