@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 390" width="700" height="390">
+  <!-- Background -->
+  <rect width="700" height="390" fill="#1e1e2e" rx="10"/>
+
+  <!-- Title -->
+  <text x="350" y="26" text-anchor="middle" fill="#cdd6f4"
+        font-family="monospace" font-size="14" font-weight="bold">
+    Hierarchical Softmax — Path Traversal to w&#x2083;
+  </text>
+
+  <!-- ─── Non-highlighted edges ─── -->
+  <line x1="350" y1="55" x2="525" y2="155" stroke="#45475a" stroke-width="2"/>
+  <line x1="175" y1="187" x2="88"  y2="268" stroke="#45475a" stroke-width="2"/>
+  <line x1="525" y1="187" x2="437" y2="268" stroke="#45475a" stroke-width="2"/>
+  <line x1="525" y1="187" x2="613" y2="268" stroke="#45475a" stroke-width="2"/>
+
+  <!-- ─── Highlighted path edges ─── -->
+  <line x1="350" y1="55"  x2="175" y2="155" stroke="#89b4fa" stroke-width="3"/>
+  <line x1="175" y1="187" x2="263" y2="268" stroke="#89b4fa" stroke-width="3"/>
+
+  <!-- ─── Edge labels (highlighted path) ─── -->
+  <!-- root → n₂: LEFT (d = +1) -->
+  <text x="228" y="92"  text-anchor="middle" fill="#fab387" font-family="monospace" font-size="11">&#963;(v_n1 &#183; v_wc)</text>
+  <text x="228" y="107" text-anchor="middle" fill="#fab387" font-family="monospace" font-size="10">left  (d = +1)</text>
+
+  <!-- n₂ → w₃: RIGHT (d = −1) -->
+  <text x="193" y="222" text-anchor="middle" fill="#fab387" font-family="monospace" font-size="11">&#963;(&#8722;v_n2 &#183; v_wc)</text>
+  <text x="193" y="237" text-anchor="middle" fill="#fab387" font-family="monospace" font-size="10">right  (d = &#8722;1)</text>
+
+  <!-- ─── Internal nodes ─── -->
+  <!-- Root n₁ -->
+  <circle cx="350" cy="55"  r="22" fill="#313244" stroke="#89b4fa" stroke-width="2.5"/>
+  <text   x="350" y="60"   text-anchor="middle" fill="#cdd6f4" font-family="monospace" font-size="13">n&#x2081;</text>
+
+  <!-- n₂ (on path) -->
+  <circle cx="175" cy="166" r="22" fill="#313244" stroke="#89b4fa" stroke-width="2.5"/>
+  <text   x="175" y="171"  text-anchor="middle" fill="#cdd6f4" font-family="monospace" font-size="13">n&#x2082;</text>
+
+  <!-- n₃ (off path, dim) -->
+  <circle cx="525" cy="166" r="22" fill="#313244" stroke="#45475a" stroke-width="1.5"/>
+  <text   x="525" y="171"  text-anchor="middle" fill="#585b70" font-family="monospace" font-size="13">n&#x2083;</text>
+
+  <!-- ─── Leaf nodes ─── -->
+  <!-- w₁ (dim) -->
+  <rect x="58"  y="258" width="60" height="32" rx="7" fill="#313244" stroke="#45475a" stroke-width="1.5"/>
+  <text x="88"  y="279" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="13">w&#x2081;</text>
+
+  <!-- w₃ (TARGET — green) -->
+  <rect x="233" y="258" width="60" height="32" rx="7" fill="#1e3a26" stroke="#a6e3a1" stroke-width="2.5"/>
+  <text x="263" y="279" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="13" font-weight="bold">w&#x2083;</text>
+  <text x="263" y="308" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="10">&#8592; target</text>
+
+  <!-- w₂ (dim) -->
+  <rect x="407" y="258" width="60" height="32" rx="7" fill="#313244" stroke="#45475a" stroke-width="1.5"/>
+  <text x="437" y="279" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="13">w&#x2082;</text>
+
+  <!-- w₄ (dim) -->
+  <rect x="583" y="258" width="60" height="32" rx="7" fill="#313244" stroke="#45475a" stroke-width="1.5"/>
+  <text x="613" y="279" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="13">w&#x2084;</text>
+
+  <!-- ─── Probability formula bar ─── -->
+  <rect x="75"  y="328" width="550" height="38" rx="7" fill="#181825"/>
+  <text x="350" y="345" text-anchor="middle" fill="#cdd6f4" font-family="monospace" font-size="11">P(w&#x2083; | wc)  =  &#963;(v_n1 &#183; v_wc)  &#215;  &#963;(&#8722;v_n2 &#183; v_wc)</text>
+  <text x="350" y="360" text-anchor="middle" fill="#585b70" font-family="monospace" font-size="10">product of two binary decisions along the path</text>
+</svg>

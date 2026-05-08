@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="680" height="420">
+  <!-- Background -->
+  <rect width="680" height="420" fill="#1e1e2e" rx="10"/>
+
+  <!-- Title -->
+  <text x="340" y="26" text-anchor="middle" fill="#cdd6f4"
+        font-family="monospace" font-size="14" font-weight="bold">
+    Huffman Tree — Frequent Words Get Shorter Paths
+  </text>
+
+  <!-- ─── Edges ─── -->
+  <!-- root → w₁ (left) -->
+  <line x1="255" y1="58"  x2="105" y2="148" stroke="#6c7086" stroke-width="2"/>
+  <!-- root → internal(6) (right) -->
+  <line x1="255" y1="58"  x2="420" y2="148" stroke="#6c7086" stroke-width="2"/>
+  <!-- internal(6) → w₂ (left) -->
+  <line x1="420" y1="172" x2="320" y2="258" stroke="#6c7086" stroke-width="2"/>
+  <!-- internal(6) → internal(3) (right) -->
+  <line x1="420" y1="172" x2="530" y2="258" stroke="#6c7086" stroke-width="2"/>
+  <!-- internal(3) → w₃ (left) -->
+  <line x1="530" y1="282" x2="468" y2="345" stroke="#6c7086" stroke-width="2"/>
+  <!-- internal(3) → w₄ (right) -->
+  <line x1="530" y1="282" x2="592" y2="345" stroke="#6c7086" stroke-width="2"/>
+
+  <!-- ─── L / R direction markers ─── -->
+  <text x="160" y="96"  text-anchor="middle" fill="#45475a" font-family="monospace" font-size="11">L</text>
+  <text x="355" y="96"  text-anchor="middle" fill="#45475a" font-family="monospace" font-size="11">R</text>
+  <text x="356" y="210" text-anchor="middle" fill="#45475a" font-family="monospace" font-size="11">L</text>
+  <text x="490" y="210" text-anchor="middle" fill="#45475a" font-family="monospace" font-size="11">R</text>
+  <text x="488" y="314" text-anchor="middle" fill="#45475a" font-family="monospace" font-size="11">L</text>
+  <text x="572" y="314" text-anchor="middle" fill="#45475a" font-family="monospace" font-size="11">R</text>
+
+  <!-- ─── Internal nodes ─── -->
+  <!-- Root -->
+  <circle cx="255" cy="55" r="26" fill="#45475a" stroke="#7f849c" stroke-width="2"/>
+  <text x="255" y="50" text-anchor="middle" fill="#cdd6f4" font-family="monospace" font-size="10" font-weight="bold">root</text>
+  <text x="255" y="66" text-anchor="middle" fill="#a6adc8" font-family="monospace" font-size="11">(11)</text>
+
+  <!-- internal(6) -->
+  <circle cx="420" cy="160" r="24" fill="#45475a" stroke="#7f849c" stroke-width="1.5"/>
+  <text x="420" y="165" text-anchor="middle" fill="#a6adc8" font-family="monospace" font-size="12">(6)</text>
+
+  <!-- internal(3) -->
+  <circle cx="530" cy="270" r="24" fill="#45475a" stroke="#7f849c" stroke-width="1.5"/>
+  <text x="530" y="275" text-anchor="middle" fill="#a6adc8" font-family="monospace" font-size="12">(3)</text>
+
+  <!-- ─── Leaf nodes ─── -->
+
+  <!-- w₁  freq=5  depth=1  (most frequent → shortest path) -->
+  <rect x="72" y="148" width="66" height="56" rx="8" fill="#1e3a26" stroke="#a6e3a1" stroke-width="2.5"/>
+  <text x="105" y="168" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="14" font-weight="bold">w&#x2081;</text>
+  <text x="105" y="184" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="10">freq = 5</text>
+  <text x="105" y="197" text-anchor="middle" fill="#a6e3a1" font-family="monospace" font-size="10">path = 1</text>
+
+  <!-- w₂  freq=3  depth=2 -->
+  <rect x="287" y="248" width="66" height="56" rx="8" fill="#1e3130" stroke="#94e2d5" stroke-width="2"/>
+  <text x="320" y="268" text-anchor="middle" fill="#94e2d5" font-family="monospace" font-size="14" font-weight="bold">w&#x2082;</text>
+  <text x="320" y="284" text-anchor="middle" fill="#94e2d5" font-family="monospace" font-size="10">freq = 3</text>
+  <text x="320" y="297" text-anchor="middle" fill="#94e2d5" font-family="monospace" font-size="10">path = 2</text>
+
+  <!-- w₃  freq=2  depth=3 -->
+  <rect x="436" y="345" width="66" height="56" rx="8" fill="#3a2e1a" stroke="#f9e2af" stroke-width="2"/>
+  <text x="469" y="365" text-anchor="middle" fill="#f9e2af" font-family="monospace" font-size="14" font-weight="bold">w&#x2083;</text>
+  <text x="469" y="381" text-anchor="middle" fill="#f9e2af" font-family="monospace" font-size="10">freq = 2</text>
+  <text x="469" y="394" text-anchor="middle" fill="#f9e2af" font-family="monospace" font-size="10">path = 3</text>
+
+  <!-- w₄  freq=1  depth=3  (rarest → longest path) -->
+  <rect x="560" y="345" width="66" height="56" rx="8" fill="#3a1e1e" stroke="#f38ba8" stroke-width="2"/>
+  <text x="593" y="365" text-anchor="middle" fill="#f38ba8" font-family="monospace" font-size="14" font-weight="bold">w&#x2084;</text>
+  <text x="593" y="381" text-anchor="middle" fill="#f38ba8" font-family="monospace" font-size="10">freq = 1</text>
+  <text x="593" y="394" text-anchor="middle" fill="#f38ba8" font-family="monospace" font-size="10">path = 3</text>
+
+  <!-- ─── Depth level indicators ─── -->
+  <line x1="36" y1="55"  x2="36" y2="380" stroke="#313244" stroke-width="1" stroke-dasharray="5 4"/>
+  <text x="28" y="59"  fill="#585b70" font-family="monospace" font-size="9" text-anchor="end">d=0</text>
+  <text x="28" y="165" fill="#585b70" font-family="monospace" font-size="9" text-anchor="end">d=1</text>
+  <text x="28" y="272" fill="#585b70" font-family="monospace" font-size="9" text-anchor="end">d=2</text>
+  <text x="28" y="378" fill="#585b70" font-family="monospace" font-size="9" text-anchor="end">d=3</text>
+  <line x1="40" y1="55"  x2="52" y2="55"  stroke="#313244" stroke-width="1"/>
+  <line x1="40" y1="160" x2="52" y2="160" stroke="#313244" stroke-width="1"/>
+  <line x1="40" y1="268" x2="52" y2="268" stroke="#313244" stroke-width="1"/>
+  <line x1="40" y1="372" x2="52" y2="372" stroke="#313244" stroke-width="1"/>
+</svg>
