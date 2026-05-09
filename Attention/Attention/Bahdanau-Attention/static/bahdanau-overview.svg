@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="900" height="640"
+     font-family="'Segoe UI', Arial, sans-serif">
+
+  <defs>
+    <marker id="arr"      markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a6adc8"/></marker>
+    <marker id="arr-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#89b4fa"/></marker>
+    <marker id="arr-pink" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#f38ba8"/></marker>
+    <marker id="arr-grn"  markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#a6e3a1"/></marker>
+    <marker id="arr-org"  markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#fab387"/></marker>
+    <marker id="arr-pur"  markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#cba6f7"/></marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="640" fill="#1e1e2e" rx="12"/>
+
+  <!-- ── Title ── -->
+  <text x="450" y="34" text-anchor="middle" fill="#cdd6f4" font-size="17" font-weight="bold">Bahdanau Attention — Encoder-Decoder Flow</text>
+  <text x="450" y="53" text-anchor="middle" fill="#6c7086" font-size="12">A fresh context vector cᵢ is computed at every decoder step</text>
+
+  <!-- ══════════════════════════════════════════════
+       ENCODER STRIP (y 68-188)
+  ══════════════════════════════════════════════ -->
+  <rect x="18" y="65" width="864" height="120" rx="8" fill="#181825" stroke="#45475a" stroke-width="1.2"/>
+  <text x="34" y="84"  fill="#6c7086" font-size="11" font-weight="bold">ENCODER</text>
+  <text x="34" y="99"  fill="#6c7086" font-size="10">(Bidirectional RNN — reads the whole source sentence once, produces h₁ … h₄)</text>
+
+  <!-- Source word chips -->
+  <rect x="80"  y="105" width="110" height="30" rx="6" fill="#11111b" stroke="#45475a" stroke-width="1"/>
+  <text x="135" y="125" text-anchor="middle" fill="#a6adc8" font-size="13">chat</text>
+
+  <rect x="230" y="105" width="110" height="30" rx="6" fill="#11111b" stroke="#45475a" stroke-width="1"/>
+  <text x="285" y="125" text-anchor="middle" fill="#a6adc8" font-size="13">mange</text>
+
+  <rect x="380" y="105" width="110" height="30" rx="6" fill="#11111b" stroke="#45475a" stroke-width="1"/>
+  <text x="435" y="125" text-anchor="middle" fill="#a6adc8" font-size="13">du</text>
+
+  <rect x="530" y="105" width="110" height="30" rx="6" fill="#11111b" stroke="#45475a" stroke-width="1"/>
+  <text x="585" y="125" text-anchor="middle" fill="#a6adc8" font-size="13">poisson</text>
+
+  <!-- Down arrows: source → h states -->
+  <line x1="135" y1="135" x2="135" y2="149" stroke="#45475a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="285" y1="135" x2="285" y2="149" stroke="#45475a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="435" y1="135" x2="435" y2="149" stroke="#45475a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="585" y1="135" x2="585" y2="149" stroke="#45475a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- h₁ h₂ h₃ h₄ boxes -->
+  <rect x="80"  y="150" width="110" height="28" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="2"/>
+  <text x="135" y="169" text-anchor="middle" fill="#89b4fa" font-size="14" font-weight="bold">h₁</text>
+
+  <rect x="230" y="150" width="110" height="28" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="2"/>
+  <text x="285" y="169" text-anchor="middle" fill="#89b4fa" font-size="14" font-weight="bold">h₂</text>
+
+  <rect x="380" y="150" width="110" height="28" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="2"/>
+  <text x="435" y="169" text-anchor="middle" fill="#89b4fa" font-size="14" font-weight="bold">h₃</text>
+
+  <rect x="530" y="150" width="110" height="28" rx="6" fill="#313244" stroke="#89b4fa" stroke-width="2"/>
+  <text x="585" y="169" text-anchor="middle" fill="#89b4fa" font-size="14" font-weight="bold">h₄</text>
+
+  <!-- Bidirectional dashes between h boxes -->
+  <line x1="192" y1="164" x2="228" y2="164" stroke="#89b4fa" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="342" y1="164" x2="378" y2="164" stroke="#89b4fa" stroke-width="1" stroke-dasharray="3,2"/>
+  <line x1="492" y1="164" x2="528" y2="164" stroke="#89b4fa" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- ══════════════════════════════════════════════
+       FIVE DECODER STEPS (vertical spine, x=450)
+  ══════════════════════════════════════════════ -->
+
+  <!-- Dotted lines: all hⱼ → step ① block -->
+  <line x1="135" y1="178" x2="135" y2="222" stroke="#89b4fa" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="135" y1="222" x2="208" y2="222" stroke="#89b4fa" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="285" y1="178" x2="285" y2="222" stroke="#89b4fa" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="285" y1="222" x2="208" y2="222" stroke="#89b4fa" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="435" y1="178" x2="435" y2="222" stroke="#89b4fa" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="585" y1="178" x2="585" y2="222" stroke="#89b4fa" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="585" y1="222" x2="692" y2="222" stroke="#89b4fa" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- ① Alignment Scoring -->
+  <rect x="208" y="200" width="484" height="82" rx="8" fill="#1e1e2e" stroke="#f38ba8" stroke-width="2"/>
+  <circle cx="236" cy="222" r="14" fill="#f38ba8"/>
+  <text x="236" y="227" text-anchor="middle" fill="#1e1e2e" font-size="14" font-weight="bold">①</text>
+  <text x="460" y="222" text-anchor="middle" fill="#f38ba8" font-size="13" font-weight="bold">Alignment Scoring</text>
+  <text x="460" y="242" text-anchor="middle" fill="#cdd6f4" font-size="12">eᵢⱼ = vₐᵀ · tanh( Wₐ sᵢ₋₁  +  Uₐ hⱼ )</text>
+  <text x="460" y="260" text-anchor="middle" fill="#6c7086" font-size="11">Score every encoder state hⱼ against the previous decoder state sᵢ₋₁</text>
+  <text x="460" y="276" text-anchor="middle" fill="#6c7086" font-size="11">→ one raw relevance score eᵢⱼ per source word j</text>
+
+  <!-- connector ①→② -->
+  <line x1="450" y1="283" x2="450" y2="303" stroke="#f38ba8" stroke-width="2" marker-end="url(#arr-pink)"/>
+
+  <!-- ② Softmax → weights -->
+  <rect x="208" y="305" width="484" height="68" rx="8" fill="#1e1e2e" stroke="#fab387" stroke-width="2"/>
+  <circle cx="236" cy="327" r="14" fill="#fab387"/>
+  <text x="236" y="332" text-anchor="middle" fill="#1e1e2e" font-size="14" font-weight="bold">②</text>
+  <text x="460" y="327" text-anchor="middle" fill="#fab387" font-size="13" font-weight="bold">Softmax  →  Attention Weights αᵢⱼ</text>
+  <text x="460" y="347" text-anchor="middle" fill="#cdd6f4" font-size="12">αᵢⱼ = exp(eᵢⱼ)  /  Σₖ exp(eᵢₖ)      so  Σⱼ αᵢⱼ = 1</text>
+  <text x="460" y="365" text-anchor="middle" fill="#6c7086" font-size="11">Turn scores into positive weights that sum to 1 (soft, differentiable selection)</text>
+
+  <!-- connector ②→③ -->
+  <line x1="450" y1="374" x2="450" y2="394" stroke="#fab387" stroke-width="2" marker-end="url(#arr-org)"/>
+
+  <!-- ③ Context Vector -->
+  <rect x="208" y="396" width="484" height="68" rx="8" fill="#1e1e2e" stroke="#a6e3a1" stroke-width="2"/>
+  <circle cx="236" cy="418" r="14" fill="#a6e3a1"/>
+  <text x="236" y="423" text-anchor="middle" fill="#1e1e2e" font-size="14" font-weight="bold">③</text>
+  <text x="460" y="418" text-anchor="middle" fill="#a6e3a1" font-size="13" font-weight="bold">Context Vector  cᵢ  (dynamic, per step)</text>
+  <text x="460" y="438" text-anchor="middle" fill="#cdd6f4" font-size="12">cᵢ = Σⱼ αᵢⱼ · hⱼ</text>
+  <text x="460" y="456" text-anchor="middle" fill="#6c7086" font-size="11">Weighted sum of encoder states — focuses on the most relevant source positions</text>
+
+  <!-- connector ③→④ -->
+  <line x1="450" y1="465" x2="450" y2="485" stroke="#a6e3a1" stroke-width="2" marker-end="url(#arr-grn)"/>
+
+  <!-- ④ Decoder RNN -->
+  <rect x="208" y="487" width="484" height="68" rx="8" fill="#313244" stroke="#fab387" stroke-width="2"/>
+  <circle cx="236" cy="509" r="14" fill="#fab387"/>
+  <text x="236" y="514" text-anchor="middle" fill="#1e1e2e" font-size="14" font-weight="bold">④</text>
+  <text x="460" y="509" text-anchor="middle" fill="#fab387" font-size="13" font-weight="bold">Decoder RNN  →  new hidden state sᵢ</text>
+  <text x="460" y="529" text-anchor="middle" fill="#cdd6f4" font-size="12">sᵢ = f( sᵢ₋₁ ,  yᵢ₋₁ ,  cᵢ )</text>
+  <text x="460" y="547" text-anchor="middle" fill="#6c7086" font-size="11">Previous state + last output word + fresh context → updated decoder state</text>
+
+  <!-- connector ④→⑤ -->
+  <line x1="450" y1="556" x2="450" y2="576" stroke="#fab387" stroke-width="2" marker-end="url(#arr-org)"/>
+
+  <!-- ⑤ Output -->
+  <rect x="208" y="578" width="484" height="52" rx="8" fill="#313244" stroke="#cba6f7" stroke-width="2"/>
+  <circle cx="236" cy="599" r="14" fill="#cba6f7"/>
+  <text x="236" y="604" text-anchor="middle" fill="#1e1e2e" font-size="14" font-weight="bold">⑤</text>
+  <text x="460" y="599" text-anchor="middle" fill="#cba6f7" font-size="13" font-weight="bold">Output Word Distribution</text>
+  <text x="460" y="619" text-anchor="middle" fill="#cdd6f4" font-size="12">P(yᵢ | y&lt;ᵢ, x) = g( sᵢ , yᵢ₋₁ , cᵢ )  →  pick highest-probability word</text>
+
+  <!-- ══ Feedback loop: sᵢ loops back as sᵢ₋₁ into step ① ══ -->
+  <path d="M 694 521  L 790 521  L 790 222  L 694 222"
+        fill="none" stroke="#fab387" stroke-width="1.8" stroke-dasharray="6,4"
+        marker-end="url(#arr-org)"/>
+  <rect x="796" y="350" width="88" height="38" rx="5" fill="#181825" stroke="#fab387" stroke-width="1"/>
+  <text x="840" y="366" text-anchor="middle" fill="#fab387" font-size="10" font-weight="bold">sᵢ feeds back</text>
+  <text x="840" y="381" text-anchor="middle" fill="#fab387" font-size="10">as sᵢ₋₁ next step</text>
+
+</svg>

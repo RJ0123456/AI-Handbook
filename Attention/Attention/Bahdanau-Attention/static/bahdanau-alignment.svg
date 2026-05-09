@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" width="520" height="400" font-family="sans-serif">
+  <rect width="520" height="400" fill="#1e1e2e"/>
+
+  <!-- Title -->
+  <text x="260" y="28" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="bold">Bahdanau Alignment Matrix</text>
+  <text x="260" y="46" text-anchor="middle" fill="#6c7086" font-size="11">(brighter = stronger alignment)</text>
+
+  <!-- Source word labels (columns) -->
+  <text x="140" y="70" text-anchor="middle" fill="#89b4fa" font-size="12">chat</text>
+  <text x="220" y="70" text-anchor="middle" fill="#89b4fa" font-size="12">mange</text>
+  <text x="300" y="70" text-anchor="middle" fill="#89b4fa" font-size="12">du</text>
+  <text x="380" y="70" text-anchor="middle" fill="#89b4fa" font-size="12">poisson</text>
+
+  <!-- Source axis label -->
+  <text x="260" y="362" text-anchor="middle" fill="#a6adc8" font-size="11">Source (French)</text>
+
+  <!-- Target word labels (rows) -->
+  <text x="105" y="106" text-anchor="end" fill="#a6e3a1" font-size="12">the</text>
+  <text x="105" y="186" text-anchor="end" fill="#a6e3a1" font-size="12">cat</text>
+  <text x="105" y="266" text-anchor="end" fill="#a6e3a1" font-size="12">eats</text>
+  <text x="105" y="346" text-anchor="end" fill="#a6e3a1" font-size="12">fish</text>
+
+  <!-- Target axis label -->
+  <text x="44" y="220" text-anchor="middle" fill="#a6adc8" font-size="11" transform="rotate(-90,44,220)">Target (English)</text>
+
+  <!-- ── Grid cells: 4 target rows × 4 source columns ── -->
+  <!-- Row 1 "the" → mostly aligns with "chat" (j=1) -->
+  <!-- α values: [0.72, 0.15, 0.08, 0.05] -->
+  <rect x="112" y="80" width="72" height="52" rx="4" fill="#4f8fd6" opacity="0.95"/><!-- 0.72 bright -->
+  <rect x="192" y="80" width="72" height="52" rx="4" fill="#1e5a9e" opacity="0.6"/><!-- 0.15 -->
+  <rect x="272" y="80" width="72" height="52" rx="4" fill="#1a3a6a" opacity="0.5"/><!-- 0.08 -->
+  <rect x="352" y="80" width="72" height="52" rx="4" fill="#162842" opacity="0.4"/><!-- 0.05 -->
+  <text x="148" y="110" text-anchor="middle" fill="#cdd6f4" font-size="11">0.72</text>
+  <text x="228" y="110" text-anchor="middle" fill="#cdd6f4" font-size="11">0.15</text>
+  <text x="308" y="110" text-anchor="middle" fill="#cdd6f4" font-size="11">0.08</text>
+  <text x="388" y="110" text-anchor="middle" fill="#cdd6f4" font-size="11">0.05</text>
+
+  <!-- Row 2 "cat" → mostly aligns with "chat" (j=1) but also some "mange" -->
+  <!-- α values: [0.65, 0.22, 0.07, 0.06] -->
+  <rect x="112" y="160" width="72" height="52" rx="4" fill="#4f8fd6" opacity="0.85"/>
+  <rect x="192" y="160" width="72" height="52" rx="4" fill="#2060b0" opacity="0.65"/>
+  <rect x="272" y="160" width="72" height="52" rx="4" fill="#1a3a6a" opacity="0.45"/>
+  <rect x="352" y="160" width="72" height="52" rx="4" fill="#162842" opacity="0.40"/>
+  <text x="148" y="190" text-anchor="middle" fill="#cdd6f4" font-size="11">0.65</text>
+  <text x="228" y="190" text-anchor="middle" fill="#cdd6f4" font-size="11">0.22</text>
+  <text x="308" y="190" text-anchor="middle" fill="#cdd6f4" font-size="11">0.07</text>
+  <text x="388" y="190" text-anchor="middle" fill="#cdd6f4" font-size="11">0.06</text>
+
+  <!-- Row 3 "eats" → mostly aligns with "mange" (j=2) -->
+  <!-- α values: [0.08, 0.78, 0.09, 0.05] -->
+  <rect x="112" y="240" width="72" height="52" rx="4" fill="#1a3a6a" opacity="0.45"/>
+  <rect x="192" y="240" width="72" height="52" rx="4" fill="#5fa0e8" opacity="0.97"/><!-- bright -->
+  <rect x="272" y="240" width="72" height="52" rx="4" fill="#1e4080" opacity="0.55"/>
+  <rect x="352" y="240" width="72" height="52" rx="4" fill="#162842" opacity="0.38"/>
+  <text x="148" y="270" text-anchor="middle" fill="#cdd6f4" font-size="11">0.08</text>
+  <text x="228" y="270" text-anchor="middle" fill="#cdd6f4" font-size="11">0.78</text>
+  <text x="308" y="270" text-anchor="middle" fill="#cdd6f4" font-size="11">0.09</text>
+  <text x="388" y="270" text-anchor="middle" fill="#cdd6f4" font-size="11">0.05</text>
+
+  <!-- Row 4 "fish" → mostly aligns with "poisson" (j=4) -->
+  <!-- α values: [0.05, 0.06, 0.11, 0.78] -->
+  <rect x="112" y="320" width="72" height="52" rx="4" fill="#162842" opacity="0.38"/>
+  <rect x="192" y="320" width="72" height="52" rx="4" fill="#162842" opacity="0.40"/>
+  <rect x="272" y="320" width="72" height="52" rx="4" fill="#1e4a8a" opacity="0.55"/>
+  <rect x="352" y="320" width="72" height="52" rx="4" fill="#5fa0e8" opacity="0.97"/><!-- bright -->
+  <text x="148" y="350" text-anchor="middle" fill="#cdd6f4" font-size="11">0.05</text>
+  <text x="228" y="350" text-anchor="middle" fill="#cdd6f4" font-size="11">0.06</text>
+  <text x="308" y="350" text-anchor="middle" fill="#cdd6f4" font-size="11">0.11</text>
+  <text x="388" y="350" text-anchor="middle" fill="#cdd6f4" font-size="11">0.78</text>
+
+  <!-- Color scale bar -->
+  <defs>
+    <linearGradient id="scale" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#162842"/>
+      <stop offset="100%" stop-color="#5fa0e8"/>
+    </linearGradient>
+  </defs>
+  <rect x="430" y="80" width="18" height="292" rx="3" fill="url(#scale)"/>
+  <text x="450" y="84" fill="#6c7086" font-size="9">1.0</text>
+  <text x="450" y="374" fill="#6c7086" font-size="9">0.0</text>
+  <text x="449" y="230" fill="#6c7086" font-size="9" transform="rotate(90,449,230)">α weight</text>
+</svg>
