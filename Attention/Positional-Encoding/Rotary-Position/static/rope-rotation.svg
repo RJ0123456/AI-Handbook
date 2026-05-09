@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 460" width="980" height="460" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="980" height="460" fill="#161b22"/>
+
+  <text x="490" y="34" text-anchor="middle" fill="#dbe5f0" font-size="20" font-weight="700">RoPE: Relative Position via Rotation</text>
+  <text x="490" y="56" text-anchor="middle" fill="#9fb0c3" font-size="13">Rotate q and k by position-dependent angles before dot product.</text>
+
+  <!-- Left: geometric intuition -->
+  <rect x="40" y="86" width="430" height="320" rx="10" fill="#0f141b" stroke="#304355"/>
+  <text x="60" y="112" fill="#8fc7ff" font-size="14" font-weight="700">2D Pair Geometry</text>
+
+  <line x1="255" y1="260" x2="255" y2="150" stroke="#6d7f91"/>
+  <line x1="160" y1="260" x2="360" y2="260" stroke="#6d7f91"/>
+  <circle cx="255" cy="260" r="82" fill="none" stroke="#4f6276" stroke-width="1.5"/>
+
+  <line x1="255" y1="260" x2="320" y2="216" stroke="#7ee787" stroke-width="3"/>
+  <text x="326" y="212" fill="#7ee787" font-size="12">R(theta_p) q</text>
+
+  <line x1="255" y1="260" x2="208" y2="189" stroke="#79c0ff" stroke-width="3"/>
+  <text x="138" y="186" fill="#79c0ff" font-size="12">R(theta_m) k</text>
+
+  <path d="M 286 241 A 36 36 0 0 0 234 225" fill="none" stroke="#f2cc60" stroke-width="2"/>
+  <text x="242" y="214" fill="#f2cc60" font-size="12">delta = theta_m - theta_p</text>
+
+  <text x="60" y="340" fill="#dfe8f2" font-size="13">Dot product depends on angle difference,</text>
+  <text x="60" y="360" fill="#dfe8f2" font-size="13">so it naturally captures relative position (m - p).</text>
+
+  <!-- Right: formula flow -->
+  <rect x="510" y="86" width="430" height="320" rx="10" fill="#0f141b" stroke="#304355"/>
+  <text x="530" y="112" fill="#8fc7ff" font-size="14" font-weight="700">Key Identity</text>
+
+  <rect x="540" y="132" width="370" height="58" rx="8" fill="#1a212b" stroke="#455a70"/>
+  <text x="725" y="166" text-anchor="middle" fill="#dfe8f2" font-size="15">q_tilde_p^T k_tilde_m = (R(theta_p)q)^T (R(theta_m)k)</text>
+
+  <rect x="540" y="204" width="370" height="58" rx="8" fill="#1a212b" stroke="#455a70"/>
+  <text x="725" y="238" text-anchor="middle" fill="#dfe8f2" font-size="15">= q^T R(theta_p)^T R(theta_m) k</text>
+
+  <rect x="540" y="276" width="370" height="58" rx="8" fill="#1a212b" stroke="#455a70"/>
+  <text x="725" y="310" text-anchor="middle" fill="#d9b3ff" font-size="15" font-weight="700">= q^T R(theta_m - theta_p) k</text>
+
+  <text x="725" y="360" text-anchor="middle" fill="#dfe8f2" font-size="13">Since theta_{i,p} = omega_i * p, score depends on omega_i * (m-p).</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7aa2c3"/>
+    </marker>
+  </defs>
+  <line x1="725" y1="190" x2="725" y2="202" stroke="#7aa2c3" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="725" y1="262" x2="725" y2="274" stroke="#7aa2c3" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>
