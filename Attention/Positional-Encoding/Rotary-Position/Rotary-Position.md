@@ -17,6 +17,28 @@ RoPE instead applies position-dependent rotation to query and key vectors before
 
 This puts position into the attention geometry itself.
 
+### 1.1 Why Rotation?
+
+We want attention to reflect **relative distance** (for example, tokens 2 apart) rather than only absolute indices.
+
+Rotation gives exactly this behavior. If query and key are rotated by position-dependent angles, their dot product depends on the **angle difference**, so absolute positions cancel and relative offset remains.
+
+For vectors $q, k$ at positions $m, n$ with base angle $\theta$:
+
+$$
+\bigl(R(m\theta)q\bigr)^\top\bigl(R(n\theta)k\bigr)
+= q^\top R\bigl((n-m)\theta\bigr)k
+$$
+
+This is the core reason RoPE works: position is encoded as rotation, and standard attention recovers relative position through the geometry of dot products, without changing the attention formula.
+
+Intuition (clock-hand analogy): two clock hands each have an absolute angle, but what often matters is the angle **between** them. RoPE uses the same idea: each token gets an absolute rotation, while the query-key interaction naturally depends on the relative angular difference.
+
+This intuition follows the same argument presented in Michael Brenndoerfer's RoPE write-up:
+https://mbrenndoerfer.com/writing/rotary-position-embedding-rope-transformers
+
+
+
 ---
 
 ## 2. RoPE Definition
