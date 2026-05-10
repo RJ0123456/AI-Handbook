@@ -51,7 +51,59 @@ $$
 
 ---
 
-## 3. Core Proof: Relative Position Emerges Naturally
+## 3. The Complete RoPE Formula
+
+The 2D version above is the building block. For a full head vector of even dimension $d$, RoPE rotates every adjacent pair.
+
+Let
+
+$$
+q_p = [q_{p,0}, q_{p,1}, \dots, q_{p,d-1}]^\top,
+\qquad
+k_m = [k_{m,0}, k_{m,1}, \dots, k_{m,d-1}]^\top
+$$
+
+For each pair index $i = 0, 1, \dots, \frac{d}{2}-1$, define $\theta_{i,p} = \omega_i p$ and
+
+$$
+R_i(p) =
+\begin{bmatrix}
+\cos(\theta_{i,p}) & -\sin(\theta_{i,p}) \\
+\sin(\theta_{i,p}) & \cos(\theta_{i,p})
+\end{bmatrix}
+$$
+
+Then the full rotated query and key vectors are:
+
+$$
+\widetilde{q}_p = \operatorname{RoPE}(q_p, p)=
+\bigl[R_0(p)q_{p,0:1},\; R_1(p)q_{p,2:3},\; \dots,\; R_{\frac{d}{2}-1}(p)q_{p,d-2:d-1}\bigr]^\top
+$$
+
+$$
+\widetilde{k}_m = \operatorname{RoPE}(k_m, m)=
+\bigl[R_0(m)k_{m,0:1},\; R_1(m)k_{m,2:3},\; \dots,\; R_{\frac{d}{2}-1}(m)k_{m,d-2:d-1}\bigr]^\top
+$$
+
+Equivalently, using a block-diagonal rotation matrix,
+
+$$
+\widetilde{q}_p = \mathcal{R}(p) q_p,
+\qquad
+\widetilde{k}_m = \mathcal{R}(m) k_m
+$$
+
+where
+
+$$
+\mathcal{R}(p) = \operatorname{diag}\bigl(R_0(p), R_1(p), \dots, R_{\frac{d}{2}-1}(p)\bigr)
+$$
+
+This is the complete RoPE formula used in practice: every 2D subspace gets its own frequency, and the full attention score is computed from the rotated whole vectors.
+
+---
+
+## 4. Core Proof: Relative Position Emerges Naturally
 
 For one 2D pair:
 
@@ -86,7 +138,7 @@ So RoPE makes score contributions explicitly relative-position aware.
 
 ---
 
-## 4. Why This Helps in Practice
+## 5. Why This Helps in Practice
 
 - Relative distance is encoded directly in $QK^\top$.
 - Works well with long contexts in many LLMs.
@@ -95,7 +147,7 @@ So RoPE makes score contributions explicitly relative-position aware.
 
 ---
 
-## 5. Minimal Attention Pipeline with RoPE
+## 6. Minimal Attention Pipeline with RoPE
 
 1. Compute $Q,K,V$ from token states.
 2. Apply RoPE to $Q,K$ only (not $V$).
@@ -113,7 +165,7 @@ $$
 
 ---
 
-## 6. Relation to Previous Two Articles
+## 7. Relation to Previous Two Articles
 
 Progression recap:
 
@@ -123,13 +175,13 @@ Progression recap:
 
 ---
 
-## 7. Visual Intuition
+## 8. Visual Intuition
 
 ![RoPE rotates query and key vectors by position-dependent angles so their dot product depends on relative angle difference](./static/rope-rotation.svg)
 
 ---
 
-## 8. One-Sentence Summary
+## 9. One-Sentence Summary
 
 RoPE encodes position by rotating query/key vector pairs, yielding attention scores that naturally depend on relative token distance.
 
