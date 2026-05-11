@@ -313,7 +313,168 @@ Self-attention lets each token look across the entire sequence, score which toke
 
 ---
 
-## 16. References
+## 16. Q&A From Your Thread
+
+### Q1. What changed from cross-attention to self-attention?
+
+**A:** In cross-attention, one sequence queries another sequence (for example, decoder queries encoder outputs). In self-attention, one sequence queries itself, so each token can directly gather information from all other tokens in the same sequence.
+
+### Q2. Why is self-attention called an all-pairs interaction mechanism?
+
+**A:** For a sequence of length $n$, each token compares itself with all $n$ tokens (including itself), producing $n^2$ pairwise interactions. This gives direct token-to-token connectivity in one layer.
+
+### Q3. What does the section "Why Self-Attention Works for Representation Learning" mean?
+
+**A:** In the section "Why Self-Attention Works for Representation Learning," the author primarily explains why self-attention is a game-changer for improving model comprehension.
+
+Simply put, the core argument of this section is that self-attention allows words to move beyond rigid, fixed meanings, achieving true contextualization.
+
+The following is a breakdown of this section:
+
+##### 1. From "Static" to "Dynamic": Contextualized Embeddings
+
+* Previous Approaches (Static): Older models like Word2Vec or GloVe assigned a fixed vector to each word. Whether "bank" refers to a "bank" or a "riverbank," its vector was the same.
+
+* Self-Attention Approach (Contextualization): Each word, during processing, "inquires" about information from all surrounding words. The resulting vector is no longer isolated but a "hybrid" incorporating information from surrounding words.
+
+##### 2. What Specific Language Challenges Does It Solve?
+
+The authors list four key capabilities that self-attention provides to the model:
+
+* **Word Sense Disambiguation:** For example, in "river bank," "bank" assigns a high weight to "river," shifting its vector towards a "natural/geographical" direction; while in "bank account," it shifts towards a "financial" direction due to the influence of "account."
+
+* **Coreference Resolution:** It can identify which preceding noun "it" in a sentence refers to (e.g., "animal" or "street").
+
+* **Syntactic Awareness:** Even when the verb and subject are far apart, self-attention can skip intermediate modifiers and directly associate them.
+
+* **Semantic Composition:** It understands the new meaning created by combining words. For example, in "not happy," "not" strongly influences the expression of "happy," helping the model understand that it means "unhappy."
+
+##### 3. A Vivid Metaphor: Every Word "Votes"
+
+The author compares this process to a vote:
+
+* When understanding a word, all other words in the sentence vote based on their relevance.
+
+* Example: Processing the sentence "The animal didn't cross the street because it was too tired."
+
+* To understand "it," the model finds that "tired" fits "animal" better than "street."
+
+* Therefore, "animal" receives a higher vote weight, helping the model determine that "it" refers to the animal.
+
+##### Summary
+
+The main point of this section is to illustrate that self-attention is essentially a "dynamic, input-dependent aggregation method." It allows the model to move beyond simply memorizing words and instead learn to accurately capture the true meaning of each word in a specific context based on the surrounding environment while reading.
+
+Would you like to delve deeper into how QKV (query, key, value) mentioned later in the article mathematically implements this "voting"?
+
+### Q4. What is the three-stage computational pattern?
+
+**A:**
+
+1. Compute similarity scores (dot products).
+2. Apply softmax to convert scores into attention weights.
+3. Compute weighted sums of value vectors.
+
+In matrix form:
+
+$$
+\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+$$
+
+### Q5. Why does self-attention help with long-range dependencies better than RNNs?
+
+**A:** RNN information flow from position $i$ to $j$ requires about $|i-j|$ recurrent steps. In self-attention, the path length is 1 because positions connect directly. Shorter paths usually improve both information flow and gradient flow.
+
+### Q6. Why is self-attention faster in practice even with $O(n^2)$ interactions?
+
+**A:** Although pairwise interactions are quadratic, they are highly parallelizable as matrix multiplications on GPUs/TPUs. RNNs are $O(n)$ per sequence but inherently sequential, which limits hardware utilization.
+
+### Q7. Why do we still need positional encoding?
+
+**A:** Pure self-attention is permutation-equivariant. Without added position signals, it cannot distinguish order-sensitive cases, so positional encoding (sinusoidal, learned, RoPE, etc.) is required.
+
+### Q8. What role does self-attention play inside a Transformer block?
+
+**A:** Self-attention mixes information across token positions. Feed-forward layers then transform each position nonlinearly. Residual connections and layer normalization stabilize optimization and preserve gradient flow.
+
+### Q9. Are attention maps always reliable explanations?
+
+**A:** They provide useful interpretability signals, but high attention weight is not a strict proof of causal importance. Attention should be treated as evidence, not definitive explanation.
+
+### Q10. What are the main limitations discussed in that thread?
+
+**A:**
+
+1. Quadratic compute and memory with sequence length.
+2. Need for explicit positional information.
+3. Streaming/very long-context efficiency challenges.
+
+These limitations motivate efficient attention methods (for example, sparse or memory-efficient variants).
+
+### Q11. Q: To delve deeper into how the QKV (query, key, value) model, mentioned later in the article, specifically implements this "voting" through mathematical means, please see below.
+
+**A:**
+To understand how QKV (query, key, value) achieves "voting" mathematically, we can break down this process into four key steps.
+
+In the Transformer model, each token is transformed into three different vectors, each playing a different role: [1, 2]
+
+* Query (Q) - "Questioner": Describes "What kind of information am I looking for?"
+
+* Key (K) - "Tag": Describes "What kind of information can I provide?"
+
+* Value (V) - "Content": Describes "What semantic information do I actually contain?" [3]
+
+The following is the mathematical "voting" process:
+
+##### 1. Calculate similarity (dot product): Who is related to me?
+
+When the model processes word A, it uses A's Query ($q_A$) to perform a dot product with the Key ($k_i$) of all words in the sentence (including itself). $$\text{Score}_{i} = q_A \cdot k_i$$
+
+* Mathematical meaning: The dot product measures how well two vectors are "aligned" in space. If the query is looking for the "subject," and a word's key happens to claim to be the "subject," then their dot product score will be high. [4, 5]
+
+##### 2. Scaling and Normalization (Softmax): Calculating "Votes"
+
+To prevent the dot product values ​​from becoming too large and causing gradient explosion, the model first scales (divide by $\sqrt{d_k}$), and then uses the Softmax function to convert these scores into a probability distribution.
+
+$$\text{Weight}_{i} = \text{softmax}\left(\frac{q_A \cdot k_i}{\sqrt{d_k}}\right)$$
+
+* Mathematical meaning: This is the real "voting weight." Softmax ensures that all weights add up to 1 (100%). The higher the score of a word, the greater the proportion of "votes" it receives. [6, 7]
+
+##### 3. Weighted Summation: Extracting Information Based on Votes
+
+Finally, the model multiplies these calculated weights by the corresponding Value ($v_i$) and sums them all together.
+
+$$\text{Output}_A = \sum_{i} \text{Weight}_i \cdot v_i$$
+
+* Mathematical Meaning: The final generated vector is no longer the initial vector of word A, but a weighted average. If the voting weight of "it" for "animal" is 0.8 and for "street" it is 0.1, then 80% of the content in the output vector will come from the semantics of "animal". [8, 9]
+
+##### Summary Formula
+
+The well-known Transformer attention formula concisely summarizes this process:
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+![How "it" distributes its "Votes" to other words](./static/self-attention-1.png)
+
+Through this mathematical mechanism, the model can achieve "contextualization": each word searches for relevant information based on the query, matches the key through dot product, and finally extracts and synthesizes the meaning that best fits the current context through the V vector. [1, 10, 11]
+
+Would you like to see how these matrix multiplications work in Python through specific code examples?
+
+[1] [https://mbrenndoerfer.com](https://mbrenndoerfer.com/writing/query-key-value-attention-mechanism)
+[2] [https://mbrenndoerfer.com](https://mbrenndoerfer.com/writing/query-key-value-attention-mechanism)
+[3] [https://medium.com](https://medium.com/@wasowski.jarek/s01e04-three-matrix-multiplications-that-gave-machines-context-self-attention-b7266afbe730)
+[4] [https://www.codecademy.com](https://www.codecademy.com/article/transformer-architecture-self-attention-mechanism)
+[5] [https://kunrenzhilu.medium.com](https://kunrenzhilu.medium.com/transformer-bd83274566c0)
+[6] [https://uvadlc-notebooks.readthedocs.io](https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial6/Transformers_and_MHAttention.html)
+[7] [https://dev.to](https://dev.to/lewis_won/creating-the-self-attention-mechanism-from-scratch-3769)
+[8] [https://medium.com](https://medium.com/analytics-vidhya/understanding-q-k-v-in-transformer-self-attention-9a5eddaa5960)
+[9] [https://medium.com](https://medium.com/@prabhatsingh_59053/list-of-open-source-llms-8d22b34475cc)
+[10] [https://www.codecademy.com](https://www.codecademy.com/article/transformer-architecture-self-attention-mechanism)
+[11] [https://medium.com](https://medium.com/@24y.harsha/self-attention-in-transformers-part-1-1cef1fa9cfa2)
+
+---
+
+## 17. References
 
 - Vaswani, A., et al. (2017). *Attention Is All You Need*.
 - Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding*.
