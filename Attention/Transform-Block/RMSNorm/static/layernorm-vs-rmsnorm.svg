@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620" role="img" aria-labelledby="title desc">
+  <title id="title">LayerNorm vs RMSNorm Pipeline</title>
+  <desc id="desc">Side-by-side flow showing LayerNorm with mean subtraction and RMSNorm with magnitude scaling.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 28px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .label { font: 20px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .text { font: 16px 'DejaVu Sans', sans-serif; fill: #334155; }
+      .boxA { fill: #eff6ff; stroke: #1d4ed8; stroke-width: 2; rx: 12; }
+      .boxB { fill: #ecfeff; stroke: #0e7490; stroke-width: 2; rx: 12; }
+      .boxC { fill: #fef9c3; stroke: #a16207; stroke-width: 2; rx: 12; }
+      .boxD { fill: #dcfce7; stroke: #166534; stroke-width: 2; rx: 12; }
+      .arrow { stroke: #0f172a; stroke-width: 2.5; fill: none; marker-end: url(#m); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1100" height="620"/>
+  <text class="title" x="40" y="56">LayerNorm vs RMSNorm (LLM-Oriented View)</text>
+
+  <text class="label" x="80" y="110">LayerNorm</text>
+  <rect class="boxA" x="70" y="140" width="220" height="70"/>
+  <text class="text" x="130" y="182">Input x</text>
+  <rect class="boxB" x="330" y="140" width="260" height="70"/>
+  <text class="text" x="365" y="173">Subtract mean</text>
+  <text class="text" x="410" y="194">x - mu</text>
+  <rect class="boxC" x="630" y="140" width="260" height="70"/>
+  <text class="text" x="665" y="173">Scale by std</text>
+  <text class="text" x="678" y="194">/(sigma^2 + eps)^0.5</text>
+  <rect class="boxD" x="920" y="140" width="140" height="70"/>
+  <text class="text" x="945" y="173">gamma, beta</text>
+  <text class="text" x="970" y="194">affine</text>
+
+  <path class="arrow" d="M290 175 L330 175"/>
+  <path class="arrow" d="M590 175 L630 175"/>
+  <path class="arrow" d="M890 175 L920 175"/>
+
+  <text class="label" x="80" y="320">RMSNorm</text>
+  <rect class="boxA" x="70" y="350" width="220" height="70"/>
+  <text class="text" x="130" y="392">Input x</text>
+  <rect class="boxC" x="330" y="350" width="260" height="70"/>
+  <text class="text" x="350" y="383">Compute RMS</text>
+  <text class="text" x="374" y="404">(mean(x^2)+eps)^0.5</text>
+  <rect class="boxD" x="630" y="350" width="260" height="70"/>
+  <text class="text" x="665" y="383">Scale only</text>
+  <text class="text" x="678" y="404">x / RMS, then * gamma</text>
+
+  <path class="arrow" d="M290 385 L330 385"/>
+  <path class="arrow" d="M590 385 L630 385"/>
+
+  <text class="text" x="70" y="500">LayerNorm controls center + scale. RMSNorm controls only scale (magnitude).</text>
+  <text class="text" x="70" y="528">In many LLMs, magnitude control is enough and cheaper at scale.</text>
+</svg>

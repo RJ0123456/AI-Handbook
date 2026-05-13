@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">RMSNorm in Pre-Norm Transformer Block</title>
+  <desc id="desc">Diagram showing RMSNorm before Attention and MLP with residual additions.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .box { fill: #ffffff; stroke: #0f172a; stroke-width: 2; rx: 12; }
+      .norm { fill: #dcfce7; stroke: #166534; stroke-width: 2; rx: 12; }
+      .op { fill: #e0f2fe; stroke: #0369a1; stroke-width: 2; rx: 12; }
+      .add { fill: #fee2e2; stroke: #b91c1c; stroke-width: 2; }
+      .text { font: 18px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .small { font: 15px 'DejaVu Sans', sans-serif; fill: #334155; }
+      .arrow { stroke: #0f172a; stroke-width: 2.5; fill: none; marker-end: url(#m); }
+      .skip { stroke: #7c3aed; stroke-width: 2.5; fill: none; stroke-dasharray: 8 6; marker-end: url(#m2); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="m2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="980" height="560"/>
+
+  <text class="text" x="40" y="50">Pre-Norm Decoder Block with RMSNorm</text>
+  <text class="small" x="40" y="78">RMSNorm stabilizes magnitude before each sublayer</text>
+
+  <rect class="box" x="90" y="120" width="180" height="60"/>
+  <text class="text" x="140" y="158">Input h</text>
+
+  <rect class="norm" x="360" y="120" width="220" height="60"/>
+  <text class="text" x="410" y="158">RMSNorm(h)</text>
+
+  <rect class="op" x="650" y="120" width="220" height="60"/>
+  <text class="text" x="720" y="158">Attention</text>
+
+  <rect class="add" x="650" y="230" width="56" height="56" rx="28"/>
+  <text class="text" x="673" y="266">+</text>
+  <text class="small" x="730" y="266">h' = h + Attn(...)</text>
+
+  <rect class="norm" x="360" y="340" width="220" height="60"/>
+  <text class="text" x="392" y="378">RMSNorm(h')</text>
+
+  <rect class="op" x="650" y="340" width="220" height="60"/>
+  <text class="text" x="748" y="378">MLP</text>
+
+  <rect class="add" x="650" y="450" width="56" height="56" rx="28"/>
+  <text class="text" x="673" y="486">+</text>
+  <text class="small" x="730" y="486">h'' = h' + MLP(...)</text>
+
+  <path class="arrow" d="M270 150 L360 150"/>
+  <path class="arrow" d="M580 150 L650 150"/>
+  <path class="arrow" d="M760 180 L760 230"/>
+
+  <path class="skip" d="M180 180 L180 258 L650 258"/>
+
+  <path class="arrow" d="M706 258 L760 258 L760 340"/>
+  <path class="arrow" d="M580 370 L650 370"/>
+  <path class="arrow" d="M760 400 L760 450"/>
+
+  <path class="skip" d="M706 258 L706 478 L650 478"/>
+
+  <text class="small" x="40" y="530">Dashed purple arrows: residual shortcuts. Solid arrows: main computation path.</text>
+</svg>

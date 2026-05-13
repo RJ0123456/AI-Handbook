@@ -184,5 +184,12 @@
     }
   },
   "active": "f1025a3f27061166",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "Attention/Transform-Block/RMSNorm/static/rmsnorm-geometric-interpretation.svg",
+    "Attention/Transform-Block/RMSNorm/static/layernorm-vs-rmsnorm.svg",
+    "Attention/Transform-Block/RMSNorm/static/rmsnorm-transformer-block.svg",
+    "Attention/Transform-Block/RMSNorm/static",
+    "Attention/Transform-Block/RMSNorm/RMSNorm.md",
+    "Attention/Transform-Block/RMSNorm"
+  ]
 }
