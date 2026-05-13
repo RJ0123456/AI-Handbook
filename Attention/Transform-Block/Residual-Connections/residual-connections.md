@@ -576,3 +576,57 @@ Residual connections transformed deep learning from an art of careful initializa
 - Transformer Architecture
 - ResNet (Residual Networks)
 - Gradient Checkpointing
+
+---
+
+## Quick Revision Sheet (Exam Style)
+
+### One-line definition
+
+Residual connection adds the input directly to a layer's transformation so each block learns a correction rather than rebuilding the full representation.
+
+### Must-remember formulas
+
+$$y = x + F(x)$$
+
+$$x_{l+1} = x_l + F_l(x_l), \quad x_L = x_0 + \sum_{l=0}^{L-1}F_l(x_l)$$
+
+$$\frac{\partial x_L}{\partial x_l} = 1 + \frac{\partial}{\partial x_l}\sum_{k=l}^{L-1}F_k(x_k)$$
+
+### High-yield facts
+
+- Identity mapping is easier in residual blocks: learn $F(x) \approx 0$.
+- Skip path gives a direct gradient route (gradient highway).
+- Each transformer sublayer (attention and FFN) usually gets its own residual path.
+- Deep models often use residual scaling: $y = x + \alpha F(x)$.
+- Pre-norm keeps the residual path cleaner than post-norm in deep transformers.
+
+### Common mistakes
+
+- Forgetting shape compatibility for addition (`x` and `F(x)` must match).
+- Ignoring residual magnitude growth in very deep stacks.
+- Assuming post-norm and pre-norm train identically at large depth.
+- Applying too large residual contributions early without scaling.
+
+### Quick compare table
+
+| Setting | Formula | Typical behavior |
+|---|---|---|
+| Plain block | $y = F(x)$ | Harder optimization as depth grows |
+| Residual block | $y = x + F(x)$ | Better gradient flow, easier deep training |
+| Pre-norm residual | $y = x + F(\mathrm{LN}(x))$ | More stable for deep LLMs |
+| Post-norm residual | $y = \mathrm{LN}(x + F(x))$ | Can need more warmup/tuning |
+
+### 30-second self-test
+
+1. Why do residuals help deep models train?
+    Answer: they provide a direct additive path for activations and gradients.
+
+2. What should a block learn for identity behavior?
+    Answer: $F(x) \approx 0$.
+
+3. Which norm placement is dominant in modern deep LLMs?
+    Answer: pre-norm.
+
+4. How do you limit residual explosion at extreme depth?
+    Answer: use residual scaling (fixed, depth-based, or learned, e.g., ReZero).
