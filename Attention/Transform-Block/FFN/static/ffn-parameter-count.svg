@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">FFN parameter count diagram</title>
+  <desc id="desc">Shows that the FFN expansion matrices dominate parameter count compared to attention projection blocks.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 28px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .text { font: 18px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .small { font: 15px 'DejaVu Sans', sans-serif; fill: #334155; }
+      .axis { stroke: #94a3b8; stroke-width: 2; }
+      .ffn { fill: #f97316; }
+      .attn { fill: #3b82f6; }
+      .other { fill: #10b981; }
+      .barlabel { font: 16px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .box { fill: #ffffff; stroke: #0f172a; stroke-width: 1.5; rx: 12; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1120" height="560"/>
+  <text class="title" x="40" y="52">Why the FFN Often Dominates Parameter Count</text>
+  <text class="small" x="40" y="82">Classic transformer blocks usually spend most weights in the two FFN projection matrices: W1 and W2.</text>
+
+  <line class="axis" x1="110" y1="470" x2="1020" y2="470"/>
+  <line class="axis" x1="110" y1="120" x2="110" y2="470"/>
+
+  <rect class="box" x="160" y="155" width="240" height="250"/>
+  <text class="text" x="205" y="190">FFN block</text>
+  <rect class="ffn" x="205" y="225" width="150" height="145"/>
+  <text class="barlabel" x="222" y="210">~2DD_ff</text>
+  <text class="small" x="218" y="388">W1 + W2 dominate</text>
+
+  <rect class="box" x="470" y="235" width="240" height="170"/>
+  <text class="text" x="525" y="270">Attention</text>
+  <rect class="attn" x="515" y="300" width="150" height="95"/>
+  <text class="barlabel" x="535" y="290">~4D^2</text>
+  <text class="small" x="520" y="408">Q, K, V, O projections</text>
+
+  <rect class="box" x="780" y="305" width="220" height="100"/>
+  <text class="text" x="835" y="340">Other layers</text>
+  <rect class="other" x="825" y="360" width="130" height="35"/>
+  <text class="barlabel" x="825" y="430">smaller share</text>
+
+  <text class="small" x="150" y="500">If D_ff = 4D, then FFN params ≈ 8D^2, which is often larger than attention.</text>
+  <text class="small" x="150" y="525">Example: D=4096, D_ff=16384 gives about 134M FFN parameters in one block.</text>
+</svg>

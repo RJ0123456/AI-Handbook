@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">FFN expand activate project diagram</title>
+  <desc id="desc">A transformer FFN expands the hidden dimension, applies a nonlinearity, then projects back to model width.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 28px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .text { font: 18px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .small { font: 15px 'DejaVu Sans', sans-serif; fill: #334155; }
+      .boxIn { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 2.5; rx: 14; }
+      .boxExpand { fill: #ecfeff; stroke: #0891b2; stroke-width: 2.5; rx: 14; }
+      .boxAct { fill: #fef3c7; stroke: #d97706; stroke-width: 2.5; rx: 14; }
+      .boxOut { fill: #dcfce7; stroke: #15803d; stroke-width: 2.5; rx: 14; }
+      .arrow { stroke: #0f172a; stroke-width: 3; fill: none; marker-end: url(#m); }
+      .dim { stroke: #7c3aed; stroke-width: 2.5; stroke-dasharray: 8 6; fill: none; marker-end: url(#m2); }
+      .brace { stroke: #475569; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="m2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1100" height="520"/>
+  <text class="title" x="40" y="54">Transformer FFN: Expand → Activate → Project</text>
+  <text class="small" x="40" y="84">The same token vector is transformed independently at every sequence position.</text>
+
+  <rect class="boxIn" x="60" y="180" width="150" height="90"/>
+  <text class="text" x="100" y="220">Input x</text>
+  <text class="small" x="78" y="246">width D</text>
+
+  <path class="arrow" d="M210 225 L300 225"/>
+
+  <rect class="boxExpand" x="300" y="145" width="260" height="160"/>
+  <text class="text" x="360" y="190">Linear W1</text>
+  <text class="text" x="336" y="220">Expand to D_ff</text>
+  <text class="small" x="332" y="248">more feature channels</text>
+  <path class="dim" d="M335 275 L525 275"/>
+  <text class="small" x="380" y="305">intermediate width is larger</text>
+
+  <path class="arrow" d="M560 225 L650 225"/>
+
+  <rect class="boxAct" x="650" y="145" width="200" height="160"/>
+  <text class="text" x="698" y="190">Activation</text>
+  <text class="text" x="688" y="220">ReLU / GELU</text>
+  <text class="text" x="692" y="250">SwiGLU</text>
+  <text class="small" x="677" y="278">adds nonlinearity</text>
+
+  <path class="arrow" d="M850 225 L940 225"/>
+
+  <rect class="boxOut" x="940" y="180" width="150" height="90"/>
+  <text class="text" x="975" y="220">Output y</text>
+  <text class="small" x="960" y="246">width D</text>
+
+  <path class="brace" d="M60 330 C160 380, 260 380, 360 330"/>
+  <text class="small" x="92" y="410">per-token transformation</text>
+
+  <path class="brace" d="M650 330 C750 380, 850 380, 940 330"/>
+  <text class="small" x="700" y="410">compress back to model width</text>
+
+  <text class="small" x="60" y="470">Formula: FFN(x) = W2 φ(W1 x + b1) + b2</text>
+</svg>

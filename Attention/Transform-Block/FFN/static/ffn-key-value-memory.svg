@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">FFN as key-value memory diagram</title>
+  <desc id="desc">Illustrates how the FFN expansion layer acts like learned keys and the output layer writes values back to the token representation.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 28px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .text { font: 18px 'DejaVu Sans', sans-serif; fill: #0f172a; }
+      .small { font: 15px 'DejaVu Sans', sans-serif; fill: #334155; }
+      .input { fill: #dbeafe; stroke: #1d4ed8; stroke-width: 2.5; rx: 14; }
+      .keys { fill: #fef3c7; stroke: #d97706; stroke-width: 2.5; rx: 14; }
+      .values { fill: #dcfce7; stroke: #15803d; stroke-width: 2.5; rx: 14; }
+      .output { fill: #ede9fe; stroke: #6d28d9; stroke-width: 2.5; rx: 14; }
+      .arrow { stroke: #0f172a; stroke-width: 3; fill: none; marker-end: url(#m); }
+      .dashed { stroke: #64748b; stroke-width: 2.5; stroke-dasharray: 8 6; fill: none; marker-end: url(#m2); }
+      .node { fill: #ffffff; stroke: #475569; stroke-width: 2; }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="m2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1120" height="560"/>
+  <text class="title" x="40" y="52">FFN as Learned Key-Value Memory</text>
+  <text class="small" x="40" y="82">The expanded hidden units act like pattern detectors (keys), and the output projection writes values back into the token state.</text>
+
+  <rect class="input" x="60" y="210" width="170" height="120"/>
+  <text class="text" x="104" y="255">Token x</text>
+  <text class="small" x="88" y="285">query features</text>
+  <text class="small" x="92" y="308">current context</text>
+
+  <path class="arrow" d="M230 270 L310 270"/>
+
+  <rect class="keys" x="310" y="150" width="280" height="240"/>
+  <text class="text" x="375" y="190">Expanded hidden layer</text>
+  <text class="small" x="350" y="218">many learned detectors / keys</text>
+
+  <circle class="node" cx="370" cy="270" r="18"/>
+  <circle class="node" cx="430" cy="240" r="18"/>
+  <circle class="node" cx="490" cy="275" r="18"/>
+  <circle class="node" cx="520" cy="215" r="18"/>
+  <circle class="node" cx="550" cy="290" r="18"/>
+  <path class="dashed" d="M345 330 C390 300, 425 300, 455 272"/>
+  <path class="dashed" d="M405 330 C455 305, 490 300, 518 232"/>
+  <path class="dashed" d="M470 330 C505 315, 530 300, 550 305"/>
+  <text class="small" x="350" y="372">activation pattern reveals which keys match</text>
+
+  <path class="arrow" d="M590 270 L690 270"/>
+
+  <rect class="values" x="690" y="150" width="250" height="240"/>
+  <text class="text" x="762" y="190">Values / payload</text>
+  <text class="small" x="725" y="218">activated features are combined</text>
+  <text class="small" x="742" y="242">into a semantic update</text>
+  <circle class="node" cx="770" cy="285" r="16"/>
+  <circle class="node" cx="820" cy="255" r="16"/>
+  <circle class="node" cx="870" cy="295" r="16"/>
+  <path class="arrow" d="M805 320 L805 380"/>
+
+  <rect class="output" x="740" y="390" width="170" height="100"/>
+  <text class="text" x="780" y="434">Output y</text>
+  <text class="small" x="760" y="460">updated token state</text>
+
+  <text class="small" x="60" y="520">Interpretation: input features select a pattern, intermediate units behave like keys, and the final projection writes the learned value back.</text>
+</svg>
