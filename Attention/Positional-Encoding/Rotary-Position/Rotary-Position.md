@@ -37,8 +37,6 @@ Intuition (clock-hand analogy): two clock hands each have an absolute angle, but
 This intuition follows the same argument presented in Michael Brenndoerfer's RoPE write-up:
 https://mbrenndoerfer.com/writing/rotary-position-embedding-rope-transformers
 
-
-
 ---
 
 ## 2. RoPE Definition
