@@ -204,5 +204,3 @@ Progression recap:
 ## 9. One-Sentence Summary
 
 RoPE encodes position by rotating query/key vector pairs, yielding attention scores that naturally depend on relative token distance.
-
-
