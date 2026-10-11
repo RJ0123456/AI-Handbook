@@ -1,4 +1,4 @@
-# FFN 升维与降维
+# FFN 先升维再降维
 
 Transformer 里非常核心的一层：**FFN（Feed-Forward Network）到底在做什么，以及为什么几乎所有 Transformer 都是“升维 → 非线性 → 降维”**。
 
