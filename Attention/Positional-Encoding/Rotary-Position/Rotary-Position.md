@@ -204,3 +204,130 @@ Progression recap:
 ## 9. One-Sentence Summary
 
 RoPE encodes position by rotating query/key vector pairs, yielding attention scores that naturally depend on relative token distance.
+
+## Efficient Implementation
+
+Modern deep learning frameworks excel at vectorized operations, so we want to apply RoPE to all tokens in a sequence simultaneously.
+
+The key insight is that we can precompute all rotation angles as a matrix and apply them through broadcasting. Instead of looping over positions and dimension pairs, we compute everything in parallel. The rotation angles form an outer product: positions multiplied by frequencies gives a matrix of shape (seq_len, d/2) where entry [m, i] is the rotation angle for position m and dimension pair i. Computing cos and sin of this matrix gives two tensors of the same shape, and the rotation of all tokens can then be expressed as a single vectorized multiply-and-add.
+
+```python
+def apply_rope_batch(x, frequencies):
+    """Apply RoPE to a batch of vectors at consecutive positions.
+
+    Args:
+        x: Input tensor of shape (seq_len, d)
+        frequencies: Pre-computed frequencies of shape (d/2,)
+
+    Returns:
+        Rotated tensor of shape (seq_len, d)
+    """
+    seq_len, d = x.shape
+    positions = np.arange(seq_len)
+
+    # Compute all rotation angles: (seq_len, d/2)
+    angles = np.outer(positions, frequencies)
+
+    # Compute cos and sin for all positions and frequencies
+    cos_angles = np.cos(angles)
+    sin_angles = np.sin(angles)
+
+    # Reshape input to pairs: (seq_len, d/2, 2)
+    x_pairs = x.reshape(seq_len, -1, 2)
+
+    # Apply rotation to each pair
+    # x_new[0] = x[0] * cos - x[1] * sin
+    # x_new[1] = x[0] * sin + x[1] * cos
+    x_rotated = np.stack(
+        [
+            x_pairs[:, :, 0] * cos_angles - x_pairs[:, :, 1] * sin_angles,
+            x_pairs[:, :, 0] * sin_angles + x_pairs[:, :, 1] * cos_angles,
+        ],
+        axis=-1,
+    )
+
+    return x_rotated.reshape(seq_len, d)
+```
+
+## Integration with Self-Attention
+
+With efficient RoPE implementation in hand, let's see how it fits into a complete self-attention layer. The integration is remarkably clean: RoPE slots in between the QKV projections and the attention computation, requiring no architectural changes to the transformer.
+
+Here's the complete flow:
+
+1. Project input embeddings to Q, K, V using learned weight matrices
+2. Apply RoPE to Q and K (but not to V)
+3. Compute scaled dot-product attention as usual
+4. Return the attention output
+
+The critical detail is step 2: we rotate queries and keys but leave values untouched. Let's implement this:
+
+```python
+class RoPEAttention:
+    """Self-attention with Rotary Position Embedding."""
+
+    def __init__(self, d_model, d_k, base=10000, seed=None):
+        """Initialize RoPE attention layer.
+
+        Args:
+            d_model: Input embedding dimension
+            d_k: Query/Key/Value dimension (must be even for RoPE)
+            base: Base for frequency computation
+            seed: Random seed for weight initialization
+        """
+        if d_k % 2 != 0:
+            raise ValueError("d_k must be even for RoPE")
+
+        if seed is not None:
+            np.random.seed(seed)
+
+        # Projection matrices
+        scale = np.sqrt(2.0 / (d_model + d_k))
+        self.W_q = np.random.randn(d_model, d_k) * scale
+        self.W_k = np.random.randn(d_model, d_k) * scale
+        self.W_v = np.random.randn(d_model, d_k) * scale
+
+        # RoPE frequencies
+        self.frequencies = compute_rope_frequencies(d_k, base)
+        self.d_k = d_k
+
+    def forward(self, x):
+        """Compute RoPE attention.
+
+        Args:
+            x: Input embeddings of shape (seq_len, d_model)
+
+        Returns:
+            output: Attention output of shape (seq_len, d_k)
+            attention_weights: Weights of shape (seq_len, seq_len)
+        """
+        # Project to Q, K, V
+        Q = x @ self.W_q
+        K = x @ self.W_k
+        V = x @ self.W_v
+
+        # Apply RoPE to Q and K
+        Q_rope = apply_rope_batch(Q, self.frequencies)
+        K_rope = apply_rope_batch(K, self.frequencies)
+
+        # Scaled dot-product attention
+        scores = Q_rope @ K_rope.T / np.sqrt(self.d_k)
+
+        # Softmax
+        scores_stable = scores - scores.max(axis=1, keepdims=True)
+        attention_weights = np.exp(scores_stable) / np.exp(scores_stable).sum(
+            axis=1, keepdims=True
+        )
+
+        # Aggregate values (V is NOT rotated)
+        output = attention_weights @ V
+
+        return output, attention_weights
+```
+
+Note that **RoPE is applied only to queries and keys, not to values**. This is because:
+
+1. **Queries and keys determine attention patterns**: The dot product between them computes compatibility. RoPE makes this compatibility position-aware.
+2. **Values carry content**: They should not be position-encoded because the content itself doesn't depend on position, only how much weight it receives.
+
+Fully understand the NOTE Reference [RoPE-QA5](./RoPE-QA5.md)
