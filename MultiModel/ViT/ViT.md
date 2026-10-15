@@ -78,6 +78,8 @@ equivalence; the basic ViT still uses global self-attention after patchifying.
 
 ## Architecture
 
+![alt text](image-6.png)
+
 The original classification architecture follows these steps:
 
 1. **Patchify** the image and project every patch into a $D$-dimensional token.
